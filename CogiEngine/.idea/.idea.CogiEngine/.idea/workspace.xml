@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Loader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/MainForm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Renderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Renderer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +51,8 @@
         <option value="$PROJECT_DIR$/CogiEngine/Program.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/SampleForm.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/RawModel.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Renderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/MainForm.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Renderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Loader.cs" />
       </list>
     </option>
@@ -100,7 +101,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584102052525</updated>
-      <workItem from="1584102054782" duration="6232000" />
+      <workItem from="1584102054782" duration="9785000" />
     </task>
     <servers />
   </component>
@@ -114,22 +115,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1002" y="339" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584103693904" />
-    <state width="2517" height="141" key="GridCell.Tab.0.bottom" timestamp="1584108860251">
+    <state width="2517" height="141" key="GridCell.Tab.0.bottom" timestamp="1584111635671">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
-    <state width="2517" height="141" key="GridCell.Tab.0.center" timestamp="1584108860251">
+    <state width="2517" height="141" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584111635671" />
+    <state width="2517" height="141" key="GridCell.Tab.0.center" timestamp="1584111635671">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
-    <state width="2517" height="141" key="GridCell.Tab.0.left" timestamp="1584108860251">
+    <state width="2517" height="141" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584111635671" />
+    <state width="2517" height="141" key="GridCell.Tab.0.left" timestamp="1584111635671">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
-    <state width="2517" height="141" key="GridCell.Tab.0.right" timestamp="1584108860251">
+    <state width="2517" height="141" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584111635671" />
+    <state width="2517" height="141" key="GridCell.Tab.0.right" timestamp="1584111635671">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
+    <state width="2517" height="141" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584111635671" />
     <state width="2517" height="492" key="GridCell.Tab.1.bottom" timestamp="1584103804330">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -202,9 +203,9 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="600" height="424" key="javadoc.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584107988027" />
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1584102548459">
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1584114822667">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584102548459" />
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584114822667" />
   </component>
 </project>

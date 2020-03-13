@@ -6,8 +6,8 @@ namespace CogiEngine
     {
         public void Prepare()
         {
-            Gl.ClearColor(1, 0, 0, 1);
             Gl.Clear(ClearBufferMask.ColorBufferBit);
+            Gl.ClearColor(1, 0, 0, 1);
         }
 
         public void Render(RawModel model)
@@ -15,7 +15,7 @@ namespace CogiEngine
             Gl.BindVertexArray(model.VaoID);
             Gl.EnableVertexAttribArray(0);
 
-            Gl.DrawArrays(PrimitiveType.Triangles, 0, model.VertexCount);
+            Gl.DrawElements(PrimitiveType.Triangles, model.VertexCount, DrawElementsType.UnsignedInt, 0);
 
             Gl.DisableVertexAttribArray(0);
             Gl.BindVertexArray(0);

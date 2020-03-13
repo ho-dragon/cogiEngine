@@ -12,16 +12,19 @@ namespace CogiEngine
         private RawModel rowModel;
         private Loader loader;
         private Renderer renderer;
-        float[] testVertices =  {
-            -0.5f, 0.5f, 0f,
-            -0.5f, -0.5f, 0f,
-            0.5f, -0.5f, 0f,
-
-            0.5f, -0.5f, 0f,
-            0.5f, 0.5f, 0f,
-            -0.5f, 0.5f, 0f
+        float[] _vertices =
+        {
+            -0.5f, 0.5f, 0f,   // V0
+            -0.5f, -0.5f, 0f,  // V1
+            0.5f, -0.5f, 0f,   // V2
+            0.5f, 0.5f, 0f   // V3
         };
-
+        
+        int[] _indices =
+        {
+            0, 1, 3,  // Top left triangle (V0, V1, V3)
+            3, 1, 2   // Bottom right triangle (V3, V1, V2)
+        };
         
         public MainForm()
         {
@@ -69,7 +72,7 @@ namespace CogiEngine
             this.displayManager.CreateDisplay(glControl);
             
             loader = new Loader();
-            rowModel = loader.loadToVAO(testVertices);
+            rowModel = loader.LoadToVAO(_vertices, _indices);
             renderer = new Renderer();
         }
         

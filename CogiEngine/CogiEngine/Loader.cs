@@ -9,12 +9,13 @@ namespace CogiEngine
         List<uint> vaoList = new List<uint>();
         List<uint> vboList = new List<uint>();
 
-        public RawModel loadToVAO(float [] positions)
+        public RawModel LoadToVAO(float [] positions, int[] indices)
         {
             uint vaoID = CreateVAO();
+            BindIndicesBuffer(indices);//Bind Index Buffer
             StoreDataInAttributeList(0, positions);
             UnbindVAO();
-            return new RawModel(vaoID, positions.Length / 3);
+            return new RawModel(vaoID, indices.Length);
         }
 
         public void CleanUp()
@@ -47,9 +48,31 @@ namespace CogiEngine
             Gl.VertexAttribPointer(attributeNumber, 3, VertexAttribType.Float, false, 0, IntPtr.Zero);//현재 바인드 중인 VBO를 VAO에 연관시키는 VertexAttribPointer 함수도 마찬가지로 현재 바인드된 VAO를 대상으로 합니다.
             Gl.BindBuffer(BufferTarget.ArrayBuffer, 0);//바인딩 후 더 이상 해당 GPU 메모리 조작이 필요 없다면 다음과 같이 바인딩 해제를 할 수 있습니다.
         }
+        
+        void BindIndicesBuffer(int[] indices)
+        {
+            uint vboID = Gl.GenBuffer();
+            vboList.Add(vboID);
+            
+            Gl.BindBuffer(BufferTarget.ElementArrayBuffer, vboID);//BufferTarget.ElementArrayBuffer에 대해서는 언바인드를 하지는 않습니다.
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)(indices.Length * sizeof(int)), indices, BufferUsage.StaticDraw);
+            #region Desc
+            /*
+            GL_ELEMENT_ARRAY_BUFFER(BufferTarget.ElementArrayBuffer)의 경우 VAO 상태의 일부로 바인딩이 되기 때문에 
+            VAO를 Unbind 하면 GL_ELEMENT_ARRAY_BUFFER 역시 자동으로 Unbind 시킨다고 합니다.
+            반면 GL_ARRAY_BUFFER(BufferTarget.ArrayBuffer)는 VAO의 일부가 아니기 때문에 명시적으로 Unbind 호출이 필요하다고.
+            (실제로, unbind 유무에 상관없이 메모리 누수 같은 현상은 발생하지 않습니다.)
+            심지어 VAO 조차도 Unbind를 할 필요는 없다고 합니다.
+            어차피 다른 VAO를 Bind 하면 기존 바인드 되었던 VAO가 Unbind되므로 오히려 명시적인 Unbind는 성능상 좋지 않다고 합니다.
+            단지, Unbind를 명시적으로 하는 것이 어떤 식으로든 지나칠 수 있는 실수를 미연에 방지할 수 있기 때문에
+            그 정도 성능은 감수하고 맞춰 주는 것이 좋다는 언급도 합니다.
+            */
+            #endregion
+        }
 
         void UnbindVAO()
         {
+            Gl.BindVertexArray(0);
             #region Desc
             //바인딩 후 더 이상 해당 GPU 메모리 조작이 필요 없다면 다음과 같이 바인딩 해제를 할 수 있습니다.
             //바인딩 해제는 문맥에서 제거한 것일 뿐 객체의 메모리가 제거된 것은 아닙니다. 해당 GPU 자원을 완전히 해제하려면 다음과 같이 삭제를 해야 합니다.
@@ -59,7 +82,6 @@ namespace CogiEngine
             // VBO의 경우
             //Gl.DeleteBuffers(vboID);
             #endregion
-            Gl.BindVertexArray(0);
         }
     }
 }
