@@ -81,14 +81,13 @@ namespace CogiEngine
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {
+            
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
             Control senderControl = (Control) sender;
             Gl.Viewport(0, 0, senderControl.ClientSize.Width, senderControl.ClientSize.Height);
-            //Gl.ClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-            //Gl.Clear(ClearBufferMask.ColorBufferBit);
             renderer.Prepare();
             renderer.Render(rowModel);
             this.displayManager.UpdateDisplay();

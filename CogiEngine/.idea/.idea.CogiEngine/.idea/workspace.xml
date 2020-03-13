@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab95fda2-f254-4b72-ac0a-6bf69f9992f0" name="Default Changelist" comment="" />
+    <list default="true" id="ab95fda2-f254-4b72-ac0a-6bf69f9992f0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Loader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/MainForm.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +24,9 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/CogiEngine/Renderer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -43,13 +50,14 @@
         <option value="$PROJECT_DIR$/CogiEngine/Program.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/SampleForm.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/RawModel.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Loader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Renderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/MainForm.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Loader.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1Z4cxGIBmePbDLy1PzPBQVJw3T5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -58,6 +66,7 @@
   <component name="PropertiesComponent">
     <property name="Rider.SolutionExplorerActivator" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TWShift.3" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="Inspections-ASP.NET" />
   </component>
@@ -91,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584102052525</updated>
-      <workItem from="1584102054782" duration="4713000" />
+      <workItem from="1584102054782" duration="6232000" />
     </task>
     <servers />
   </component>
@@ -105,22 +114,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1002" y="339" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584103693904" />
-    <state width="2517" height="141" key="GridCell.Tab.0.bottom" timestamp="1584105054976">
+    <state width="2517" height="141" key="GridCell.Tab.0.bottom" timestamp="1584108860251">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584105054976" />
-    <state width="2517" height="141" key="GridCell.Tab.0.center" timestamp="1584105054976">
+    <state width="2517" height="141" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
+    <state width="2517" height="141" key="GridCell.Tab.0.center" timestamp="1584108860251">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584105054976" />
-    <state width="2517" height="141" key="GridCell.Tab.0.left" timestamp="1584105054976">
+    <state width="2517" height="141" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
+    <state width="2517" height="141" key="GridCell.Tab.0.left" timestamp="1584108860251">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584105054976" />
-    <state width="2517" height="141" key="GridCell.Tab.0.right" timestamp="1584105054976">
+    <state width="2517" height="141" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
+    <state width="2517" height="141" key="GridCell.Tab.0.right" timestamp="1584108860251">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="141" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584105054976" />
+    <state width="2517" height="141" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584108860251" />
     <state width="2517" height="492" key="GridCell.Tab.1.bottom" timestamp="1584103804330">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
