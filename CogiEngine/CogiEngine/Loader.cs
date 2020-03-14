@@ -15,7 +15,7 @@ namespace CogiEngine
             BindIndicesBuffer(indices);//Bind Index Buffer
             StoreDataInAttributeList(0, positions);
             UnbindVAO();
-            return new RawModel(vaoID, indices.Length);
+            return new RawModel(vaoID, positions.Length);
         }
 
         public void CleanUp()
