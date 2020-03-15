@@ -12,7 +12,8 @@
 
         protected override void BindAttributes()
         {
-            base.BindAttribute(0, "_position");
+            //base.BindAttribute(0, "_position");
+            //base.BindAttribute(1, "_textureCoords");
             #region Desc
             /*
             바인딩은 0번 위치에 "position"이라는 이름으로 하고 있습니다. 이것은 vertexShader의 소스 코드를 보면 이해할 수 있습니다.

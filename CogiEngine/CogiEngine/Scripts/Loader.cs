@@ -8,20 +8,32 @@ namespace CogiEngine
     {
         List<uint> vaoList = new List<uint>();
         List<uint> vboList = new List<uint>();
-
-        public RawModel LoadToVAO(float [] positions, int[] indices)
+        List<uint> _textures = new List<uint>();
+        
+        public RawModel LoadToVAO(float [] positions,float [] textureCoords, int[] indices)
         {
             uint vaoID = CreateVAO();
             BindIndicesBuffer(indices);//Bind Index Buffer
-            StoreDataInAttributeList(0, positions);
+            StoreDataInAttributeList(0, 3, positions); // Position 데이터를 VAO의 0번 슬롯에 할당
+            StoreDataInAttributeList(1, 2, textureCoords);  
             UnbindVAO();
             return new RawModel(vaoID, positions.Length);
         }
 
+        public uint LoadTexture(string fileName)
+        {
+            string filePath = $".\\Resources\\Textures\\{fileName}.png";
+            uint tex2d_id = Soil.NET.WrapSOIL.load_OGL_texture(filePath, Soil.NET.WrapSOIL.SOIL_LOAD.AUTO, Soil.NET.WrapSOIL.SOIL_NEW.ID,
+                Soil.NET.WrapSOIL.SOIL_FLAG.MIPMAPS | Soil.NET.WrapSOIL.SOIL_FLAG.NTSC_SAFE_RGB | Soil.NET.WrapSOIL.SOIL_FLAG.COMPRESS_TO_DXT);
+            _textures.Add(tex2d_id);
+            return tex2d_id;
+        }
+        
         public void CleanUp()
         {
             Gl.DeleteVertexArrays(vaoList.ToArray());
             Gl.DeleteBuffers(vboList.ToArray());
+            Gl.DeleteTextures(_textures.ToArray());
         }
 
         uint CreateVAO()
@@ -37,7 +49,7 @@ namespace CogiEngine
             return vaoID;
         }
 
-        void StoreDataInAttributeList(uint attributeNumber, float [] data)
+        void StoreDataInAttributeList(uint attributeNumber,int coordinateSize, float [] data)
         {
             uint vboID = Gl.GenBuffer();
             vboList.Add(vboID);
@@ -45,7 +57,7 @@ namespace CogiEngine
             Gl.BindBuffer(BufferTarget.ArrayBuffer, vboID);
             Gl.BufferData(BufferTarget.ArrayBuffer, (uint)(data.Length * sizeof(float)), data, BufferUsage.StaticDraw);//Bind 이후의 연산들은 이제 해당 VAO, VBO 문맥 하에서 이뤄집니다. 가령 VBO의 데이터를 CPU로부터 GPU에 복사할 때 사용하는 BindBuffer를 다음과 같이 사용할 수 있습니다.
 
-            Gl.VertexAttribPointer(attributeNumber, 3, VertexAttribType.Float, false, 0, IntPtr.Zero);//현재 바인드 중인 VBO를 VAO에 연관시키는 VertexAttribPointer 함수도 마찬가지로 현재 바인드된 VAO를 대상으로 합니다.
+            Gl.VertexAttribPointer(attributeNumber, coordinateSize, VertexAttribType.Float, false, 0, IntPtr.Zero);//현재 바인드 중인 VBO를 VAO에 연관시키는 VertexAttribPointer 함수도 마찬가지로 현재 바인드된 VAO를 대상으로 합니다.
             Gl.BindBuffer(BufferTarget.ArrayBuffer, 0);//바인딩 후 더 이상 해당 GPU 메모리 조작이 필요 없다면 다음과 같이 바인딩 해제를 할 수 있습니다.
         }
         
