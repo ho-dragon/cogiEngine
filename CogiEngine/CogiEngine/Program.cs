@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Khronos;
 
@@ -12,10 +13,11 @@ namespace CogiEngine
         [STAThread]
         static void Main()
         {
+            CogiLogger.Log("Main", "=========START=======");
             string envDebug = Environment.GetEnvironmentVariable("DEBUG");
             if (envDebug == "GL") {
                 KhronosApi.Log += delegate(object sender, KhronosLogEventArgs e) {
-                    Console.WriteLine(e.ToString());
+                    CogiLogger.Log("KhronosApi", e.ToString());
                 };
                 KhronosApi.LogEnabled = true;
             }

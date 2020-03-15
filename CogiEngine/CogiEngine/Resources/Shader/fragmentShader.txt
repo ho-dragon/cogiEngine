@@ -1,0 +1,10 @@
+﻿#version 400 core
+
+in vec3 _colour;
+
+out vec4 _out_Color;
+
+void main(void)
+{
+    _out_Color = vec4(_colour, 1.0);
+}

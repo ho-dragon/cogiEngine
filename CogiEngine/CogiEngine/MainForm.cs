@@ -12,7 +12,8 @@ namespace CogiEngine
         private RawModel rowModel;
         private Loader loader;
         private Renderer renderer;
-        float[] _vertices =
+        private StaticShader shader;
+        private float[] _vertices =
         {
             -0.5f, 0.5f, 0f,   // V0
             -0.5f, -0.5f, 0f,  // V1
@@ -20,7 +21,7 @@ namespace CogiEngine
             0.5f, 0.5f, 0f   // V3
         };
         
-        int[] _indices =
+        private int[] _indices =
         {
             0, 1, 3,  // Top left triangle (V0, V1, V3)
             3, 1, 2   // Bottom right triangle (V3, V1, V2)
@@ -70,16 +71,17 @@ namespace CogiEngine
         {
             GlControl glControl = (GlControl)sender;
             this.displayManager.CreateDisplay(glControl);
-            
-            loader = new Loader();
-            rowModel = loader.LoadToVAO(_vertices, _indices);
-            renderer = new Renderer();
+            this.loader = new Loader();
+            this.renderer = new Renderer();
+            this.shader = new StaticShader();
+            this.rowModel = loader.LoadToVAO(_vertices, _indices);
         }
         
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
         {
             this.displayManager.CloseDisplay();
-            loader.CleanUp();
+            this.loader.CleanUp();
+            this.shader.CleanUp();
         }
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
@@ -91,8 +93,10 @@ namespace CogiEngine
         {
             Control senderControl = (Control) sender;
             Gl.Viewport(0, 0, senderControl.ClientSize.Width, senderControl.ClientSize.Height);
-            renderer.Prepare();
-            renderer.Render(rowModel);
+            this.renderer.Prepare();
+            this.shader.Start();
+            this.renderer.Render(rowModel);
+            this.shader.Stop();
             this.displayManager.UpdateDisplay();
         }
     }

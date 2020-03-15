@@ -1,12 +1,6 @@
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe.config
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.pdb
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csprojAssemblyReference.cache
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.Properties.Resources.resources
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.GenerateResource.cache
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CoreCompileInputs.cache
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.Math.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.WinForms.dll
@@ -20,4 +14,12 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.WinForms.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.WinForms.xml
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Numerics.Vectors.xml
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csprojAssemblyReference.cache
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.Properties.Resources.resources
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.GenerateResource.cache
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CoreCompileInputs.cache
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CopyComplete
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\fragmentShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\vertexShader.txt

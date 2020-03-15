@@ -6,10 +6,12 @@
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="CogiEngine.csproj" t="IncludeRecursive" />
+        <e p="CogiLogger.cs" t="Include" />
         <e p="DisplayManager.cs" t="Include" />
         <e p="Loader.cs" t="Include" />
         <e p="MainForm.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
+        <e p="OpenGLExtension.cs" t="Include" />
         <e p="packages.config" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -21,6 +23,14 @@
         </e>
         <e p="RawModel.cs" t="Include" />
         <e p="Renderer.cs" t="Include" />
+        <e p="Resources" t="Include">
+          <e p="Shader" t="Include">
+            <e p="fragmentShader.txt" t="Include" />
+            <e p="vertexShader.txt" t="Include" />
+          </e>
+        </e>
+        <e p="ShaderProgram.cs" t="Include" />
+        <e p="StaticShader.cs" t="Include" />
       </e>
       <e p="CogiEngine.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
