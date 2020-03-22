@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Text;
+using System.Numerics;
 using OpenGL;
 
 namespace CogiEngine
@@ -29,7 +28,34 @@ namespace CogiEngine
         }
 
         protected abstract void BindAttributes();
+        protected abstract void GetAllUniformLocations();
 
+        protected int GetUniformLocation(string uniformName)
+        {
+            return Gl.GetUniformLocation(programID, uniformName);
+        }
+        
+        protected void LoadFloat(int location, float value)
+        {
+            Gl.Uniform1f(location, 1, value);
+        }
+
+        protected void LoadVector(int location, Vertex3f value)
+        {
+            Gl.Uniform3f(location, 1, value);
+        }
+
+        protected void LoadBoolean(int location, bool value)
+        {
+            float toLoad = (value == true) ? 1.0f : 0.0f;
+            Gl.Uniform1f(location, 1, value);
+        }
+
+        protected void LoadMatrix(int location,  Matrix4x4f matrix)
+        {
+            Gl.UniformMatrix4f<Matrix4x4f>(location, 1,false, matrix);
+        }
+        
         public void Start()
         {
             Gl.UseProgram(programID);

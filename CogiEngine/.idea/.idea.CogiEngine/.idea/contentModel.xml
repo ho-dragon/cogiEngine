@@ -6,12 +6,12 @@
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="CogiEngine.csproj" t="IncludeRecursive" />
-        <e p="CogiLogger.cs" t="Include" />
-        <e p="DisplayManager.cs" t="Include" />
-        <e p="Loader.cs" t="Include" />
+        <e p="Entities" t="Include">
+          <e p="Camera.cs" t="Include" />
+          <e p="Entity.cs" t="Include" />
+        </e>
         <e p="MainForm.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
-        <e p="OpenGLExtension.cs" t="Include" />
         <e p="packages.config" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -21,19 +21,41 @@
           <e p="Settings.Designer.cs" t="Include" />
           <e p="Settings.settings" t="Include" />
         </e>
-        <e p="RawModel.cs" t="Include" />
-        <e p="Renderer.cs" t="Include" />
         <e p="Resources" t="Include">
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
             <e p="vertexShader.txt" t="Include" />
           </e>
+          <e p="Textures" t="Include">
+            <e p="image.png" t="Include" />
+            <e p="image_2.png" t="Include" />
+          </e>
         </e>
-        <e p="ShaderProgram.cs" t="Include" />
-        <e p="StaticShader.cs" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="DisplayManager.cs" t="Include" />
+          <e p="Loader.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="ModelTexture.cs" t="Include" />
+            <e p="RawModel.cs" t="Include" />
+            <e p="TextureModel.cs" t="Include" />
+          </e>
+          <e p="Renderer.cs" t="Include" />
+          <e p="Shader" t="Include">
+            <e p="ShaderProgram.cs" t="Include" />
+            <e p="StaticShader.cs" t="Include" />
+          </e>
+          <e p="Utils" t="Include">
+            <e p="CogiLogger.cs" t="Include" />
+            <e p="Maths.cs" t="Include" />
+            <e p="OpenGLExtension.cs" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="CogiEngine.sln" t="IncludeFlat" />
-      <e p="packages" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive">
+        <e p="SoilDotnet.1.0.3\lib\runtimes\SoilProxy32.dll" t="Include" />
+        <e p="SoilDotnet.1.0.3\lib\runtimes\SoilProxy64.dll" t="Include" />
+      </e>
     </e>
     <e p="C:\Users\hoyong\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\hoyong\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CogiEngine.2031301159.00" t="ExcludeRecursive" />

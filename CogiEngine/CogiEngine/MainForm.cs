@@ -15,8 +15,9 @@ namespace CogiEngine
         private StaticShader shader;
         private ModelTexture modelTexture;
         private TextureModel textureModel;
+        private Entity entity;
         
-        private float[] _vertices =
+        private float[] vertices =
         {
             -0.5f, 0.5f, 0f,   // V0
             -0.5f, -0.5f, 0f,  // V1
@@ -24,13 +25,13 @@ namespace CogiEngine
             0.5f, 0.5f, 0f     // V3
         };
         
-        private int[] _indices =
+        private int[] indices =
         {
             0, 1, 3,  // Top left triangle (V0, V1, V3)
             3, 1, 2   // Bottom right triangle (V3, V1, V2)
         };
         
-        float[] _textureCoords =
+        float[] textureCoords =
         {
             0,0, // V0
             0,1, // V1
@@ -93,10 +94,11 @@ namespace CogiEngine
             
             this.loader = new Loader();
             this.renderer = new Renderer();
-            this.rowModel = loader.LoadToVAO(_vertices,_textureCoords, _indices);
+            this.rowModel = loader.LoadToVAO(vertices,textureCoords, indices);
             this.modelTexture = new ModelTexture(this.loader.LoadTexture("image_2"));
             this.textureModel = new TextureModel(this.rowModel, this.modelTexture);
             this.shader = new StaticShader();
+            this.entity = new Entity(textureModel, new Vertex3f(-1, 0, 0), 0, 0, 0, 1);
         }
         
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
@@ -107,8 +109,9 @@ namespace CogiEngine
         }
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
-        {
-            
+        {   
+            this.entity.IncreasePosition(0.002f, 0f, 0f);
+            this.entity.IncreaseRotation(0, 1, 0);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
@@ -117,7 +120,7 @@ namespace CogiEngine
             Gl.Viewport(0, 0, senderControl.ClientSize.Width, senderControl.ClientSize.Height);
             this.renderer.Prepare();
             this.shader.Start();
-            this.renderer.Render(this.textureModel);
+            this.renderer.Render(this.entity, this.shader);
             this.shader.Stop();
             this.displayManager.UpdateDisplay();
         }

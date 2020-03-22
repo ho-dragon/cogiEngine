@@ -1,15 +1,19 @@
-﻿namespace CogiEngine
+﻿using System.Numerics;
+using OpenGL;
+
+namespace CogiEngine
 {
     public class StaticShader : ShaderProgram
     {
-        const string VERTEX_FILE_PATH = "./Resources/Shader/vertexShader.txt";
-        const string FRAGMENT_FILE_PATH = "./Resources/Shader/fragmentShader.txt";
+        private const string VERTEX_FILE_PATH = "./Resources/Shader/vertexShader.txt";
+        private const string FRAGMENT_FILE_PATH = "./Resources/Shader/fragmentShader.txt";
+        private int transformationMatrix;
 
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
             
         }
-
+        
         protected override void BindAttributes()
         {
             //base.BindAttribute(0, "_position");
@@ -32,6 +36,16 @@
             }
             */
             #endregion
+        }
+
+        protected override void GetAllUniformLocations()
+        {
+            transformationMatrix  = base.GetUniformLocation("_transformationMatrix");
+        }
+
+        public void LoadTransformationMatrix(Matrix4x4f value)
+        {
+            base.LoadMatrix(transformationMatrix, value);
         }
     }
 }
