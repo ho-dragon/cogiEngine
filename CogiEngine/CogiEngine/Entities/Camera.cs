@@ -1,5 +1,6 @@
-﻿﻿using OpenGL;
-//using SFML.Window;
+﻿using System;
+using System.Windows.Forms;
+using OpenGL;
 
 namespace CogiEngine
 {
@@ -21,28 +22,23 @@ namespace CogiEngine
         {
         }
 
-        public void Move()
+        public void Move(object sender, KeyEventArgs e)
         {
-            /*
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+            switch (e.KeyCode)
             {
-                _position.z -= 0.02f;
+                case Keys.W:
+                    _position.z -= 0.02f; 
+                    break;
+                case Keys.S:
+                    _position.z += 0.02f;
+                    break;
+                case Keys.D:
+                    _position.x += 0.02f;
+                    break;
+                case Keys.A:
+                    _position.x -= 0.02f;
+                    break;
             }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S))
-            {
-                _position.z += 0.02f;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D))
-            {
-                _position.x += 0.02f;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A))
-            {
-                _position.x -= 0.02f;
-            }*/
         }
     }
 }

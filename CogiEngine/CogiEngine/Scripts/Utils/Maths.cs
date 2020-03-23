@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Numerics;
 using OpenGL;
 
 namespace CogiEngine
@@ -25,6 +27,11 @@ namespace CogiEngine
             matrix.RotateY(rz);
             matrix.Scale(scale, scale, scale);
             return matrix;
+        }
+
+        public static Matrix4x4f CreateProjectionMatrix(float fov, float aspectRatio, float nearPlane, float farPlane)
+        {
+            return Matrix4x4f.Perspective(fov, aspectRatio, nearPlane, farPlane);
         }
 
         public static Matrix4x4f CreateViewMatrix(Camera camera)

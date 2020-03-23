@@ -12,36 +12,93 @@ namespace CogiEngine
         private RawModel rowModel;
         private Loader loader;
         private Renderer renderer;
+        private Camera camera;
         private StaticShader shader;
         private ModelTexture modelTexture;
         private TextureModel textureModel;
         private Entity entity;
         
-        private float[] vertices =
-        {
-            -0.5f, 0.5f, 0f,   // V0
-            -0.5f, -0.5f, 0f,  // V1
-            0.5f, -0.5f, 0f,   // V2
-            0.5f, 0.5f, 0f     // V3
+        float[] vertices = {			
+            -0.5f,0.5f,-0.5f,	
+            -0.5f,-0.5f,-0.5f,	
+            0.5f,-0.5f,-0.5f,	
+            0.5f,0.5f,-0.5f,		
+				
+            -0.5f,0.5f,0.5f,	
+            -0.5f,-0.5f,0.5f,	
+            0.5f,-0.5f,0.5f,	
+            0.5f,0.5f,0.5f,
+				
+            0.5f,0.5f,-0.5f,	
+            0.5f,-0.5f,-0.5f,	
+            0.5f,-0.5f,0.5f,	
+            0.5f,0.5f,0.5f,
+				
+            -0.5f,0.5f,-0.5f,	
+            -0.5f,-0.5f,-0.5f,	
+            -0.5f,-0.5f,0.5f,	
+            -0.5f,0.5f,0.5f,
+				
+            -0.5f,0.5f,0.5f,
+            -0.5f,0.5f,-0.5f,
+            0.5f,0.5f,-0.5f,
+            0.5f,0.5f,0.5f,
+				
+            -0.5f,-0.5f,0.5f,
+            -0.5f,-0.5f,-0.5f,
+            0.5f,-0.5f,-0.5f,
+            0.5f,-0.5f,0.5f
         };
-        
-        private int[] indices =
-        {
-            0, 1, 3,  // Top left triangle (V0, V1, V3)
-            3, 1, 2   // Bottom right triangle (V3, V1, V2)
+
+        float[] textureCoords = {
+				
+            0,0,
+            0,1,
+            1,1,
+            1,0,			
+            0,0,
+            0,1,
+            1,1,
+            1,0,			
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0
         };
-        
-        float[] textureCoords =
-        {
-            0,0, // V0
-            0,1, // V1
-            1,1, // V2
-            1,0, // V3
+
+
+        int[] indices = {
+            0,1,3,	
+            3,1,2,	
+            4,5,7,
+            7,5,6,
+            8,9,11,
+            11,9,10,
+            12,13,15,
+            15,13,14,	
+            16,17,19,
+            19,17,18,
+            20,21,23,
+            23,21,22
         };
         
         public MainForm()
         {
             InitializeComponent();
+            KeyPreview = true;
+            KeyDown += MainForm_KeyDown;
         }
 
         public void InitializeComponent()
@@ -56,7 +113,7 @@ namespace CogiEngine
             this.glControl.AnimationTimer = false;
             this.glControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.glControl.ColorBits = 24u;//Gl.COLOR_BUFFER_BIT;
-            this.glControl.DepthBits = 0u;//Gl.DEPTH_BUFFER_BIT;
+            this.glControl.DepthBits = 24u;//Gl.DEPTH_BUFFER_BIT;
             this.glControl.Dock = DockStyle.Fill;
             this.glControl.Location = new Point(0, 0);
             this.glControl.MultisampleBits = 0u;
@@ -77,6 +134,14 @@ namespace CogiEngine
             this.Name = "CogiEngine";
             this.Text = "[CogiEngine] Window";
             this.ResumeLayout(false);
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.camera != null)
+            {
+                this.camera.Move(sender, e);
+            }
         }
 
         private void OnCreated_GlControl(object sender, GlControlEventArgs e)
@@ -100,8 +165,11 @@ namespace CogiEngine
             this.modelTexture = new ModelTexture(this.loader.LoadTexture("image"));
             this.textureModel = new TextureModel(this.rowModel, this.modelTexture);
             
+            //Camera 
+            this.camera = new Camera();
+            
             //Entity
-            this.entity = new Entity(textureModel, new Vertex3f(0, 0, -1), 0, 0, 0, 1);
+            this.entity = new Entity(textureModel, new Vertex3f(0, 0, -5), 0, 0, 0, 1);
         }
         
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
@@ -113,9 +181,8 @@ namespace CogiEngine
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {   
-            this.entity.IncreasePosition(0f, 0f, -0.002f);
+            this.entity.IncreaseRotation(1f,1f,0f);
             this.renderer.SetViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
-            //this.entity.IncreaseRotation(0, 1, 0);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
@@ -124,6 +191,7 @@ namespace CogiEngine
             Gl.Viewport(0, 0, senderControl.ClientSize.Width, senderControl.ClientSize.Height);
             this.renderer.Prepare();
             this.shader.Start();
+            this.shader.LoadViewMatrix(camera);
             this.renderer.Render(this.entity, this.shader);
             this.shader.Stop();
             this.displayManager.UpdateDisplay();

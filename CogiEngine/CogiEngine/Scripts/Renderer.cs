@@ -10,9 +10,7 @@ namespace CogiEngine
         private const float FOV = 70;
         private const float NEAR_PLANE = 0.1f;
         private const float FAR_PLANE = 1000f;
-
         private Matrix4x4f projectionMatrix = Matrix4x4f.Identity;
-        
         private int clientWidth;
         private int clientHeight;
 
@@ -24,17 +22,12 @@ namespace CogiEngine
         public Renderer(StaticShader shader, int width, int height)
         {
             SetViewRect(width, height);
-            this.projectionMatrix = CreateProjectionMatrix();
+            this.projectionMatrix = Maths.CreateProjectionMatrix(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
             shader.Start();
             shader.LoadProjectionMatrix(this.projectionMatrix);
             shader.Stop();
         }
-        Matrix4x4f CreateProjectionMatrix()
-        {
-            return Matrix4x4f.Perspective(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
-        }
-        
-        
+
         public void SetViewRect(int width, int height)
         {
             if (clientWidth == width && clientHeight == height)
@@ -48,9 +41,16 @@ namespace CogiEngine
 
         public void Prepare()
         {
-            Gl.ClearColor(0, 0, 1, 1);
-            Gl.Clear(ClearBufferMask.ColorBufferBit);
             Gl.Viewport(0, 0, clientWidth, clientHeight);
+            Gl.Enable(EnableCap.DepthTest);
+            Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            Gl.ClearColor(1, 0, 0, 1f);
+        }
+        public bool IsEnabledDepthTest()
+        {
+            ulong[] values = new ulong[1];
+            Gl.GetIntegerNV(GetPName.DepthTest, values);
+            return values[0] == 1;
         }
         
         public void Render(Entity entity, StaticShader shader)

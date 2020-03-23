@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using OpenGL;
 
 namespace CogiEngine
@@ -7,8 +8,9 @@ namespace CogiEngine
     {
         private const string VERTEX_FILE_PATH = "./Resources/Shader/vertexShader.txt";
         private const string FRAGMENT_FILE_PATH = "./Resources/Shader/fragmentShader.txt";
-        private int transformationMatrix;
-        private int projectionMatrix;
+        private int locationTransformationMatrix;
+        private int locationProjectionMatrix;
+        private int locationViewMatrix;
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
 
@@ -40,18 +42,25 @@ namespace CogiEngine
 
         protected override void GetAllUniformLocations()
         {
-            this.transformationMatrix  = base.GetUniformLocation("_transformationMatrix");
-            this.projectionMatrix = base.GetUniformLocation("_projectionMatrix");
+            this.locationTransformationMatrix  = base.GetUniformLocation("_transformationMatrix");
+            this.locationProjectionMatrix = base.GetUniformLocation("_projectionMatrix");
+            this.locationViewMatrix = base.GetUniformLocation("_viewMatrix");
         }
 
         public void LoadTransformationMatrix(Matrix4x4f value)
         {
-            base.LoadMatrix(this.transformationMatrix, value);
+            base.LoadMatrix(this.locationTransformationMatrix, value);
         }
         
         public void LoadProjectionMatrix(Matrix4x4f value)
         {
-            base.LoadMatrix(this.projectionMatrix, value);
+            base.LoadMatrix(this.locationProjectionMatrix, value);
+        }
+        
+        public void LoadViewMatrix(Camera camera)
+        {
+            Matrix4x4f viewMatrix = Maths.CreateViewMatrix(camera);
+            base.LoadMatrix(this.locationViewMatrix, viewMatrix);
         }
     }
 }
