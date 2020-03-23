@@ -91,14 +91,17 @@ namespace CogiEngine
                 return;
             }
             
-            
             this.loader = new Loader();
-            this.renderer = new Renderer();
-            this.rowModel = loader.LoadToVAO(vertices,textureCoords, indices);
-            this.modelTexture = new ModelTexture(this.loader.LoadTexture("image_2"));
-            this.textureModel = new TextureModel(this.rowModel, this.modelTexture);
             this.shader = new StaticShader();
-            this.entity = new Entity(textureModel, new Vertex3f(-1, 0, 0), 0, 0, 0, 1);
+            this.renderer = new Renderer(this.shader, glControl.ClientSize.Width, glControl.ClientSize.Height);
+            
+            //Model
+            this.rowModel = loader.LoadToVAO(vertices,textureCoords, indices);
+            this.modelTexture = new ModelTexture(this.loader.LoadTexture("image"));
+            this.textureModel = new TextureModel(this.rowModel, this.modelTexture);
+            
+            //Entity
+            this.entity = new Entity(textureModel, new Vertex3f(0, 0, -1), 0, 0, 0, 1);
         }
         
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
@@ -110,8 +113,9 @@ namespace CogiEngine
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {   
-            this.entity.IncreasePosition(0.002f, 0f, 0f);
-            this.entity.IncreaseRotation(0, 1, 0);
+            this.entity.IncreasePosition(0f, 0f, -0.002f);
+            this.renderer.SetViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
+            //this.entity.IncreaseRotation(0, 1, 0);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)

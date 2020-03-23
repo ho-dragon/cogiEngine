@@ -1,11 +1,16 @@
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy64.dll
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy32.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\fragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\vertexShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image_2.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe.config
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.Math.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.WinForms.dll
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Soil.NetFX4.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Numerics.Vectors.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.pdb
@@ -14,6 +19,7 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.Math.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.Math.xml
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.WinForms.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.WinForms.xml
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Soil.NetFX4.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Numerics.Vectors.xml
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csprojAssemblyReference.cache
@@ -23,9 +29,3 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CoreCom
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CopyComplete
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy64.dll
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy32.dll
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Soil.NetFX4.dll
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Soil.NetFX4.pdb
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image.png
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image_2.png

@@ -1,16 +1,58 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Numerics;
 using OpenGL;
 
 namespace CogiEngine
 {
     public class Renderer
     {
-        public void Prepare()
+        private const float FOV = 70;
+        private const float NEAR_PLANE = 0.1f;
+        private const float FAR_PLANE = 1000f;
+
+        private Matrix4x4f projectionMatrix = Matrix4x4f.Identity;
+        
+        private int clientWidth;
+        private int clientHeight;
+
+        float AspectRatio
         {
-            Gl.Clear(ClearBufferMask.ColorBufferBit);
-            Gl.ClearColor(0, 0, 1, 1);
+            get { return (float)clientWidth / (float)clientHeight; }
         }
 
+        public Renderer(StaticShader shader, int width, int height)
+        {
+            SetViewRect(width, height);
+            this.projectionMatrix = CreateProjectionMatrix();
+            shader.Start();
+            shader.LoadProjectionMatrix(this.projectionMatrix);
+            shader.Stop();
+        }
+        Matrix4x4f CreateProjectionMatrix()
+        {
+            return Matrix4x4f.Perspective(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
+        }
+        
+        
+        public void SetViewRect(int width, int height)
+        {
+            if (clientWidth == width && clientHeight == height)
+            {
+                return;
+            }
+            this.clientWidth = width;
+            this.clientHeight = height;
+
+        }
+
+        public void Prepare()
+        {
+            Gl.ClearColor(0, 0, 1, 1);
+            Gl.Clear(ClearBufferMask.ColorBufferBit);
+            Gl.Viewport(0, 0, clientWidth, clientHeight);
+        }
+        
         public void Render(Entity entity, StaticShader shader)
         {
             TextureModel model = entity.Model;
@@ -22,7 +64,7 @@ namespace CogiEngine
 
             Matrix4x4f transformationMatrix = Maths.CreateTransformationMatrix(entity.Position, entity.RotX, entity.RotY, entity.RotZ, entity.Scale);
             shader.LoadTransformationMatrix(transformationMatrix);
-            
+
             Gl.ActiveTexture(TextureUnit.Texture0);
             Gl.BindTexture(TextureTarget.Texture2d, model.Texture.ID);
             

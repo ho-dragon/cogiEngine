@@ -8,10 +8,10 @@ namespace CogiEngine
         private const string VERTEX_FILE_PATH = "./Resources/Shader/vertexShader.txt";
         private const string FRAGMENT_FILE_PATH = "./Resources/Shader/fragmentShader.txt";
         private int transformationMatrix;
-
+        private int projectionMatrix;
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
-            
+
         }
         
         protected override void BindAttributes()
@@ -40,12 +40,18 @@ namespace CogiEngine
 
         protected override void GetAllUniformLocations()
         {
-            transformationMatrix  = base.GetUniformLocation("_transformationMatrix");
+            this.transformationMatrix  = base.GetUniformLocation("_transformationMatrix");
+            this.projectionMatrix = base.GetUniformLocation("_projectionMatrix");
         }
 
         public void LoadTransformationMatrix(Matrix4x4f value)
         {
-            base.LoadMatrix(transformationMatrix, value);
+            base.LoadMatrix(this.transformationMatrix, value);
+        }
+        
+        public void LoadProjectionMatrix(Matrix4x4f value)
+        {
+            base.LoadMatrix(this.projectionMatrix, value);
         }
     }
 }

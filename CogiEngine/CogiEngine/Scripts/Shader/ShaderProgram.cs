@@ -25,6 +25,8 @@ namespace CogiEngine
 
             Gl.LinkProgram(this.programID);
             Gl.ValidateProgram(this.programID);
+            
+            GetAllUniformLocations();
         }
 
         protected abstract void BindAttributes();
