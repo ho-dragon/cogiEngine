@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using OpenGL;
 
 namespace CogiEngine
@@ -22,22 +21,26 @@ namespace CogiEngine
         {
         }
 
-        public void Move(object sender, KeyEventArgs e)
+        public void UpdateMoveByInput(InputManager input)
         {
-            switch (e.KeyCode)
+            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.W))
             {
-                case Keys.W:
-                    _position.z -= 0.02f; 
-                    break;
-                case Keys.S:
-                    _position.z += 0.02f;
-                    break;
-                case Keys.D:
-                    _position.x += 0.02f;
-                    break;
-                case Keys.A:
-                    _position.x -= 0.02f;
-                    break;
+                _position.z -= 0.02f;
+            }  
+            
+            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.S))
+            {
+                _position.z += 0.02f;
+            }  
+            
+            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.D))
+            {
+                _position.x += 0.02f;
+            }  
+            
+            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.A))
+            {
+                _position.x -= 0.02f;
             }
         }
     }

@@ -9,6 +9,7 @@ namespace CogiEngine
     {
         private GlControl glControl;
         private DisplayManager displayManager;
+        private InputManager inputManager;
         private RawModel rowModel;
         private Loader loader;
         private Renderer renderer;
@@ -78,7 +79,6 @@ namespace CogiEngine
             1,0
         };
 
-
         int[] indices = {
             0,1,3,	
             3,1,2,	
@@ -98,13 +98,16 @@ namespace CogiEngine
         {
             InitializeComponent();
             KeyPreview = true;
-            KeyDown += MainForm_KeyDown;
+
         }
 
         public void InitializeComponent()
         {
             this.glControl = new GlControl();
             this.displayManager = new DisplayManager();
+            this.inputManager = new InputManager();
+            KeyDown += this.inputManager.OnKeyDown;
+            KeyUp += this.inputManager.OnKeyUp;
             
             this.SuspendLayout();
 
@@ -134,14 +137,6 @@ namespace CogiEngine
             this.Name = "CogiEngine";
             this.Text = "[CogiEngine] Window";
             this.ResumeLayout(false);
-        }
-
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (this.camera != null)
-            {
-                this.camera.Move(sender, e);
-            }
         }
 
         private void OnCreated_GlControl(object sender, GlControlEventArgs e)
@@ -183,6 +178,7 @@ namespace CogiEngine
         {   
             this.entity.IncreaseRotation(1f,1f,0f);
             this.renderer.SetViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
+            this.camera.UpdateMoveByInput(this.inputManager);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
