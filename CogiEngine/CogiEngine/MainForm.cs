@@ -19,81 +19,6 @@ namespace CogiEngine
         private TextureModel textureModel;
         private Entity entity;
         
-        float[] vertices = {			
-            -0.5f,0.5f,-0.5f,	
-            -0.5f,-0.5f,-0.5f,	
-            0.5f,-0.5f,-0.5f,	
-            0.5f,0.5f,-0.5f,		
-				
-            -0.5f,0.5f,0.5f,	
-            -0.5f,-0.5f,0.5f,	
-            0.5f,-0.5f,0.5f,	
-            0.5f,0.5f,0.5f,
-				
-            0.5f,0.5f,-0.5f,	
-            0.5f,-0.5f,-0.5f,	
-            0.5f,-0.5f,0.5f,	
-            0.5f,0.5f,0.5f,
-				
-            -0.5f,0.5f,-0.5f,	
-            -0.5f,-0.5f,-0.5f,	
-            -0.5f,-0.5f,0.5f,	
-            -0.5f,0.5f,0.5f,
-				
-            -0.5f,0.5f,0.5f,
-            -0.5f,0.5f,-0.5f,
-            0.5f,0.5f,-0.5f,
-            0.5f,0.5f,0.5f,
-				
-            -0.5f,-0.5f,0.5f,
-            -0.5f,-0.5f,-0.5f,
-            0.5f,-0.5f,-0.5f,
-            0.5f,-0.5f,0.5f
-        };
-
-        float[] textureCoords = {
-				
-            0,0,
-            0,1,
-            1,1,
-            1,0,			
-            0,0,
-            0,1,
-            1,1,
-            1,0,			
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0,
-            0,0,
-            0,1,
-            1,1,
-            1,0
-        };
-
-        int[] indices = {
-            0,1,3,	
-            3,1,2,	
-            4,5,7,
-            7,5,6,
-            8,9,11,
-            11,9,10,
-            12,13,15,
-            15,13,14,	
-            16,17,19,
-            19,17,18,
-            20,21,23,
-            23,21,22
-        };
-        
         public MainForm()
         {
             InitializeComponent();
@@ -106,6 +31,7 @@ namespace CogiEngine
             this.glControl = new GlControl();
             this.displayManager = new DisplayManager();
             this.inputManager = new InputManager();
+            
             KeyDown += this.inputManager.OnKeyDown;
             KeyUp += this.inputManager.OnKeyUp;
             
@@ -156,15 +82,17 @@ namespace CogiEngine
             this.renderer = new Renderer(this.shader, glControl.ClientSize.Width, glControl.ClientSize.Height);
             
             //Model
-            this.rowModel = loader.LoadToVAO(vertices,textureCoords, indices);
-            this.modelTexture = new ModelTexture(this.loader.LoadTexture("image"));
+            this.rowModel = OBJLoader.LoadObjModel("new_stall", this.loader);
+            //this.rowModel = OBJLoader.LoadObjModelFromAssimp("new_stall", this.loader);
+            this.modelTexture = new ModelTexture(this.loader.LoadTexture("stallTexture"));
             this.textureModel = new TextureModel(this.rowModel, this.modelTexture);
             
             //Camera 
             this.camera = new Camera();
+            this.inputManager.OnEventKeyDown += this.camera.OnEventKeyDown;
             
             //Entity
-            this.entity = new Entity(textureModel, new Vertex3f(0, 0, -5), 0, 0, 0, 1);
+            this.entity = new Entity(textureModel, new Vertex3f(0, -3, -8), 0, 180, 0, 1);
         }
         
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
@@ -176,9 +104,9 @@ namespace CogiEngine
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {   
-            this.entity.IncreaseRotation(1f,1f,0f);
+            //this.entity.IncreaseRotation(1f,1f,0f);
             this.renderer.SetViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
-            this.camera.UpdateMoveByInput(this.inputManager);
+            this.camera.UpdateMove(this.inputManager);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)

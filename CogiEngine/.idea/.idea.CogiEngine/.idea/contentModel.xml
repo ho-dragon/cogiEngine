@@ -22,13 +22,16 @@
           <e p="Settings.settings" t="Include" />
         </e>
         <e p="Resources" t="Include">
+          <e p="new_stall.obj" t="Include" />
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
             <e p="vertexShader.txt" t="Include" />
           </e>
+          <e p="stall.obj" t="Include" />
           <e p="Textures" t="Include">
             <e p="image.png" t="Include" />
             <e p="image_2.png" t="Include" />
+            <e p="stallTexture.png" t="Include" />
           </e>
         </e>
         <e p="Scripts" t="Include">
@@ -40,6 +43,7 @@
             <e p="RawModel.cs" t="Include" />
             <e p="TextureModel.cs" t="Include" />
           </e>
+          <e p="OBJLoader.cs" t="Include" />
           <e p="Renderer.cs" t="Include" />
           <e p="Shader" t="Include">
             <e p="ShaderProgram.cs" t="Include" />

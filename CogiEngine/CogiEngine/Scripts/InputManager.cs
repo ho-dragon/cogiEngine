@@ -8,14 +8,18 @@ namespace CogiEngine
     {
         None = 0,
         KeyDown = 1,
-        KeyUp =2,
+        KeyUp = 2,
+        KeyPress = 3
     }
     public class InputManager
     {
         private bool isKeyDown;
         private Keys lastKeyDown;
         private Dictionary<Keys, KeyStatus> inputStatus = new Dictionary<Keys, KeyStatus>();
-
+        
+        public delegate void OnEventKeyDownHandler(Keys key);
+        public event OnEventKeyDownHandler OnEventKeyDown;
+        
         public KeyStatus GetKeyStatus(Keys keyCode)
         {
             if (inputStatus.ContainsKey(keyCode) == false)
@@ -37,13 +41,14 @@ namespace CogiEngine
         public void OnKeyDown(object sender, KeyEventArgs e)
         {
             UpdateKeyStatus(e.KeyCode, KeyStatus.KeyDown);
+            OnEventKeyDown(e.KeyCode);
         }
 
         public void OnKeyUp(object sender, KeyEventArgs e)
         {
             UpdateKeyStatus(e.KeyCode, KeyStatus.KeyUp);
         }
-
+        
         private void UpdateKeyStatus(Keys keyCode, KeyStatus keyStatus)
         {
             if (inputStatus.ContainsKey(keyCode) == false)

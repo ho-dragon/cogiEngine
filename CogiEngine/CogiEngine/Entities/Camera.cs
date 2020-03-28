@@ -5,42 +5,90 @@ namespace CogiEngine
 {
     public class Camera
     {
-        Vertex3f _position = new Vertex3f(0, 0, 0);
-        public Vertex3f Position { get { return _position; } }
+        private Vertex3f position = new Vertex3f(0, 0, 0);
+        private const float MOVE_ROTATION_PER_FRAME = 1f;
+        private const float MOVE_POSITION_PER_FRAME = 0.02f;
+        private bool isRotation = false;
+        private bool isSpeedUp = false;
 
-        float _pitch;
-        public float Pitch { get { return _pitch; } }
+        public Vertex3f Position { get { return position; } }
+        
+        float pitch;
+        public float Pitch { get { return pitch; } }
 
-        float _yaw;
-        public float Yaw { get { return _yaw; } }
+        float yaw;
+        public float Yaw { get { return yaw; } }
 
-        float _roll;
-        public float Roll { get { return _roll; } }
+        float roll;
+        public float Roll { get { return roll; } }
 
         public Camera()
         {
+            
         }
 
-        public void UpdateMoveByInput(InputManager input)
+        public void OnEventKeyDown(Keys inputKey)
         {
+            switch (inputKey)
+            {
+                case Keys.R:
+                    isRotation = !isRotation;
+                    break;
+                case Keys.Q:
+                    isSpeedUp = !isSpeedUp;
+                    break;
+            }
+        }
+        
+        public void UpdateMove(InputManager input)
+        {
+            float speed = isSpeedUp ? 5f : 1f;
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.W))
             {
-                _position.z -= 0.02f;
+                if (isRotation)
+                {
+                    pitch -= MOVE_ROTATION_PER_FRAME * speed;
+                }
+                else
+                {
+                    position.z -= MOVE_POSITION_PER_FRAME * speed;    
+                }
             }  
             
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.S))
             {
-                _position.z += 0.02f;
+                if (isRotation)
+                {
+                    pitch +=  MOVE_ROTATION_PER_FRAME * speed;;
+                }
+                else
+                {
+                    position.z += MOVE_POSITION_PER_FRAME * speed;    
+                }
             }  
             
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.D))
             {
-                _position.x += 0.02f;
+                if (isRotation)
+                {
+                    yaw +=  MOVE_ROTATION_PER_FRAME * speed;;
+                }
+                else
+                {
+                    position.x += MOVE_POSITION_PER_FRAME * speed;    
+                }
             }  
             
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.A))
             {
-                _position.x -= 0.02f;
+                if (isRotation)
+                {
+                    yaw -=  MOVE_ROTATION_PER_FRAME * speed;;
+                }
+                else
+                {
+                    position.x -= MOVE_POSITION_PER_FRAME * speed;    
+                }
             }
         }
     }
