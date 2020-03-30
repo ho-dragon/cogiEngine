@@ -11,6 +11,9 @@ namespace CogiEngine
         private int locationTransformationMatrix;
         private int locationProjectionMatrix;
         private int locationViewMatrix;
+        private int loc_lightPosition;
+        private int loc_lightColour;
+        
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
 
@@ -45,6 +48,8 @@ namespace CogiEngine
             this.locationTransformationMatrix  = base.GetUniformLocation("_transformationMatrix");
             this.locationProjectionMatrix = base.GetUniformLocation("_projectionMatrix");
             this.locationViewMatrix = base.GetUniformLocation("_viewMatrix");
+            this.loc_lightPosition = base.GetUniformLocation("_lightPosition");
+            this.loc_lightColour = base.GetUniformLocation("_lightColour");
         }
 
         public void LoadTransformationMatrix(Matrix4x4f value)
@@ -61,6 +66,12 @@ namespace CogiEngine
         {
             Matrix4x4f viewMatrix = Maths.CreateViewMatrix(camera);
             base.LoadMatrix(this.locationViewMatrix, viewMatrix);
+        }
+        
+        public void LoadLight(Light light)
+        {
+            base.LoadVector(this.loc_lightPosition, light.Position);
+            base.LoadVector(this.loc_lightColour, light.Colour);
         }
     }
 }

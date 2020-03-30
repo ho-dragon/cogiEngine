@@ -10,12 +10,13 @@ namespace CogiEngine
         List<uint> vboList = new List<uint>();
         List<uint> _textures = new List<uint>();
         
-        public RawModel LoadToVAO(float [] positions,float [] textureCoords, int[] indices)
+        public RawModel LoadToVAO(float [] positions,float [] textureCoords, float [] normals, int[] indices)
         {
             uint vaoID = CreateVAO();
             BindIndicesBuffer(indices);//Bind Index Buffer
             StoreDataInAttributeList(0, 3, positions); // Position 데이터를 VAO의 0번 슬롯에 할당
             StoreDataInAttributeList(1, 2, textureCoords);  
+            StoreDataInAttributeList(2,3, normals);
             UnbindVAO();
             return new RawModel(vaoID, positions.Length);
         }

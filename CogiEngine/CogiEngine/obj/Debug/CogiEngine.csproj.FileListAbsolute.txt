@@ -34,3 +34,6 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CoreCom
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CopyComplete
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\dragon.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\white2.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\white64.png

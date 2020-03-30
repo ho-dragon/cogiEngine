@@ -9,6 +9,7 @@
         <e p="Entities" t="Include">
           <e p="Camera.cs" t="Include" />
           <e p="Entity.cs" t="Include" />
+          <e p="Light.cs" t="Include" />
         </e>
         <e p="MainForm.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
@@ -22,6 +23,7 @@
           <e p="Settings.settings" t="Include" />
         </e>
         <e p="Resources" t="Include">
+          <e p="dragon.obj" t="Include" />
           <e p="new_stall.obj" t="Include" />
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
@@ -32,6 +34,8 @@
             <e p="image.png" t="Include" />
             <e p="image_2.png" t="Include" />
             <e p="stallTexture.png" t="Include" />
+            <e p="white2.png" t="Include" />
+            <e p="white64.png" t="Include" />
           </e>
         </e>
         <e p="Scripts" t="Include">

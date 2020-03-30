@@ -14,6 +14,7 @@ namespace CogiEngine
         private Loader loader;
         private Renderer renderer;
         private Camera camera;
+        private Light lgiht;
         private StaticShader shader;
         private ModelTexture modelTexture;
         private TextureModel textureModel;
@@ -82,19 +83,31 @@ namespace CogiEngine
             this.renderer = new Renderer(this.shader, glControl.ClientSize.Width, glControl.ClientSize.Height);
             
             //Model
-            this.rowModel = OBJLoader.LoadObjModel("new_stall", this.loader);
-            //this.rowModel = OBJLoader.LoadObjModelFromAssimp("new_stall", this.loader);
-            this.modelTexture = new ModelTexture(this.loader.LoadTexture("stallTexture"));
+            //this.rowModel = OBJLoader.LoadObjModel("dragon", this.loader);
+            this.rowModel = OBJLoader.LoadObjModelFromAssimp("dragon", this.loader);
+            this.modelTexture = new ModelTexture(this.loader.LoadTexture("white2"));
+            
+            //Remove texture outline
+            int value = (int)TextureMagFilter.Linear;
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, value);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, value);
+            value = Gl.REPEAT;
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, value);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, value);
+            
             this.textureModel = new TextureModel(this.rowModel, this.modelTexture);
             
             //Camera 
             this.camera = new Camera();
+            this.lgiht = new Light(new Vertex3f(0,150,-50), new Vertex3f(1,1,1));
             this.inputManager.OnEventKeyDown += this.camera.OnEventKeyDown;
             
             //Entity
             this.entity = new Entity(textureModel, new Vertex3f(0, -3, -8), 0, 180, 0, 1);
-        }
+                    
         
+        }
+
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
         {
             this.displayManager.CloseDisplay();
@@ -104,7 +117,7 @@ namespace CogiEngine
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {   
-            //this.entity.IncreaseRotation(1f,1f,0f);
+            this.entity.IncreaseRotation(0f,0.5f,0f);
             this.renderer.SetViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
             this.camera.UpdateMove(this.inputManager);
         }
@@ -115,6 +128,7 @@ namespace CogiEngine
             Gl.Viewport(0, 0, senderControl.ClientSize.Width, senderControl.ClientSize.Height);
             this.renderer.Prepare();
             this.shader.Start();
+            this.shader.LoadLight(this.lgiht);
             this.shader.LoadViewMatrix(camera);
             this.renderer.Render(this.entity, this.shader);
             this.shader.Stop();

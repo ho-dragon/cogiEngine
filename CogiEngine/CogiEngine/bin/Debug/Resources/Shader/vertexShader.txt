@@ -2,14 +2,23 @@
 
 /* layout(location = 0) */ in vec3 _position;
 /* layout(location = 1) */ in vec2 _textureCoords;
+/* layout(location = 2) */ in vec3 _normal;
 
 out vec2 _pass_textureCoords;
+out vec3 _surfaceNormal;
+out vec3 _toLightVector;
+
 uniform mat4 _transformationMatrix;
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
+uniform vec3 _lightPosition;
 
 void main(void)
 {
-     gl_Position  = _projectionMatrix * _viewMatrix * _transformationMatrix * vec4(_position, 1.0);
+    vec4 worldPosition = _transformationMatrix * vec4(_position, 1.0);
+    gl_Position  = _projectionMatrix * _viewMatrix * worldPosition;
     _pass_textureCoords = _textureCoords;
+    
+    _surfaceNormal = (_transformationMatrix * vec4(_normal, 0.0)).xyz;
+    _toLightVector = _lightPosition - worldPosition.xyz;
 }
