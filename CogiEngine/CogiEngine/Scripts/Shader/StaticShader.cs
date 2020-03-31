@@ -11,8 +11,10 @@ namespace CogiEngine
         private int locationTransformationMatrix;
         private int locationProjectionMatrix;
         private int locationViewMatrix;
-        private int loc_lightPosition;
-        private int loc_lightColour;
+        private int loccationLightPosition;
+        private int locationLightColor;
+        private int locationShineDamper;
+        private int locationReflectivity;
         
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
@@ -48,10 +50,18 @@ namespace CogiEngine
             this.locationTransformationMatrix  = base.GetUniformLocation("_transformationMatrix");
             this.locationProjectionMatrix = base.GetUniformLocation("_projectionMatrix");
             this.locationViewMatrix = base.GetUniformLocation("_viewMatrix");
-            this.loc_lightPosition = base.GetUniformLocation("_lightPosition");
-            this.loc_lightColour = base.GetUniformLocation("_lightColour");
+            this.loccationLightPosition = base.GetUniformLocation("_lightPosition");
+            this.locationLightColor = base.GetUniformLocation("_lightColour");
+            this.locationShineDamper = base.GetUniformLocation("_shineDamper");
+            this.locationReflectivity = base.GetUniformLocation("_reflectivity");
         }
 
+        public void LoadShineVariables(float damper, float reflectivity)
+        {
+            base.LoadFloat(this.locationShineDamper, damper);
+            base.LoadFloat(this.locationReflectivity, reflectivity);
+        }
+        
         public void LoadTransformationMatrix(Matrix4x4f value)
         {
             base.LoadMatrix(this.locationTransformationMatrix, value);
@@ -70,8 +80,8 @@ namespace CogiEngine
         
         public void LoadLight(Light light)
         {
-            base.LoadVector(this.loc_lightPosition, light.Position);
-            base.LoadVector(this.loc_lightColour, light.Colour);
+            base.LoadVector(this.loccationLightPosition, light.Position);
+            base.LoadVector(this.locationLightColor, light.Colour);
         }
     }
 }

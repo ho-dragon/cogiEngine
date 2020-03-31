@@ -86,6 +86,8 @@ namespace CogiEngine
             //this.rowModel = OBJLoader.LoadObjModel("dragon", this.loader);
             this.rowModel = OBJLoader.LoadObjModelFromAssimp("dragon", this.loader);
             this.modelTexture = new ModelTexture(this.loader.LoadTexture("white2"));
+            this.modelTexture.ShineDamper = 10f;
+            this.modelTexture.Reflectivity = 1f;
             
             //Remove texture outline
             int value = (int)TextureMagFilter.Linear;

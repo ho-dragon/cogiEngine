@@ -65,7 +65,9 @@ namespace CogiEngine
 
             Matrix4x4f transformationMatrix = Maths.CreateTransformationMatrix(entity.Position, entity.RotX, entity.RotY, entity.RotZ, entity.Scale);
             shader.LoadTransformationMatrix(transformationMatrix);
-
+            ModelTexture texture = model.Texture;
+            shader.LoadShineVariables(texture.ShineDamper, texture.Reflectivity);
+            
             Gl.ActiveTexture(TextureUnit.Texture0);
             Gl.BindTexture(TextureTarget.Texture2d, model.Texture.ID);
             

@@ -2,15 +2,30 @@
 {
     public class ModelTexture
     {
-        uint _textureID;
+        private uint textureID;
+        private float shineDamper = 1f;
+        private float reflectivity = 0f;
+
+        public float ShineDamper
+        {
+            get => shineDamper;
+            set => shineDamper = value;
+        }
+
+        public float Reflectivity
+        {
+            get => reflectivity;
+            set => reflectivity = value;
+        }
+
         public uint ID
         {
-            get { return _textureID; }
+            get => textureID;
         }
 
         public ModelTexture(uint id)
         {
-            this._textureID = id;
+            this.textureID = id;
         }
     }
 }

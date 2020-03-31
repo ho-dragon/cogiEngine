@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab95fda2-f254-4b72-ac0a-6bf69f9992f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Entities/Light.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/MainForm.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/fragmentShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/fragmentShader.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/vertexShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/vertexShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/OBJLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/OBJLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Models/ModelTexture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Models/ModelTexture.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Shader/StaticShader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Shader/StaticShader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/fragmentShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/fragmentShader.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/vertexShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/vertexShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +117,6 @@
         <option value="$PROJECT_DIR$/CogiEngine/Program.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/OpenGLExtension.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/ShaderProgram.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Models/ModelTexture.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Models/TextureModel.cs" />
         <option value="$PROJECT_DIR$/../.gitignore" />
         <option value="$PROJECT_DIR$/CogiEngine/Entities/Entity.cs" />
@@ -133,13 +127,14 @@
         <option value="$PROJECT_DIR$/CogiEngine/Resources/new_stall.obj" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/stall.obj" />
         <option value="$PROJECT_DIR$/CogiEngine/Entities/Light.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/StaticShader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/OBJLoader.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Models/ModelTexture.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/StaticShader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/vertexShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/fragmentShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/MainForm.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" />
       </list>
     </option>
   </component>
@@ -202,7 +197,8 @@
       <workItem from="1585238645725" duration="3069000" />
       <workItem from="1585324275322" duration="5829000" />
       <workItem from="1585403997598" duration="12933000" />
-      <workItem from="1585577858614" duration="4201000" />
+      <workItem from="1585577858614" duration="4708000" />
+      <workItem from="1585666340386" duration="3253000" />
     </task>
     <servers />
   </component>
@@ -249,22 +245,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1282" y="445" width="751" height="775" key="EnvironmentVariablesDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584277591831" />
-    <state width="2517" height="636" key="GridCell.Tab.0.bottom" timestamp="1585582455955">
+    <state width="2517" height="300" key="GridCell.Tab.0.bottom" timestamp="1585671156429">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="636" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585582455955" />
-    <state width="2517" height="636" key="GridCell.Tab.0.center" timestamp="1585582455955">
+    <state width="2517" height="300" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585671156429" />
+    <state width="2517" height="300" key="GridCell.Tab.0.center" timestamp="1585671156429">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="636" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585582455955" />
-    <state width="2517" height="636" key="GridCell.Tab.0.left" timestamp="1585582455955">
+    <state width="2517" height="300" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585671156429" />
+    <state width="2517" height="300" key="GridCell.Tab.0.left" timestamp="1585671156429">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="636" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585582455955" />
-    <state width="2517" height="636" key="GridCell.Tab.0.right" timestamp="1585582455955">
+    <state width="2517" height="300" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585671156429" />
+    <state width="2517" height="300" key="GridCell.Tab.0.right" timestamp="1585671156429">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="636" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585582455955" />
+    <state width="2517" height="300" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585671156429" />
     <state width="2517" height="456" key="GridCell.Tab.1.bottom" timestamp="1585420698682">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -329,10 +325,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="456" key="GridCell.Tab.4.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585420698682" />
-    <state x="983" y="379" key="RiderGenerateDialog" timestamp="1584898985029">
+    <state x="983" y="379" key="RiderGenerateDialog" timestamp="1585667812295">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="983" y="379" key="RiderGenerateDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584898985029" />
+    <state x="983" y="379" key="RiderGenerateDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585667812295" />
     <state x="781" y="342" key="SettingsEditor" timestamp="1584274788346">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -349,9 +345,9 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="600" height="424" key="javadoc.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584107988027" />
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1585581944681">
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1585668185474">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585581944681" />
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585668185474" />
   </component>
 </project>
