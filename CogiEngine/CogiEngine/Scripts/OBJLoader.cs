@@ -14,7 +14,7 @@ namespace CogiEngine
     {
 
         public static RawModel LoadObjModelFromAssimp(string fileName, Loader loader)
-        {
+     {   
             string filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", fileName + ".obj");
             AssimpContext importer = new AssimpContext();
             importer.SetConfig(new NormalSmoothingAngleConfig(66.0f));

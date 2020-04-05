@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using OpenGL;
@@ -13,6 +14,7 @@ namespace CogiEngine
         private Matrix4x4f projectionMatrix = Matrix4x4f.Identity;
         private int clientWidth;
         private int clientHeight;
+        private StaticShader shader;
 
         float AspectRatio
         {
@@ -21,11 +23,12 @@ namespace CogiEngine
 
         public Renderer(StaticShader shader, int width, int height)
         {
+            this.shader = shader;
             SetViewRect(width, height);
-            this.projectionMatrix = Maths.CreateProjectionMatrix(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
-            shader.Start();
-            shader.LoadProjectionMatrix(this.projectionMatrix);
-            shader.Stop();
+            this.projectionMatrix  = Maths.CreateProjectionMatrix(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
+            this.shader.Start();
+            this.shader.LoadProjectionMatrix(this.projectionMatrix);
+            this.shader.Stop();
         }
 
         public void SetViewRect(int width, int height)
@@ -43,8 +46,11 @@ namespace CogiEngine
         {
             Gl.Viewport(0, 0, clientWidth, clientHeight);
             Gl.Enable(EnableCap.DepthTest);
+            Gl.Enable(EnableCap.CullFace);//Optimize
+            Gl.CullFace(CullFaceMode.Front);//Optimize
+            
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Gl.ClearColor(1, 0, 0, 1f);
+            Gl.ClearColor(0, 0.6f, 0, 1f);
         }
         public bool IsEnabledDepthTest()
         {
@@ -52,32 +58,50 @@ namespace CogiEngine
             Gl.GetIntegerNV(GetPName.DepthTest, values);
             return values[0] == 1;
         }
-        
-        public void Render(Entity entity, StaticShader shader)
+
+        public void Render(Dictionary<TextureModel, List<Entity>> entities)
         {
-            TextureModel model = entity.Model;
+            var enumerator = entities.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                TextureModel model = enumerator.Current.Key;
+                PrepareTextureModel(model);
+                List<Entity> batch = enumerator.Current.Value;
+                for (int i = 0; i < batch.Count; i++)
+                {
+                    PrepareInstance(batch[i]);
+                    Gl.DrawElements(PrimitiveType.Triangles, model.RawModel.VertexCount, DrawElementsType.UnsignedInt, IntPtr.Zero);
+                }
+                UnbindTextureModel();
+            }
+        }
+
+        private void PrepareTextureModel(TextureModel model)
+        {
             RawModel rawModel = model.RawModel;
-            
             Gl.BindVertexArray(rawModel.VaoID);
             Gl.EnableVertexAttribArray(0);// Position
             Gl.EnableVertexAttribArray(1);// UV 매핑 데이터 Slot 활성
             Gl.EnableVertexAttribArray(2);// Normal
-
-            Matrix4x4f transformationMatrix = Maths.CreateTransformationMatrix(entity.Position, entity.RotX, entity.RotY, entity.RotZ, entity.Scale);
-            shader.LoadTransformationMatrix(transformationMatrix);
-            ModelTexture texture = model.Texture;
-            shader.LoadShineVariables(texture.ShineDamper, texture.Reflectivity);
             
+            ModelTexture texture = model.Texture;
+            this.shader.LoadShineVariables(texture.ShineDamper, texture.Reflectivity);
             Gl.ActiveTexture(TextureUnit.Texture0);
             Gl.BindTexture(TextureTarget.Texture2d, model.Texture.ID);
-            
-            Gl.DrawElements(PrimitiveType.Triangles, rawModel.VertexCount, DrawElementsType.UnsignedInt, IntPtr.Zero);
+        }
 
+        private void UnbindTextureModel()
+        {
             Gl.DisableVertexAttribArray(0);
             Gl.DisableVertexAttribArray(1); // UV 매핑 데이터 Slot 비활성
             Gl.DisableVertexAttribArray(2);
             Gl.BindVertexArray(0);
         }
+
+        private void PrepareInstance(Entity entity)
+        {
+            Matrix4x4f transformationMatrix = Maths.CreateTransformationMatrix(entity.Position, entity.RotX, entity.RotY, entity.RotZ, entity.Scale);
+            this.shader.LoadTransformationMatrix(transformationMatrix);
+        }
     }
-    
 }

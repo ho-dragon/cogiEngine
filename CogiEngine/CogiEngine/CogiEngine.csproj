@@ -86,6 +86,7 @@
         <Compile Include="Scripts\DisplayManager.cs" />
         <Compile Include="Scripts\InputManager.cs" />
         <Compile Include="Scripts\Loader.cs" />
+        <Compile Include="Scripts\MasterRanderer.cs" />
         <Compile Include="Scripts\Models\ModelTexture.cs" />
         <Compile Include="Scripts\Models\RawModel.cs" />
         <Compile Include="Scripts\Models\TextureModel.cs" />

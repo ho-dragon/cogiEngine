@@ -1,12 +1,15 @@
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy64.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy32.dll
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\fragmentShader.txt
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\vertexShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image_2.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\stall.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\stallTexture.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\new_stall.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\dragon.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\white2.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\white64.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\fragmentShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\vertexShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe.config
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.pdb
@@ -34,6 +37,3 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CoreCom
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CopyComplete
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\dragon.obj
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\white2.png
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\white64.png

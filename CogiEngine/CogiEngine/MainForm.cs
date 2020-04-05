@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using OpenGL;
 
@@ -10,15 +12,14 @@ namespace CogiEngine
         private GlControl glControl;
         private DisplayManager displayManager;
         private InputManager inputManager;
+        private MasterRanderer masterRenderer;
         private RawModel rowModel;
         private Loader loader;
-        private Renderer renderer;
         private Camera camera;
         private Light lgiht;
-        private StaticShader shader;
         private ModelTexture modelTexture;
         private TextureModel textureModel;
-        private Entity entity;
+        private List<Entity> models;
         
         public MainForm()
         {
@@ -79,9 +80,8 @@ namespace CogiEngine
             }
             
             this.loader = new Loader();
-            this.shader = new StaticShader();
-            this.renderer = new Renderer(this.shader, glControl.ClientSize.Width, glControl.ClientSize.Height);
-            
+            this.masterRenderer = new MasterRanderer(glControl.ClientSize.Width, glControl.ClientSize.Height);
+
             //Model
             //this.rowModel = OBJLoader.LoadObjModel("dragon", this.loader);
             this.rowModel = OBJLoader.LoadObjModelFromAssimp("dragon", this.loader);
@@ -105,36 +105,76 @@ namespace CogiEngine
             this.inputManager.OnEventKeyDown += this.camera.OnEventKeyDown;
             
             //Entity
-            this.entity = new Entity(textureModel, new Vertex3f(0, -3, -8), 0, 180, 0, 1);
-                    
-        
+            //new Entity(textureModel, new Vertex3f(0, -3, -8), 0, 180, 0, 1)
+            models = new List<Entity>();
+            int count = 150;
+            int lastX = 0;
+            int lastY = 0;
+            for (int i = 0; i < count; i++)
+            {
+                int y = 30  - ((int)(i / 15) * 10);
+                if (lastY != y)
+                {
+                    lastY = y;
+                    lastX = 0;
+                }
+                models.Add(new Entity(textureModel, new Vertex3f(-120 + (lastX * 15), y , -100), 0, 0, 0, 1));
+                lastX += 1;
+            }
         }
 
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
         {
             this.displayManager.CloseDisplay();
             this.loader.CleanUp();
-            this.shader.CleanUp();
+            this.masterRenderer.CleanUp();
         }
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {   
-            this.entity.IncreaseRotation(0f,0.5f,0f);
-            this.renderer.SetViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
+            this.models.ForEach(x => x.IncreaseRotation(0f,0.5f,0f));
+            this.masterRenderer.UpdateViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
             this.camera.UpdateMove(this.inputManager);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
             Control senderControl = (Control) sender;
-            Gl.Viewport(0, 0, senderControl.ClientSize.Width, senderControl.ClientSize.Height);
-            this.renderer.Prepare();
-            this.shader.Start();
-            this.shader.LoadLight(this.lgiht);
-            this.shader.LoadViewMatrix(camera);
-            this.renderer.Render(this.entity, this.shader);
-            this.shader.Stop();
+            for (int i = 0; i < this.models.Count; i++)
+            {
+                masterRenderer.ProcessEntity(this.models[i]);
+            }
+            masterRenderer.Render(this.lgiht, this.camera);
+            //DrawAxis(PrimitiveType.Lines,0,0,0,0.1f,1f);
             this.displayManager.UpdateDisplay();
         }
+        
+        public void DrawAxis(PrimitiveType mode, float px, float py, float pz, float dist, float thick)
+        {
+            //x축은 빨간색
+            Gl.Begin(mode);
+            Gl.Color3(1f, 0f, 0f);
+            Gl.LineWidth(thick);
+            Gl.Vertex3(px, py, pz);
+            Gl.Vertex3(px + dist, py, pz);
+            Gl.End();
+
+            //y축은 파랑
+            Gl.Begin(mode);
+            Gl.LineWidth(thick);
+            Gl.Color3(0, 0, 1f);
+            Gl.Vertex3(px, py, pz);
+            Gl.Vertex3(px, py + dist, pz);
+            Gl.End();
+
+            //z축은 녹색
+            Gl.Begin(mode);
+            Gl.LineWidth(thick);
+            Gl.Color3(0f,1f,0f);
+            Gl.Vertex3(px, py, pz);
+            Gl.Vertex3(px, py, pz + dist);
+            Gl.End();
+        }
+
     }
 }

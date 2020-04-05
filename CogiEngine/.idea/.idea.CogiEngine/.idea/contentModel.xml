@@ -42,6 +42,7 @@
           <e p="DisplayManager.cs" t="Include" />
           <e p="InputManager.cs" t="Include" />
           <e p="Loader.cs" t="Include" />
+          <e p="MasterRanderer.cs" t="Include" />
           <e p="Models" t="Include">
             <e p="ModelTexture.cs" t="Include" />
             <e p="RawModel.cs" t="Include" />
