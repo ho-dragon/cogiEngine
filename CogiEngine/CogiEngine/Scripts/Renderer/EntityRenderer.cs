@@ -1,63 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Numerics;
 using OpenGL;
 
 namespace CogiEngine
 {
-    public class Renderer
+    public class EntityRenderer
     {
-        private const float FOV = 70;
-        private const float NEAR_PLANE = 0.1f;
-        private const float FAR_PLANE = 1000f;
-        private Matrix4x4f projectionMatrix = Matrix4x4f.Identity;
-        private int clientWidth;
-        private int clientHeight;
         private StaticShader shader;
-
-        float AspectRatio
-        {
-            get { return (float)clientWidth / (float)clientHeight; }
-        }
-
-        public Renderer(StaticShader shader, int width, int height)
+        public EntityRenderer(StaticShader shader, int width, int height, Matrix4x4f projectionMatrix)
         {
             this.shader = shader;
-            SetViewRect(width, height);
-            this.projectionMatrix  = Maths.CreateProjectionMatrix(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
             this.shader.Start();
-            this.shader.LoadProjectionMatrix(this.projectionMatrix);
+            this.shader.LoadProjectionMatrix(projectionMatrix);
             this.shader.Stop();
-        }
-
-        public void SetViewRect(int width, int height)
-        {
-            if (clientWidth == width && clientHeight == height)
-            {
-                return;
-            }
-            this.clientWidth = width;
-            this.clientHeight = height;
-
-        }
-
-        public void Prepare()
-        {
-            Gl.Viewport(0, 0, clientWidth, clientHeight);
-            Gl.Enable(EnableCap.DepthTest);
-            Gl.Enable(EnableCap.CullFace);//Optimize
-            Gl.CullFace(CullFaceMode.Front);//Optimize
-            
-            Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Gl.ClearColor(0, 0.6f, 0, 1f);
-        }
-        public bool IsEnabledDepthTest()
-        {
-            ulong[] values = new ulong[1];
-            Gl.GetIntegerNV(GetPName.DepthTest, values);
-            return values[0] == 1;
-        }
+        }       
 
         public void Render(Dictionary<TextureModel, List<Entity>> entities)
         {
@@ -72,7 +28,7 @@ namespace CogiEngine
                     PrepareInstance(batch[i]);
                     Gl.DrawElements(PrimitiveType.Triangles, model.RawModel.VertexCount, DrawElementsType.UnsignedInt, IntPtr.Zero);
                 }
-                UnbindTextureModel();
+                Unbind();
             }
         }
 
@@ -87,10 +43,10 @@ namespace CogiEngine
             ModelTexture texture = model.Texture;
             this.shader.LoadShineVariables(texture.ShineDamper, texture.Reflectivity);
             Gl.ActiveTexture(TextureUnit.Texture0);
-            Gl.BindTexture(TextureTarget.Texture2d, model.Texture.ID);
+            Gl.BindTexture(TextureTarget.Texture2d, texture.ID);
         }
 
-        private void UnbindTextureModel()
+        private void Unbind()
         {
             Gl.DisableVertexAttribArray(0);
             Gl.DisableVertexAttribArray(1); // UV 매핑 데이터 Slot 비활성

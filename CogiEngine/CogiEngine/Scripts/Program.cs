@@ -14,13 +14,15 @@ namespace CogiEngine
         static void Main()
         {
             CogiLogger.Log("Main", "=========START=======");
-            //string envDebug = Environment.GetEnvironmentVariable("DEBUG");
-            //if (envDebug == "GL") {
-                KhronosApi.Log += delegate(object sender, KhronosLogEventArgs e) {
+            string envDebug = Environment.GetEnvironmentVariable("DEBUG");
+            if (envDebug == "GL")
+            {
+                KhronosApi.Log += delegate(object sender, KhronosLogEventArgs e)
+                {
                     CogiLogger.Log("KhronosApi", e.ToString());
                 };
                 KhronosApi.LogEnabled = true;
-            //}
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

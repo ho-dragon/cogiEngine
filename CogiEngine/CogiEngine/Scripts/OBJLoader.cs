@@ -27,7 +27,7 @@ namespace CogiEngine
             float[] normalsArray = NormalsFromMesh(scene.Meshes[0]);
             return loader.LoadToVAO(verticesArray, textureArray, normalsArray, indicesArray);
         }
-        
+
         static float[] TextureFromMesh(Mesh mesh)
         {
             List<float> list = new List<float>();
@@ -36,6 +36,7 @@ namespace CogiEngine
                 list.Add(vertex.X);
                 list.Add(1 - vertex.Y);
             }
+
             return list.ToArray();
         }
 
@@ -48,6 +49,7 @@ namespace CogiEngine
                 list.Add(vertex.Y);
                 list.Add(vertex.Z);
             }
+
             return list.ToArray();
         }
 
@@ -58,9 +60,10 @@ namespace CogiEngine
             {
                 list.AddRange(face.Indices);
             }
+
             return list.ToArray();
         }
-        
+
         static float[] NormalsFromMesh(Mesh mesh)
         {
             List<float> list = new List<float>();
@@ -70,19 +73,20 @@ namespace CogiEngine
                 list.Add(vector.Y);
                 list.Add(vector.Z);
             }
+
             return list.ToArray();
         }
-        
+
         public static RawModel LoadObjModel(string fileName, Loader loader)
         {
             List<Vertex3f> vertexList = new List<Vertex3f>();
             List<Vertex2f> uvList = new List<Vertex2f>();
             List<Vertex3f> normalList = new List<Vertex3f>();
             List<int> indexList = new List<int>();
-            
+
             float[] uvArray = null;
             float[] normalArray = null;
-            
+
             string filePath = $".\\Resources\\{fileName}.obj";
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
@@ -96,7 +100,8 @@ namespace CogiEngine
 
                         if (line.StartsWith("v "))
                         {
-                            vertexList.Add(new Vertex3f(float.Parse(currentLine[1]), float.Parse(currentLine[2]), float.Parse(currentLine[3])));
+                            vertexList.Add(new Vertex3f(float.Parse(currentLine[1]), float.Parse(currentLine[2]),
+                                float.Parse(currentLine[3])));
                         }
                         else if (line.StartsWith("vt "))
                         {
@@ -104,7 +109,8 @@ namespace CogiEngine
                         }
                         else if (line.StartsWith("vn "))
                         {
-                            normalList.Add(new Vertex3f(float.Parse(currentLine[1]), float.Parse(currentLine[2]), float.Parse(currentLine[3])));
+                            normalList.Add(new Vertex3f(float.Parse(currentLine[1]), float.Parse(currentLine[2]),
+                                float.Parse(currentLine[3])));
                         }
                         else if (line.StartsWith("f "))
                         {
@@ -135,7 +141,9 @@ namespace CogiEngine
                     }
                 }
             }
-            return loader.LoadToVAO(ConvertToArray(vertexList), uvArray,  ConvertToArray(normalList), indexList.ToArray());
+
+            return loader.LoadToVAO(ConvertToArray(vertexList), uvArray, ConvertToArray(normalList),
+                indexList.ToArray());
         }
 
         static float[] ConvertToArray(List<Vertex3f> vecterList)
@@ -147,10 +155,11 @@ namespace CogiEngine
                 array[index++] = i.x;
                 array[index++] = i.y;
                 array[index++] = i.z;
-             }
+            }
+
             return array;
         }
-        
+
         /* 
          v: vertex
         vt: UV texture Coordinates
@@ -165,14 +174,14 @@ namespace CogiEngine
             , float[] uvArray
             , float[] normalArray)
         {
-            int i = int.Parse(vertexData[0]) - 1;//position
+            int i = int.Parse(vertexData[0]) - 1; //position
             indexList.Add(i);
 
-            Vertex2f uv = uvList[int.Parse(vertexData[1]) - 1];//texture-coordinates
+            Vertex2f uv = uvList[int.Parse(vertexData[1]) - 1]; //texture-coordinates
             uvArray[i * 2] = uv.x;
             uvArray[i * 2 + 1] = 1 - uv.y;
 
-            Vertex3f normal = normalList[int.Parse(vertexData[2]) - 1];//normal
+            Vertex3f normal = normalList[int.Parse(vertexData[2]) - 1]; //normal
             normalArray[i * 3] = normal.x;
             normalArray[i * 3 + 1] = normal.y;
             normalArray[i * 3 + 2] = normal.z;

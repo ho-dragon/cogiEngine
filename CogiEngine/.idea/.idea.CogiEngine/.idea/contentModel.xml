@@ -6,15 +6,8 @@
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="CogiEngine.csproj" t="IncludeRecursive" />
-        <e p="Entities" t="Include">
-          <e p="Camera.cs" t="Include" />
-          <e p="Entity.cs" t="Include" />
-          <e p="Light.cs" t="Include" />
-        </e>
-        <e p="MainForm.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="packages.config" t="Include" />
-        <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="AssemblyInfo.cs" t="Include" />
           <e p="Resources.Designer.cs" t="Include" />
@@ -27,32 +20,53 @@
           <e p="new_stall.obj" t="Include" />
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
+            <e p="terrainFragmentShader.txt" t="Include" />
+            <e p="terrainVertexShader.txt" t="Include" />
             <e p="vertexShader.txt" t="Include" />
           </e>
           <e p="stall.obj" t="Include" />
           <e p="Textures" t="Include">
+            <e p="gold.png" t="Include" />
+            <e p="grass.png" t="Include" />
             <e p="image.png" t="Include" />
             <e p="image_2.png" t="Include" />
+            <e p="rainbow.png" t="Include" />
             <e p="stallTexture.png" t="Include" />
+            <e p="tree.png" t="Include" />
             <e p="white2.png" t="Include" />
             <e p="white64.png" t="Include" />
           </e>
+          <e p="tree.obj" t="Include" />
         </e>
         <e p="Scripts" t="Include">
           <e p="DisplayManager.cs" t="Include" />
+          <e p="Entities" t="Include">
+            <e p="Camera.cs" t="Include" />
+            <e p="Entity.cs" t="Include" />
+            <e p="Light.cs" t="Include" />
+          </e>
           <e p="InputManager.cs" t="Include" />
           <e p="Loader.cs" t="Include" />
-          <e p="MasterRanderer.cs" t="Include" />
+          <e p="MainForm.cs" t="Include" />
           <e p="Models" t="Include">
             <e p="ModelTexture.cs" t="Include" />
             <e p="RawModel.cs" t="Include" />
             <e p="TextureModel.cs" t="Include" />
           </e>
           <e p="OBJLoader.cs" t="Include" />
-          <e p="Renderer.cs" t="Include" />
+          <e p="Program.cs" t="Include" />
+          <e p="Renderer" t="Include">
+            <e p="EntityRenderer.cs" t="Include" />
+            <e p="MasterRanderer.cs" t="Include" />
+            <e p="TerrainRenderer.cs" t="Include" />
+          </e>
           <e p="Shader" t="Include">
             <e p="ShaderProgram.cs" t="Include" />
             <e p="StaticShader.cs" t="Include" />
+            <e p="TerrainShader.cs" t="Include" />
+          </e>
+          <e p="Terrain" t="Include">
+            <e p="Terrain.cs" t="Include" />
           </e>
           <e p="Utils" t="Include">
             <e p="CogiLogger.cs" t="Include" />

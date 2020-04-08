@@ -77,23 +77,26 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Entities\Camera.cs" />
-        <Compile Include="Entities\Entity.cs" />
-        <Compile Include="Entities\Light.cs" />
-        <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="MainForm.cs" />
         <Compile Include="Scripts\DisplayManager.cs" />
+        <Compile Include="Scripts\Entities\Camera.cs" />
+        <Compile Include="Scripts\Entities\Entity.cs" />
+        <Compile Include="Scripts\Entities\Light.cs" />
         <Compile Include="Scripts\InputManager.cs" />
         <Compile Include="Scripts\Loader.cs" />
-        <Compile Include="Scripts\MasterRanderer.cs" />
+        <Compile Include="Scripts\MainForm.cs" />
         <Compile Include="Scripts\Models\ModelTexture.cs" />
         <Compile Include="Scripts\Models\RawModel.cs" />
         <Compile Include="Scripts\Models\TextureModel.cs" />
         <Compile Include="Scripts\OBJLoader.cs" />
-        <Compile Include="Scripts\Renderer.cs" />
+        <Compile Include="Scripts\Program.cs" />
+        <Compile Include="Scripts\Renderer\EntityRenderer.cs" />
+        <Compile Include="Scripts\Renderer\MasterRanderer.cs" />
+        <Compile Include="Scripts\Renderer\TerrainRenderer.cs" />
         <Compile Include="Scripts\Shader\ShaderProgram.cs" />
         <Compile Include="Scripts\Shader\StaticShader.cs" />
+        <Compile Include="Scripts\Shader\TerrainShader.cs" />
+        <Compile Include="Scripts\Terrain\Terrain.cs" />
         <Compile Include="Scripts\Utils\CogiLogger.cs" />
         <Compile Include="Scripts\Utils\Maths.cs" />
         <Compile Include="Scripts\Utils\OpenGLExtension.cs" />
@@ -122,6 +125,12 @@
     </ItemGroup>
     <ItemGroup>
       <None Include="Resources\Shader\fragmentShader.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Shader\terrainFragmentShader.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Shader\terrainVertexShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Include="Resources\Shader\vertexShader.txt">
@@ -161,6 +170,25 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Include="Resources\Textures\white64.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="Resources\Textures\gold.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\grass.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\rainbow.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\tree.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="Resources\tree.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
