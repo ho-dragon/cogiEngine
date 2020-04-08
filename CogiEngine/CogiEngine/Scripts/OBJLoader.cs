@@ -12,13 +12,11 @@ namespace CogiEngine
     /// </summary>
     public class OBJLoader
     {
-
         public static RawModel LoadObjModelFromAssimp(string fileName, Loader loader)
-     {   
+        {
             string filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", fileName + ".obj");
             AssimpContext importer = new AssimpContext();
-            importer.SetConfig(new NormalSmoothingAngleConfig(66.0f));
-            Scene scene = importer.ImportFile(filePath, PostProcessPreset.TargetRealTimeQuality | PostProcessSteps.FlipWindingOrder);
+            Scene scene = importer.ImportFile(filePath);
             if (scene == null || scene.HasMeshes == false)
             {
                 return null;
