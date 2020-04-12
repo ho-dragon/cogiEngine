@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Numerics;
 using OpenGL;
@@ -49,8 +50,7 @@ namespace CogiEngine
 
         protected void LoadBoolean(int location, bool value)
         {
-            float toLoad = (value == true) ? 1.0f : 0.0f;
-            Gl.Uniform1f(location, 1, value);
+            Gl.Uniform1f(location, 1, value? 1.0f : 0.0f);
         }
 
         protected void LoadMatrix(int location,  Matrix4x4f matrix)

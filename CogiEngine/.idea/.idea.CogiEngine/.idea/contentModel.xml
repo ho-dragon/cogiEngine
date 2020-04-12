@@ -16,7 +16,13 @@
           <e p="Settings.settings" t="Include" />
         </e>
         <e p="Resources" t="Include">
+          <e p="bunny.obj" t="Include" />
           <e p="dragon.obj" t="Include" />
+          <e p="drone.obj" t="Include" />
+          <e p="exampleOBJ.obj" t="Include" />
+          <e p="fern.obj" t="Include" />
+          <e p="grassModel.obj" t="Include" />
+          <e p="lowPolyTree.obj" t="Include" />
           <e p="new_stall.obj" t="Include" />
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
@@ -26,10 +32,15 @@
           </e>
           <e p="stall.obj" t="Include" />
           <e p="Textures" t="Include">
+            <e p="fern.png" t="Include" />
+            <e p="flower.png" t="Include" />
             <e p="gold.png" t="Include" />
             <e p="grass.png" t="Include" />
+            <e p="grassTexture.png" t="Include" />
+            <e p="grassy.png" t="Include" />
             <e p="image.png" t="Include" />
             <e p="image_2.png" t="Include" />
+            <e p="lowPolyTree.png" t="Include" />
             <e p="rainbow.png" t="Include" />
             <e p="stallTexture.png" t="Include" />
             <e p="tree.png" t="Include" />

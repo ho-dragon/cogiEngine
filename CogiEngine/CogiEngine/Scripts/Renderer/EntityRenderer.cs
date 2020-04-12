@@ -41,6 +41,11 @@ namespace CogiEngine
             Gl.EnableVertexAttribArray(2);// Normal
             
             ModelTexture texture = model.Texture;
+            if (texture.HasTransparency)
+            {
+                MasterRanderer.DisableCulling();
+            }
+            this.shader.LoadFakeLighting(texture.UseFakeLigihting);
             this.shader.LoadShineVariables(texture.ShineDamper, texture.Reflectivity);
             Gl.ActiveTexture(TextureUnit.Texture0);
             Gl.BindTexture(TextureTarget.Texture2d, texture.ID);
@@ -48,6 +53,7 @@ namespace CogiEngine
 
         private void Unbind()
         {
+            MasterRanderer.EnableCulling();
             Gl.DisableVertexAttribArray(0);
             Gl.DisableVertexAttribArray(1); // UV 매핑 데이터 Slot 비활성
             Gl.DisableVertexAttribArray(2);

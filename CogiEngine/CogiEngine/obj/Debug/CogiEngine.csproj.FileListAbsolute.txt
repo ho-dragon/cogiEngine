@@ -44,3 +44,14 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CopyCom
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\terrainVertexShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\bunny.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\drone.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\exampleOBJ.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\fern.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\grassModel.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\lowPolyTree.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\fern.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\flower.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grassTexture.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grassy.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\lowPolyTree.png

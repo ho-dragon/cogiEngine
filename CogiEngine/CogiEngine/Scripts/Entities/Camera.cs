@@ -24,9 +24,8 @@ namespace CogiEngine
 
         public Camera()
         {
-            position = new Vertex3f(20, 20, 0);
+            position = new Vertex3f(0, 10, 0);
             pitch = 20f;
-            yaw = 180f;
         }
 
         public void OnEventKeyDown(Keys inputKey)
@@ -44,24 +43,12 @@ namespace CogiEngine
         
         public void UpdateMove(InputManager input)
         {
-            float speed = isSpeedUp ? 10f : 1f;
+            float speed = isSpeedUp ? 100f : 1f;
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.W))
             {
                 if (isRotation)
                 {
-                    pitch += MOVE_ROTATION_PER_FRAME * speed;
-                }
-                else
-                {
-                    position.z += MOVE_POSITION_PER_FRAME * speed;    
-                }
-            }  
-            
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.S))
-            {
-                if (isRotation)
-                {
-                    pitch -=  MOVE_ROTATION_PER_FRAME * speed;;
+                    pitch -= MOVE_ROTATION_PER_FRAME;
                 }
                 else
                 {
@@ -69,11 +56,23 @@ namespace CogiEngine
                 }
             }  
             
+            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.S))
+            {
+                if (isRotation)
+                {
+                    pitch +=  MOVE_ROTATION_PER_FRAME;;
+                }
+                else
+                {
+                    position.z += MOVE_POSITION_PER_FRAME * speed;    
+                }
+            }  
+            
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.D))
             {
                 if (isRotation)
                 {
-                    yaw +=  MOVE_ROTATION_PER_FRAME * speed;;
+                    yaw +=  MOVE_ROTATION_PER_FRAME;;
                 }
                 else
                 {
@@ -85,7 +84,7 @@ namespace CogiEngine
             {
                 if (isRotation)
                 {
-                    yaw -=  MOVE_ROTATION_PER_FRAME * speed;;
+                    yaw -=  MOVE_ROTATION_PER_FRAME;;
                 }
                 else
                 {
@@ -95,12 +94,12 @@ namespace CogiEngine
             
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.Q))
             {
-                position.y += MOVE_POSITION_PER_FRAME * speed;
+                position.y -= MOVE_POSITION_PER_FRAME * speed;
             }
             
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.E))
             {
-                position.y -= MOVE_POSITION_PER_FRAME * speed;
+                position.y += MOVE_POSITION_PER_FRAME * speed;
             }
         }
     }

@@ -26,9 +26,6 @@ namespace CogiEngine
         public MasterRanderer(int width, int height)
         {
             Gl.Enable(EnableCap.DepthTest);
-            Gl.Enable(EnableCap.CullFace);//Optimize -- issue. not showing terrain
-            Gl.CullFace(CullFaceMode.Back);//Optimize
-            
             this.clientWidth = width;
             this.clientHeight = height;
             this.projectionMatrix  = Maths.CreateProjectionMatrix(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
@@ -42,6 +39,17 @@ namespace CogiEngine
             this.terrainShader = new TerrainShader();
             this.terrainRenderer = new TerrainRenderer(this.terrainShader, this.projectionMatrix);
             this.terrainList = new List<Terrain>();
+        }
+
+        public static void EnableCulling()
+        {
+            Gl.Enable(EnableCap.CullFace);//Optimize
+            Gl.CullFace(CullFaceMode.Back);//Optimize
+        }
+
+        public static void DisableCulling()
+        {
+            Gl.Disable(EnableCap.CullFace);
         }
 
         public void SetViewRect(int width, int height)

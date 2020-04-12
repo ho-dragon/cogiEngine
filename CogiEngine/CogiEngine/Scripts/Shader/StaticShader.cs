@@ -13,7 +13,7 @@ namespace CogiEngine
         private int locationLightColor;
         private int locationShineDamper;
         private int locationReflectivity;
-        
+        private int locationUseFakeLighting;
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
 
@@ -52,6 +52,7 @@ namespace CogiEngine
             this.locationLightColor = base.GetUniformLocation("_lightColour");
             this.locationShineDamper = base.GetUniformLocation("_shineDamper");
             this.locationReflectivity = base.GetUniformLocation("_reflectivity");
+            this.locationUseFakeLighting = base.GetUniformLocation("_useFakeLighting");
         }
 
         public void LoadShineVariables(float damper, float reflectivity)
@@ -80,6 +81,11 @@ namespace CogiEngine
         {
             base.LoadVector(this.loccationLightPosition, light.Position);
             base.LoadVector(this.locationLightColor, light.Colour);
+        }
+
+        public void LoadFakeLighting(bool useFakeLighting)
+        {
+            base.LoadBoolean(this.locationUseFakeLighting, useFakeLighting);
         }
     }
 }

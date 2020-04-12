@@ -13,6 +13,7 @@ uniform mat4 _transformationMatrix;
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
 uniform vec3 _lightPosition;
+uniform float _useFakeLighting;
 
 void main(void)
 {
@@ -20,7 +21,12 @@ void main(void)
     gl_Position  = _projectionMatrix * _viewMatrix * worldPosition;
     _pass_textureCoords = _textureCoords;
     
-    _surfaceNormal = (_transformationMatrix * vec4(_normal, 0.0)).xyz;
+    vec3 fakeNormal = _normal;
+    if (_useFakeLighting > 0.5) {
+        fakeNormal  = vec3(0.0, 1.0, 0.0); 
+    }
+    
+    _surfaceNormal = (_transformationMatrix * vec4(fakeNormal, 0.0)).xyz;
     _toLightVector = _lightPosition - worldPosition.xyz;
     _toCameraVector = (inverse(_viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - worldPosition.xyz;
 }

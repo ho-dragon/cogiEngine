@@ -15,7 +15,7 @@
         public RawModel Model => model;
         public ModelTexture Texture => texture;
 
-        public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture)
+        public Terrain(float gridX, float gridZ, Loader loader, ModelTexture texture)
         {
             this.texture = texture;
             this.x = gridX * SIZE;

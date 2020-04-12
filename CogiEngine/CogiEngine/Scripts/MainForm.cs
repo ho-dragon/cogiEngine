@@ -13,13 +13,10 @@ namespace CogiEngine
         private DisplayManager displayManager;
         private InputManager inputManager;
         private MasterRanderer renderer;
-        private RawModel rowModel;
         private Loader loader;
         private Camera camera;
         private Light lgiht;
-        private ModelTexture modelTexture;
-        private TextureModel textureModel;
-        private List<Entity> models;
+        private List<Entity> entities;
         private Terrain terrain_01;
         private Terrain terrain_02;
         
@@ -84,56 +81,60 @@ namespace CogiEngine
             
             this.loader = new Loader();
             this.renderer = new MasterRanderer(glControl.ClientSize.Width, glControl.ClientSize.Height);
-
-            //Model
-            //this.rowModel = OBJLoader.LoadObjModel("dragon", this.loader);
-            this.rowModel = OBJLoader.LoadObjModelFromAssimp("dragon", this.loader);
-            
-            //Remove texture outline
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, TextureMagFilter.Linear);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, TextureMagFilter.Linear);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            
-            this.modelTexture = new ModelTexture(this.loader.LoadTexture("gold"));
-            this.modelTexture.ShineDamper = 10f;
-            this.modelTexture.Reflectivity = 1f;
-            
-
-            this.textureModel = new TextureModel(this.rowModel, this.modelTexture);
             
             //Camera 
             this.camera = new Camera();
-            this.lgiht = new Light(new Vertex3f(0,150,-50), new Vertex3f(1,1,1));
+            this.lgiht = new Light(new Vertex3f(20000, 40000,20000), new Vertex3f(1,1,1));
             this.inputManager.OnEventKeyDown += this.camera.OnEventKeyDown;
             
-            //Entity
-            models = new List<Entity>();
-            int count = 1;
-            int lastX = 0;
-            int lastY = 0;
-            for (int i = 0; i < count; i++)
-            {
-                int y = 30  - ((int)(i / 15) * 10);
-                if (lastY != y)
-                {
-                    lastY = y;
-                    lastX = 0;
-                }
-                //models.Add(new Entity(textureModel, new Vertex3f(-120 + (lastX * 15), y , -100), 0, 0, 0, 1));
-                lastX += 1;
-            }
-            models.Add(new Entity(textureModel, new Vertex3f(0, 0 , 50), 0, 0, 0, 1));
-            
-            //Terrain
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            this.terrain_01 = new Terrain(0, 0, this.loader, new ModelTexture(this.loader.LoadTexture("grass")));
-
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            this.terrain_02 = new Terrain(1, 0, this.loader, new ModelTexture(this.loader.LoadTexture("grass")));
+            this.entities = new List<Entity>();
+            LoadEntities(this.entities, this.loader);
+            LoadTerrain(this.loader);
         }
+
+        private void LoadEntities(List<Entity> entities, Loader loader)
+        {
+            //Tree
+            ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("tree"));
+            treeTexture.ShineDamper = 30f;
+            treeTexture.Reflectivity = 0.3f;
+            TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("tree", loader), treeTexture);
+            //Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, TextureMagFilter.Linear);
+            //Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, TextureMagFilter.Linear);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            
+            //Grass
+            ModelTexture grassTexture = new ModelTexture(loader.LoadTexture("grassTexture"));
+            grassTexture.HasTransparency = true;
+            grassTexture.UseFakeLigihting = true;
+            TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), grassTexture);
+
+            //Fern
+            ModelTexture fernTexture = new ModelTexture(loader.LoadTexture("fern"));
+            fernTexture.HasTransparency = true;
+            TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", this.loader), fernTexture);
+     
+            Random random = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                entities.Add(new Entity(treeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 3));
+                entities.Add(new Entity(grassModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));
+                entities.Add(new Entity(fernModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 0.6f));
+            }
+        }
+
+        private void LoadTerrain(Loader loader)
+        {
+            this.terrain_01 = new Terrain(0, -0.5f, loader, new ModelTexture(this.loader.LoadTexture("grass")));
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            
+            this.terrain_02 = new Terrain(-1, -0.5f, loader, new ModelTexture(this.loader.LoadTexture("grass")));
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+        }
+        
 
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
         {
@@ -144,7 +145,7 @@ namespace CogiEngine
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {   
-            this.models.ForEach(x => x.IncreaseRotation(0f,0.5f,0f));
+            //this.models.ForEach(x => x.IncreaseRotation(0f,0.5f,0f));
             this.renderer.UpdateViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
             this.camera.UpdateMove(this.inputManager);
         }
@@ -152,9 +153,9 @@ namespace CogiEngine
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
             //Control senderControl = (Control) sender;
-            for (int i = 0; i < this.models.Count; i++)
+            for (int i = 0; i < this.entities.Count; i++)
             {
-                renderer.ProcessEntity(this.models[i]);
+                renderer.ProcessEntity(this.entities[i]);
             }
             renderer.ProcessTerrain(this.terrain_01); 
             renderer.ProcessTerrain(this.terrain_02);
