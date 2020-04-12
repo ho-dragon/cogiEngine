@@ -108,8 +108,12 @@ namespace CogiEngine
             ModelTexture grassTexture = new ModelTexture(loader.LoadTexture("grassTexture"));
             grassTexture.HasTransparency = true;
             grassTexture.UseFakeLigihting = true;
+            ModelTexture flowerTexture = new ModelTexture(loader.LoadTexture("flower"));
+            flowerTexture.HasTransparency = true;
+            flowerTexture.UseFakeLigihting = true;
             TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), grassTexture);
-
+            TextureModel flowerModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), flowerTexture);
+            
             //Fern
             ModelTexture fernTexture = new ModelTexture(loader.LoadTexture("fern"));
             fernTexture.HasTransparency = true;
@@ -120,19 +124,33 @@ namespace CogiEngine
             {
                 entities.Add(new Entity(treeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 3));
                 entities.Add(new Entity(grassModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));
+                entities.Add(new Entity(flowerModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));
                 entities.Add(new Entity(fernModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 0.6f));
             }
         }
 
         private void LoadTerrain(Loader loader)
         {
-            this.terrain_01 = new Terrain(0, -0.5f, loader, new ModelTexture(this.loader.LoadTexture("grass")));
+            TerrainTexture baseTexture = new TerrainTexture(loader.LoadTexture("grassy"));
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            TerrainTexture redTexture = new TerrainTexture(loader.LoadTexture("dirt"));
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            TerrainTexture greenTexture = new TerrainTexture(loader.LoadTexture("pinkFlowers"));
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            TerrainTexture blueTexture = new TerrainTexture(loader.LoadTexture("path"));
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            TerrainTexturePack texturePack = new TerrainTexturePack(baseTexture, redTexture, greenTexture, blueTexture);
+            
+            TerrainTexture blendMapTexture = new TerrainTexture(loader.LoadTexture("blendMap"));
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
             
-            this.terrain_02 = new Terrain(-1, -0.5f, loader, new ModelTexture(this.loader.LoadTexture("grass")));
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            this.terrain_01 = new Terrain(0, -0.5f, loader, texturePack, blendMapTexture);
+            this.terrain_02 = new Terrain(-1, -0.5f, loader, texturePack, blendMapTexture);
         }
         
 

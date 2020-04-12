@@ -55,3 +55,9 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\flower
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grassTexture.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grassy.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\lowPolyTree.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\blendMap.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\dirt.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grassFlowers.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\mud.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\path.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\pinkFlowers.png

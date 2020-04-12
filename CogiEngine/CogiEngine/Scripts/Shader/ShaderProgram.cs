@@ -42,6 +42,11 @@ namespace CogiEngine
         {
             Gl.Uniform1f(location, 1, value);
         }
+        
+        protected void LoadInt(int location, int value)
+        {
+            Gl.Uniform1i(location, 1, value);
+        }
 
         protected void LoadVector(int location, Vertex3f value)
         {

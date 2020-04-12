@@ -14,7 +14,11 @@ namespace CogiEngine
         private int locationShineDamper;
         private int locationReflectivity;
         private int locationSkyColor;
-        
+        private int locationBlendMapTexture;
+        private int locationBaseTexture;
+        private int locationRedTexture;
+        private int locationGreenTexture;
+        private int locationBlueTexture;
         public TerrainShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
 
@@ -34,6 +38,20 @@ namespace CogiEngine
             this.locationShineDamper = base.GetUniformLocation("_shineDamper");
             this.locationReflectivity = base.GetUniformLocation("_reflectivity");
             this.locationSkyColor = base.GetUniformLocation("_skyColor");
+            this.locationBlendMapTexture = base.GetUniformLocation("_blendMap");
+            this.locationBaseTexture = base.GetUniformLocation("_baseTexture");
+            this.locationRedTexture = base.GetUniformLocation("_redTexture");
+            this.locationGreenTexture = base.GetUniformLocation("_greenTexture");
+            this.locationBlueTexture = base.GetUniformLocation("_blueTexture");
+        }
+
+        public void ConnetTextureUnits()
+        {
+            base.LoadInt(this.locationBlendMapTexture, 0);
+            base.LoadInt(this.locationBaseTexture, 1);
+            base.LoadInt(this.locationRedTexture, 2);
+            base.LoadInt(this.locationGreenTexture, 3);
+            base.LoadInt(this.locationBlueTexture, 4);
         }
         
         public void LoadSkyColor(float r, float g, float b)

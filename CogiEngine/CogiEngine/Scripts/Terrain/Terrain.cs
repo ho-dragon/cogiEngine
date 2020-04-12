@@ -8,16 +8,19 @@
         private float x;
         private float z;
         private RawModel model;
-        private ModelTexture texture;
-
+        private TerrainTexturePack texturePack;
+        private TerrainTexture blendMap;
+        
         public float X => x;
         public float Z => z;
         public RawModel Model => model;
-        public ModelTexture Texture => texture;
+        public TerrainTexturePack TexturePack => texturePack;
+        public TerrainTexture BlendMap => blendMap;
 
-        public Terrain(float gridX, float gridZ, Loader loader, ModelTexture texture)
+        public Terrain(float gridX, float gridZ, Loader loader, TerrainTexturePack texturePack, TerrainTexture blendMap)
         {
-            this.texture = texture;
+            this.texturePack = texturePack;
+            this.blendMap = blendMap;
             this.x = gridX * SIZE;
             this.z = gridZ * SIZE;
             this.model = GenerateTerrain(loader);

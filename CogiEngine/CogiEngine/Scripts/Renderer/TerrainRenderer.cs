@@ -7,12 +7,15 @@ namespace CogiEngine
     public class TerrainRenderer
     {
         private TerrainShader shader;
+        private const float SHINE_DAMPER = 1f;
+        private const float REFLECTIVITY = 0f;
 
         public TerrainRenderer(TerrainShader shader, Matrix4x4f projectionMatrix)
         {
             this.shader = shader;
             this.shader.Start();
             this.shader.LoadProjectionMatrix(projectionMatrix);
+            this.shader.ConnetTextureUnits();
             this.shader.Stop();
         }
 
@@ -35,11 +38,28 @@ namespace CogiEngine
             Gl.EnableVertexAttribArray(0);// Position
             Gl.EnableVertexAttribArray(1);// UV 매핑 데이터 Slot 활성
             Gl.EnableVertexAttribArray(2);// Normal
+            BindTextures(terrain);
+            this.shader.LoadShineVariables(SHINE_DAMPER, REFLECTIVITY);
+        }
+
+        private void BindTextures(Terrain terrain)
+        {
+            TerrainTexturePack texturePack = terrain.TexturePack;
             
-            ModelTexture texture = terrain.Texture;
-            this.shader.LoadShineVariables(texture.ShineDamper, texture.Reflectivity);
             Gl.ActiveTexture(TextureUnit.Texture0);
-            Gl.BindTexture(TextureTarget.Texture2d, texture.ID);
+            Gl.BindTexture(TextureTarget.Texture2d, terrain.BlendMap.TextureId);
+            
+            Gl.ActiveTexture(TextureUnit.Texture1);
+            Gl.BindTexture(TextureTarget.Texture2d, texturePack.BaseTexture.TextureId);
+            
+            Gl.ActiveTexture(TextureUnit.Texture2);
+            Gl.BindTexture(TextureTarget.Texture2d, texturePack.RedTexture.TextureId);
+            
+            Gl.ActiveTexture(TextureUnit.Texture3);
+            Gl.BindTexture(TextureTarget.Texture2d, texturePack.GreenTexture.TextureId);
+            
+            Gl.ActiveTexture(TextureUnit.Texture4);
+            Gl.BindTexture(TextureTarget.Texture2d, texturePack.BlueTexture.TextureId);
         }
 
         private void Unbind()

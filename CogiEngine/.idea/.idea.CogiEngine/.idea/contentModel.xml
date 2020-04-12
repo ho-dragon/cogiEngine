@@ -32,15 +32,21 @@
           </e>
           <e p="stall.obj" t="Include" />
           <e p="Textures" t="Include">
+            <e p="blendMap.png" t="Include" />
+            <e p="dirt.png" t="Include" />
             <e p="fern.png" t="Include" />
             <e p="flower.png" t="Include" />
             <e p="gold.png" t="Include" />
             <e p="grass.png" t="Include" />
+            <e p="grassFlowers.png" t="Include" />
             <e p="grassTexture.png" t="Include" />
             <e p="grassy.png" t="Include" />
             <e p="image.png" t="Include" />
             <e p="image_2.png" t="Include" />
             <e p="lowPolyTree.png" t="Include" />
+            <e p="mud.png" t="Include" />
+            <e p="path.png" t="Include" />
+            <e p="pinkFlowers.png" t="Include" />
             <e p="rainbow.png" t="Include" />
             <e p="stallTexture.png" t="Include" />
             <e p="tree.png" t="Include" />
@@ -60,7 +66,6 @@
           <e p="Loader.cs" t="Include" />
           <e p="MainForm.cs" t="Include" />
           <e p="Models" t="Include">
-            <e p="ModelTexture.cs" t="Include" />
             <e p="RawModel.cs" t="Include" />
             <e p="TextureModel.cs" t="Include" />
           </e>
@@ -78,6 +83,11 @@
           </e>
           <e p="Terrain" t="Include">
             <e p="Terrain.cs" t="Include" />
+          </e>
+          <e p="Textures" t="Include">
+            <e p="ModelTexture.cs" t="Include" />
+            <e p="TerrainTexture.cs" t="Include" />
+            <e p="TerrainTexturePack.cs" t="Include" />
           </e>
           <e p="Utils" t="Include">
             <e p="CogiLogger.cs" t="Include" />

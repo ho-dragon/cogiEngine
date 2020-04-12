@@ -85,7 +85,6 @@
         <Compile Include="Scripts\InputManager.cs" />
         <Compile Include="Scripts\Loader.cs" />
         <Compile Include="Scripts\MainForm.cs" />
-        <Compile Include="Scripts\Models\ModelTexture.cs" />
         <Compile Include="Scripts\Models\RawModel.cs" />
         <Compile Include="Scripts\Models\TextureModel.cs" />
         <Compile Include="Scripts\OBJLoader.cs" />
@@ -97,6 +96,9 @@
         <Compile Include="Scripts\Shader\StaticShader.cs" />
         <Compile Include="Scripts\Shader\TerrainShader.cs" />
         <Compile Include="Scripts\Terrain\Terrain.cs" />
+        <Compile Include="Scripts\Textures\ModelTexture.cs" />
+        <Compile Include="Scripts\Textures\TerrainTexture.cs" />
+        <Compile Include="Scripts\Textures\TerrainTexturePack.cs" />
         <Compile Include="Scripts\Utils\CogiLogger.cs" />
         <Compile Include="Scripts\Utils\Maths.cs" />
         <Compile Include="Scripts\Utils\OpenGLExtension.cs" />
@@ -224,6 +226,26 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Include="Resources\Textures\lowPolyTree.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="Resources\Textures\blendMap.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\dirt.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\grassFlowers.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\mud.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\path.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\pinkFlowers.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
