@@ -14,6 +14,8 @@ namespace CogiEngine
         private int locationShineDamper;
         private int locationReflectivity;
         private int locationUseFakeLighting;
+        private int locationSkyColor;
+        
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
 
@@ -49,12 +51,18 @@ namespace CogiEngine
             this.locationProjectionMatrix = base.GetUniformLocation("_projectionMatrix");
             this.locationViewMatrix = base.GetUniformLocation("_viewMatrix");
             this.loccationLightPosition = base.GetUniformLocation("_lightPosition");
-            this.locationLightColor = base.GetUniformLocation("_lightColour");
+            this.locationLightColor = base.GetUniformLocation("_lightColor");
             this.locationShineDamper = base.GetUniformLocation("_shineDamper");
             this.locationReflectivity = base.GetUniformLocation("_reflectivity");
             this.locationUseFakeLighting = base.GetUniformLocation("_useFakeLighting");
+            this.locationSkyColor = base.GetUniformLocation("_skyColor");
         }
 
+        public void LoadSkyColor(float r, float g, float b)
+        {
+            base.LoadVector(this.locationSkyColor, new Vertex3f(r, g, b));
+        }
+        
         public void LoadShineVariables(float damper, float reflectivity)
         {
             base.LoadFloat(this.locationShineDamper, damper);

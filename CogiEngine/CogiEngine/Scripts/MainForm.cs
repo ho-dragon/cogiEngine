@@ -116,7 +116,7 @@ namespace CogiEngine
             TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", this.loader), fernTexture);
      
             Random random = new Random();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 500; i++)
             {
                 entities.Add(new Entity(treeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 3));
                 entities.Add(new Entity(grassModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));

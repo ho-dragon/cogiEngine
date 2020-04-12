@@ -8,19 +8,28 @@ out vec2 _pass_textureCoords;
 out vec3 _surfaceNormal;
 out vec3 _toLightVector;
 out vec3 _toCameraVector;
+out float _fogVisibility;
 
 uniform mat4 _transformationMatrix;
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
 uniform vec3 _lightPosition;
 
+const float FOG_DENSITY = 0.007;
+const float FOG_GRADIENT = 1.5;
+
 void main(void)
 {
     vec4 worldPosition = _transformationMatrix * vec4(_position, 1.0);
-    gl_Position  = _projectionMatrix * _viewMatrix * worldPosition;
+    vec4 positionRelativeToCam = _viewMatrix * worldPosition;    
+    gl_Position  = _projectionMatrix * positionRelativeToCam;
     _pass_textureCoords = _textureCoords * 40.0;
     
     _surfaceNormal = (_transformationMatrix * vec4(_normal, 0.0)).xyz;
     _toLightVector = _lightPosition - worldPosition.xyz;
     _toCameraVector = (inverse(_viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - worldPosition.xyz;
+    
+     float distanceFromCam = length(positionRelativeToCam.xyz);
+    _fogVisibility = exp(-pow((distanceFromCam * FOG_DENSITY), FOG_GRADIENT));
+    _fogVisibility = clamp(_fogVisibility, 0.0, 1.0); 
 }

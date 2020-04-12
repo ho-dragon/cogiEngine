@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 using OpenGL;
 
 namespace CogiEngine
@@ -8,6 +9,11 @@ namespace CogiEngine
         private const float FOV = 70;
         private const float NEAR_PLANE = 0.1f;
         private const float FAR_PLANE = 1000f;
+
+        private const float SKY_COLOR_RED = 0.5f;
+        private const float SKY_COLOR_GREEN = 0.5f;
+        private const float SKY_COLOR_BLUE = 0.5f;
+
         private int clientWidth;
         private int clientHeight;
         private Matrix4x4f projectionMatrix = Matrix4x4f.Identity;
@@ -68,6 +74,7 @@ namespace CogiEngine
             
             //Entities
             this.entityShader.Start();
+            this.entityShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.entityShader.LoadLight(light);
             this.entityShader.LoadViewMatrix(camera);
             this.entityRenderer.Render(this.entities);
@@ -75,6 +82,7 @@ namespace CogiEngine
             
             //Terrain
             this.terrainShader.Start();
+            this.terrainShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.terrainShader.LoadLight(light);
             this.terrainShader.LoadViewMatrix(camera);
             this.terrainRenderer.Render(this.terrainList);
@@ -112,7 +120,7 @@ namespace CogiEngine
         {
             Gl.Viewport(0, 0, clientWidth, clientHeight);
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Gl.ClearColor(0, 0.3f, 0, 1f);
+            Gl.ClearColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE, 1f);
         }
 
         public void CleanUp()
