@@ -9,11 +9,16 @@ namespace CogiEngine
 {
     public class DisplayManager
     {
+        
+        Gl.DebugProc _debugProc;
+        
         public void CreateDisplay(GlControl glControl)
         {
+            _debugProc = GLDebugMessageCallbackProc;
+            
             if (Gl.CurrentExtensions != null && Gl.CurrentExtensions.DebugOutput_ARB)
             {
-                Gl.DebugMessageCallback(GLDebugMessageCallbackProc, null);
+                Gl.DebugMessageCallback(_debugProc, IntPtr.Zero);
                 Gl.DebugMessageControl(DebugSource.DontCare, DebugType.DontCare, DebugSeverity.DontCare, 0, null, true);
             }
 
