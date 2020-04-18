@@ -24,6 +24,7 @@
           <e p="grassModel.obj" t="Include" />
           <e p="lowPolyTree.obj" t="Include" />
           <e p="new_stall.obj" t="Include" />
+          <e p="person.obj" t="Include" />
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
             <e p="terrainFragmentShader.txt" t="Include" />
@@ -47,6 +48,7 @@
             <e p="mud.png" t="Include" />
             <e p="path.png" t="Include" />
             <e p="pinkFlowers.png" t="Include" />
+            <e p="playerTexture.png" t="Include" />
             <e p="rainbow.png" t="Include" />
             <e p="stallTexture.png" t="Include" />
             <e p="tree.png" t="Include" />
@@ -61,6 +63,7 @@
             <e p="Camera.cs" t="Include" />
             <e p="Entity.cs" t="Include" />
             <e p="Light.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
           </e>
           <e p="InputManager.cs" t="Include" />
           <e p="Loader.cs" t="Include" />

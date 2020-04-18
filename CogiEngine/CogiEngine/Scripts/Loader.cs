@@ -30,6 +30,14 @@ namespace CogiEngine
             return tex2d_id;
         }
         
+        public uint LoadRepeatTexture(string fileName)
+        {
+            uint loadNumber = LoadTexture(fileName);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            return loadNumber;
+        }
+        
         public void CleanUp()
         {
             Gl.DeleteVertexArrays(vaoList.ToArray());

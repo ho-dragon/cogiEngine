@@ -19,6 +19,7 @@ namespace CogiEngine
         private List<Entity> entities;
         private Terrain terrain_01;
         private Terrain terrain_02;
+        private Player player;
         
         public MainForm()
         {
@@ -46,10 +47,10 @@ namespace CogiEngine
             this.glControl.ColorBits = 24u;//Gl.COLOR_BUFFER_BIT;
             this.glControl.DepthBits = 24u;//Gl.DEPTH_BUFFER_BIT;
             this.glControl.Dock = DockStyle.Fill;
-            this.glControl.Location = new Point(0, 0);
+            this.glControl.Location = new Point(DisplayManager.WIDTH, DisplayManager.HEIGHT);
             this.glControl.MultisampleBits = 0u;
             this.glControl.Name = "glControl";
-            this.glControl.Size = new Size(1280, 720);
+            this.glControl.Size = new Size(DisplayManager.WIDTH, DisplayManager.HEIGHT);
             this.glControl.StencilBits = 0u;//Gl.MULTISAMPLE_BIT;
             this.glControl.TabIndex = 0;
 
@@ -60,7 +61,7 @@ namespace CogiEngine
             
             this.AutoScaleDimensions = new SizeF(6f, 13f);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(1280, 720);
+            this.ClientSize = new Size(DisplayManager.WIDTH, DisplayManager.HEIGHT);
             this.Controls.Add(this.glControl);
             this.Name = "CogiEngine";
             this.Text = "[CogiEngine] Window";
@@ -84,9 +85,10 @@ namespace CogiEngine
             
             //Camera 
             this.camera = new Camera();
+            this.camera.EnableMove(false);
+            
             this.lgiht = new Light(new Vertex3f(20000, 40000,20000), new Vertex3f(1,1,1));
             this.inputManager.OnEventKeyDown += this.camera.OnEventKeyDown;
-            
             this.entities = new List<Entity>();
             LoadEntities(this.entities, this.loader);
             LoadTerrain(this.loader);
@@ -94,24 +96,29 @@ namespace CogiEngine
 
         private void LoadEntities(List<Entity> entities, Loader loader)
         {
+            //Person
+            ModelTexture personTexture = new ModelTexture(loader.LoadTexture("playerTexture"));
+            personTexture.ShineDamper = 30f;
+            personTexture.Reflectivity = 0.3f;
+            TextureModel personModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("person", loader), personTexture);
+            this.player = new Player(personModel, new Vertex3f(0, 0, -50), 0, 0, 0, 1f);
+
             //Tree
             ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("tree"));
             treeTexture.ShineDamper = 30f;
             treeTexture.Reflectivity = 0.3f;
             TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("tree", loader), treeTexture);
-            //Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, TextureMagFilter.Linear);
-            //Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, TextureMagFilter.Linear);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            
+
             //Grass
             ModelTexture grassTexture = new ModelTexture(loader.LoadTexture("grassTexture"));
             grassTexture.HasTransparency = true;
             grassTexture.UseFakeLigihting = true;
+            TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), grassTexture);
+            
+            
             ModelTexture flowerTexture = new ModelTexture(loader.LoadTexture("flower"));
             flowerTexture.HasTransparency = true;
             flowerTexture.UseFakeLigihting = true;
-            TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), grassTexture);
             TextureModel flowerModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), flowerTexture);
             
             //Fern
@@ -131,29 +138,17 @@ namespace CogiEngine
 
         private void LoadTerrain(Loader loader)
         {
-            TerrainTexture baseTexture = new TerrainTexture(loader.LoadTexture("grassy"));
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            TerrainTexture redTexture = new TerrainTexture(loader.LoadTexture("dirt"));
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            TerrainTexture greenTexture = new TerrainTexture(loader.LoadTexture("pinkFlowers"));
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            TerrainTexture blueTexture = new TerrainTexture(loader.LoadTexture("path"));
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            TerrainTexture baseTexture = new TerrainTexture(loader.LoadRepeatTexture("grassy"));
+            TerrainTexture redTexture = new TerrainTexture(loader.LoadRepeatTexture("dirt"));
+            TerrainTexture greenTexture = new TerrainTexture(loader.LoadRepeatTexture("pinkFlowers"));
+            TerrainTexture blueTexture = new TerrainTexture(loader.LoadRepeatTexture("path"));
             TerrainTexturePack texturePack = new TerrainTexturePack(baseTexture, redTexture, greenTexture, blueTexture);
             
-            TerrainTexture blendMapTexture = new TerrainTexture(loader.LoadTexture("blendMap"));
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
-            
+            TerrainTexture blendMapTexture = new TerrainTexture(loader.LoadRepeatTexture("blendMap"));
             this.terrain_01 = new Terrain(0, -0.5f, loader, texturePack, blendMapTexture);
             this.terrain_02 = new Terrain(-1, -0.5f, loader, texturePack, blendMapTexture);
         }
         
-
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
         {
             this.displayManager.CloseDisplay();
@@ -164,13 +159,16 @@ namespace CogiEngine
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
         {   
             //this.models.ForEach(x => x.IncreaseRotation(0f,0.5f,0f));
-            this.renderer.UpdateViewRect(glControl.ClientSize.Width, glControl.ClientSize.Height);
+            this.renderer.UpdateViewRect(this.glControl.ClientSize.Width, this.glControl.ClientSize.Height);
+            this.player.UpdateMove(this.inputManager, this.displayManager.GetFrameTimeSeconds());
             this.camera.UpdateMove(this.inputManager);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
             //Control senderControl = (Control) sender;
+            renderer.ProcessEntity(this.player);
+            
             for (int i = 0; i < this.entities.Count; i++)
             {
                 renderer.ProcessEntity(this.entities[i]);

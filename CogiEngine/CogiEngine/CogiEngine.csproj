@@ -82,6 +82,7 @@
         <Compile Include="Scripts\Entities\Camera.cs" />
         <Compile Include="Scripts\Entities\Entity.cs" />
         <Compile Include="Scripts\Entities\Light.cs" />
+        <Compile Include="Scripts\Entities\Player.cs" />
         <Compile Include="Scripts\InputManager.cs" />
         <Compile Include="Scripts\Loader.cs" />
         <Compile Include="Scripts\MainForm.cs" />
@@ -246,6 +247,14 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Include="Resources\Textures\pinkFlowers.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="Resources\person.obj">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\playerTexture.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>

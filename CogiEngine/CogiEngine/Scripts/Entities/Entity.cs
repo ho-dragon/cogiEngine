@@ -18,11 +18,11 @@ namespace CogiEngine
 
         public float Scale => _scale;
 
-        Vertex3f _position;
-        float _rotX;
-        float _rotY;
-        float _rotZ;
-        float _scale;
+        protected Vertex3f _position;
+        protected float _rotX;
+        protected float _rotY;
+        protected float _rotZ;
+        protected float _scale;
   
         public Entity(TextureModel model, Vertex3f position, float rotX, float rotY, float rotZ, float scale)
         {

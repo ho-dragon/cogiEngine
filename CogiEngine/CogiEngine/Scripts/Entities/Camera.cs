@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing.Printing;
+using System.Windows.Forms;
 using OpenGL;
 
 namespace CogiEngine
@@ -10,6 +11,12 @@ namespace CogiEngine
         private const float MOVE_POSITION_PER_FRAME = 0.02f;
         private bool isRotation = false;
         private bool isSpeedUp = false;
+        private bool isMovable = false;
+
+        public void EnableMove(bool isMovable)
+        {
+            this.isMovable = isMovable;
+        }
 
         public Vertex3f Position { get { return position; } }
         
@@ -30,6 +37,11 @@ namespace CogiEngine
 
         public void OnEventKeyDown(Keys inputKey)
         {
+            if (this.isMovable == false)
+            {
+                return;
+            }
+            
             switch (inputKey)
             {
                 case Keys.R:
@@ -43,7 +55,12 @@ namespace CogiEngine
         
         public void UpdateMove(InputManager input)
         {
-            float speed = isSpeedUp ? 100f : 1f;
+            if (this.isMovable == false)
+            {
+                return;
+            }
+            
+            float speed = isSpeedUp ? 100f : 10f;
             if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.W))
             {
                 if (isRotation)
@@ -92,12 +109,12 @@ namespace CogiEngine
                 }
             }
             
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.Q))
+            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.ShiftKey))
             {
                 position.y -= MOVE_POSITION_PER_FRAME * speed;
             }
             
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.E))
+            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.Space))
             {
                 position.y += MOVE_POSITION_PER_FRAME * speed;
             }

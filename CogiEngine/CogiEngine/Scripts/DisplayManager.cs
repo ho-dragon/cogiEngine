@@ -9,6 +9,11 @@ namespace CogiEngine
 {
     public class DisplayManager
     {
+        public const int WIDTH = 1280;
+        public const int HEIGHT = 720;
+
+        private long lastFrameTime;
+        private float deltaTime;
         
         Gl.DebugProc _debugProc;
         
@@ -26,6 +31,8 @@ namespace CogiEngine
             {
                 Gl.Enable(EnableCap.Multisample);
             }
+
+            this.lastFrameTime = GetCurrentTime();
         }
         
         private void GLDebugMessageCallbackProc(DebugSource source, DebugType type, uint id, DebugSeverity severity, int length, IntPtr message, IntPtr userParam)
@@ -37,12 +44,24 @@ namespace CogiEngine
 
         public void UpdateDisplay()
         {
-            
+            long currentFrameTime = GetCurrentTime(); 
+            this.deltaTime = (currentFrameTime - lastFrameTime) / 10000000f;
+            this.lastFrameTime = currentFrameTime;
+        }
+
+        public float GetFrameTimeSeconds()
+        {
+            return this.deltaTime;
         }
 
         public void CloseDisplay()
         {
             
+        }
+
+        private long GetCurrentTime()
+        {
+            return DateTime.Now.Ticks;
         }
         
     }
