@@ -26,7 +26,6 @@ namespace CogiEngine
         
         private void Move(float frameTimeSec)
         {
-            CogiLogger.Log("Move", "frameTimeSec = " + frameTimeSec.ToString());
             base.IncreaseRotation(0f, this.currentTurnSpeed * frameTimeSec, 0f);
             float distance = currentSpeed * frameTimeSec;
             double radian  = Math.PI * _rotY / 180.0f;

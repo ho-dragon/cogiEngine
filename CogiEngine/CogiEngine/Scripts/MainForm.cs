@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using OpenGL;
@@ -23,22 +24,15 @@ namespace CogiEngine
         
         public MainForm()
         {
-            //Terrain.Test();
             InitializeComponent();
-            KeyPreview = true;
-
         }
 
         public void InitializeComponent()
         {
+            this.SuspendLayout();
             this.glControl = new GlControl();
             this.displayManager = new DisplayManager();
             this.inputManager = new InputManager();
-            
-            KeyDown += this.inputManager.OnKeyDown;
-            KeyUp += this.inputManager.OnKeyUp;
-            
-            this.SuspendLayout();
 
             //glControl
             this.glControl.Animation = true;
@@ -53,12 +47,20 @@ namespace CogiEngine
             this.glControl.Size = new Size(DisplayManager.WIDTH, DisplayManager.HEIGHT);
             this.glControl.StencilBits = 0u;//Gl.MULTISAMPLE_BIT;
             this.glControl.TabIndex = 0;
-
+            
             this.glControl.ContextCreated += new EventHandler<GlControlEventArgs>(this.OnCreated_GlControl);
             this.glControl.ContextDestroying += new EventHandler<GlControlEventArgs>(this.OnDestroying_GlControl);
             this.glControl.Render += new EventHandler<GlControlEventArgs>(this.OnRender_GlControl);
             this.glControl.ContextUpdate += new EventHandler<GlControlEventArgs>(this.OnUpdate_GlControl);
             
+            //input event
+            this.glControl.MouseWheel += this.inputManager.OnMoueWheel;
+            this.glControl.KeyDown += this.inputManager.OnKeyDown;
+            this.glControl.KeyUp += this.inputManager.OnKeyUp;
+            this.glControl.MouseDown += this.inputManager.OnMouseDown;
+            this.glControl.MouseUp += this.inputManager.OnMouseUp;
+
+            //winform
             this.AutoScaleDimensions = new SizeF(6f, 13f);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new Size(DisplayManager.WIDTH, DisplayManager.HEIGHT);
@@ -66,8 +68,9 @@ namespace CogiEngine
             this.Name = "CogiEngine";
             this.Text = "[CogiEngine] Window";
             this.ResumeLayout(false);
+            this.KeyPreview = true;
         }
-
+        
         private void OnCreated_GlControl(object sender, GlControlEventArgs e)
         {
             GlControl glControl = (GlControl)sender;
@@ -84,16 +87,15 @@ namespace CogiEngine
             this.renderer = new MasterRanderer(glControl.ClientSize.Width, glControl.ClientSize.Height);
             
             //Camera 
-            this.camera = new Camera();
-            this.camera.EnableMove(false);
+            this.camera = new Camera(new Vertex3f(0, 10, 0), 20f);
+            this.inputManager.OnEventMouseWheel += this.camera.OnEventWheel;
             
             this.lgiht = new Light(new Vertex3f(20000, 40000,20000), new Vertex3f(1,1,1));
-            this.inputManager.OnEventKeyDown += this.camera.OnEventKeyDown;
             this.entities = new List<Entity>();
             LoadEntities(this.entities, this.loader);
             LoadTerrain(this.loader);
         }
-
+        
         private void LoadEntities(List<Entity> entities, Loader loader)
         {
             //Person
@@ -149,6 +151,7 @@ namespace CogiEngine
             this.terrain_02 = new Terrain(-1, -0.5f, loader, texturePack, blendMapTexture);
         }
         
+
         private void OnDestroying_GlControl(object sender, GlControlEventArgs e)
         {
             this.displayManager.CloseDisplay();
@@ -160,8 +163,9 @@ namespace CogiEngine
         {   
             //this.models.ForEach(x => x.IncreaseRotation(0f,0.5f,0f));
             this.renderer.UpdateViewRect(this.glControl.ClientSize.Width, this.glControl.ClientSize.Height);
+            this.inputManager.UpdateMousePosition();
             this.player.UpdateMove(this.inputManager, this.displayManager.GetFrameTimeSeconds());
-            this.camera.UpdateMove(this.inputManager);
+            this.camera.UpdateMove(this.player.Position, this.player.RotY, this.inputManager);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)

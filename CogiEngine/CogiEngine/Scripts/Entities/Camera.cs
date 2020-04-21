@@ -1,4 +1,5 @@
-﻿using System.Drawing.Printing;
+﻿using System;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 using OpenGL;
 
@@ -6,118 +7,78 @@ namespace CogiEngine
 {
     public class Camera
     {
+        private float distanceFromPlayer = 50f;
+        private float angleAroundPlayer = 0f;
         private Vertex3f position = Vertex3f.Zero;
-        private const float MOVE_ROTATION_PER_FRAME = 1f;
-        private const float MOVE_POSITION_PER_FRAME = 0.02f;
-        private bool isRotation = false;
-        private bool isSpeedUp = false;
-        private bool isMovable = false;
-
-        public void EnableMove(bool isMovable)
-        {
-            this.isMovable = isMovable;
-        }
-
-        public Vertex3f Position { get { return position; } }
+        private float pitch;
+        private float yaw;
+        private float roll;
         
-        float pitch;
+        public Vertex3f Position { get { return position; } }
         public float Pitch { get { return pitch; } }
-
-        float yaw;
         public float Yaw { get { return yaw; } }
-
-        float roll;
         public float Roll { get { return roll; } }
 
-        public Camera()
+        public Camera(Vertex3f position, float pitch)
         {
-            position = new Vertex3f(0, 10, 0);
-            pitch = 20f;
+            this.position = position;
+            this.pitch = pitch;
         }
 
-        public void OnEventKeyDown(Keys inputKey)
+        private void UpdateZoom(float deltaWeel)
         {
-            if (this.isMovable == false)
-            {
-                return;
-            }
-            
-            switch (inputKey)
-            {
-                case Keys.R:
-                    isRotation = !isRotation;
-                    break;
-                case Keys.F:
-                    isSpeedUp = !isSpeedUp;
-                    break;
-            }
+            this.distanceFromPlayer -= deltaWeel * 0.1f;
+        }
+
+        private void UpdatePitch(float mouseDeltaY)
+        {
+            this.pitch -= mouseDeltaY * 0.1f;
+        }
+
+        private void UpdateAngleAroundPlayer(float mouseDeltaX)
+        {
+            float angleChange = mouseDeltaX * 0.3f;
+            this.angleAroundPlayer += angleChange;
+        }
+
+        private void UpdatePosition(Vertex3f targetPosition, float targetRotationY)
+        {
+            float theta = targetRotationY + angleAroundPlayer;
+            float offsetX = GetHorizontalDisatnace() * (float)Math.Sin(Maths.DegreeToRadian(theta));
+            float offsetZ = GetHorizontalDisatnace() * (float)Math.Cos(Maths.DegreeToRadian(theta));
+            position.x = targetPosition.x - offsetX;
+            position.z = targetPosition.z - offsetZ;
+            position.y = targetPosition.y + GetVerticalDisatnace();
+            this.yaw = 180 - (targetRotationY + angleAroundPlayer);
+        }
+
+        private float GetHorizontalDisatnace()
+        {
+            return this.distanceFromPlayer * (float)Math.Cos(Maths.DegreeToRadian(pitch));
         }
         
-        public void UpdateMove(InputManager input)
+        private float GetVerticalDisatnace()
         {
-            if (this.isMovable == false)
+            return this.distanceFromPlayer * (float)Math.Sin(Maths.DegreeToRadian(pitch));
+        }
+
+        public void OnEventWheel(int deltaWeel)
+        {
+            UpdateZoom(deltaWeel);
+        }
+
+        public void UpdateMove(Vertex3f targetPosition, float targetRotationY, InputManager input)
+        {
+            if (input.IsMouseLeftDown)
             {
-                return;
+                UpdatePitch(input.MouseDeltaY);
             }
-            
-            float speed = isSpeedUp ? 100f : 10f;
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.W))
+
+            if (input.IsMouseRightDown)
             {
-                if (isRotation)
-                {
-                    pitch -= MOVE_ROTATION_PER_FRAME;
-                }
-                else
-                {
-                    position.z -= MOVE_POSITION_PER_FRAME * speed;    
-                }
-            }  
-            
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.S))
-            {
-                if (isRotation)
-                {
-                    pitch +=  MOVE_ROTATION_PER_FRAME;;
-                }
-                else
-                {
-                    position.z += MOVE_POSITION_PER_FRAME * speed;    
-                }
-            }  
-            
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.D))
-            {
-                if (isRotation)
-                {
-                    yaw +=  MOVE_ROTATION_PER_FRAME;;
-                }
-                else
-                {
-                    position.x += MOVE_POSITION_PER_FRAME * speed;    
-                }
-            }  
-            
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.A))
-            {
-                if (isRotation)
-                {
-                    yaw -=  MOVE_ROTATION_PER_FRAME;;
-                }
-                else
-                {
-                    position.x -= MOVE_POSITION_PER_FRAME * speed;    
-                }
+                UpdateAngleAroundPlayer(input.MouseDeltaX);
             }
-            
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.ShiftKey))
-            {
-                position.y -= MOVE_POSITION_PER_FRAME * speed;
-            }
-            
-            if (input.IsKeyStatus(KeyStatus.KeyDown,Keys.Space))
-            {
-                position.y += MOVE_POSITION_PER_FRAME * speed;
-            }
+            UpdatePosition(targetPosition, targetRotationY);
         }
     }
 }
