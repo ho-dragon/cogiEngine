@@ -27,6 +27,30 @@ namespace CogiEngine
             uint tex2d_id = Soil.NET.WrapSOIL.load_OGL_texture(filePath, Soil.NET.WrapSOIL.SOIL_LOAD.AUTO, Soil.NET.WrapSOIL.SOIL_NEW.ID,
                 Soil.NET.WrapSOIL.SOIL_FLAG.MIPMAPS | Soil.NET.WrapSOIL.SOIL_FLAG.NTSC_SAFE_RGB | Soil.NET.WrapSOIL.SOIL_FLAG.COMPRESS_TO_DXT);
             _textures.Add(tex2d_id);
+            
+            
+            Gl.GenerateMipmap(TextureTarget.Texture2d);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, TextureMinFilter.LinearMipmapLinear);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, Gl.LINEAR);
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureLodBias, -0.2f);
+            
+
+            #region Desc
+            // Mipmap과 TexturFiter는 함께 쓸수있는가?
+            // Mimap사용시 TexturFiter의 TextureMinFilter는 TextureMinFilter.LinearMipmapLinear이걸로 넣어야 작동함.
+            // TextureMagFilter는 Gl.LINEAR과 Gl.NEAREST로 변경시 정삭작동함(ex 잔디를 큰화면으로 키워서 확인)
+
+            //GL_NEAREST는 텍스처를 형성하는 픽셀들을 명확히 볼 수 있는 차단된 패턴을 생성하는 반면
+            //GL_LINEAR는 개별 픽셀들이 덜 보이는 더 매끄러운 패턴을 생성합니다.
+            //텍스처 필터링은 확대(magnifying) 및 축소(minifying) 작업(스케일 업 혹은 다운)에 대해 설정할 수 있으므로
+            //예를 들어 텍스처가 축소될 때 nearest neighbor filtering을 사용하고 텍스처가 확대될 때는 linear filtering을 사용할 수 있습니다.
+            //따라서 우리는 glTexParameter* 함수를 통해 두 업션 모두에 대한 필터링 방법을 지정해야 합니다.
+            
+            //TextureLodBias는 텍스처의 LOD를 계산할 때 mipmap 레벨에 더해지는 값입니다.
+            //TextureLodBias를 낮추면 민맵기능을 낮추는것이므로 화면에 보이는 픽셀의 정보량이많아 반짝거림.
+            //따라서 -0.1f정도로 적게 낮춰서 반짝거림만 없도록하면 텍스쳐의 품질을 높일 수있음.(뭉게짐이 덜함)
+            // 1f 하면 민맵레벨을 너무 높여서 화면전체 텍스쳐에 민맵이 적용되어 텍스쳐가 다 뭉게짐
+            #endregion
             return tex2d_id;
         }
         
@@ -35,6 +59,11 @@ namespace CogiEngine
             uint loadNumber = LoadTexture(fileName);
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            #region Desc
+            //첫 번째 파라미터는 텍스처 타겟을 지정합니다. 우리는 2D 텍스처를 사용하기 때문에 타겟을 GL_TEXTURE_2D로 설정하였습니다.
+            //두 번째 파라미터는 우리가 설정할 옵션과 어떤 축에 적용할 것인지 지정합니다. WRAP 옵션을 설정하고 S, T 축 모두에 적용하려고 합니다.
+            //마지막 파라미터는 텍스처 wrapping 모드를 설정해야하며 이 경우에는 GL_MIRRORED_REPEAT을 사용하여 현재 활성화된 텍스처의 wrapping 옵션을 설정합니다.
+            #endregion
             return loadNumber;
         }
         

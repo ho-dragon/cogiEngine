@@ -106,6 +106,12 @@ namespace CogiEngine
             this.player = new Player(personModel, new Vertex3f(0, 0, -50), 0, 0, 0, 1f);
 
             //Tree
+            ModelTexture lowPolyTree = new ModelTexture(loader.LoadTexture("lowPolyTree"));
+            lowPolyTree.ShineDamper = 30f;
+            lowPolyTree.Reflectivity = 0.3f;
+            TextureModel lowPolyTreeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("lowPolyTree", loader), lowPolyTree);
+            
+            //Tree
             ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("tree"));
             treeTexture.ShineDamper = 30f;
             treeTexture.Reflectivity = 0.3f;
@@ -129,9 +135,10 @@ namespace CogiEngine
             TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", this.loader), fernTexture);
      
             Random random = new Random();
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 200; i++)
             {
-                entities.Add(new Entity(treeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 3));
+                entities.Add(new Entity(lowPolyTreeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1f));
+                entities.Add(new Entity(treeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 5f));
                 entities.Add(new Entity(grassModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));
                 entities.Add(new Entity(flowerModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));
                 entities.Add(new Entity(fernModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 0.6f));
