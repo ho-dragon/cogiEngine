@@ -6,13 +6,14 @@ namespace CogiEngine
 {
     public static class CogiLogger
     {
-        public static void Log(string title, string desc)
+        public static void Debug(string msg)
         {
-            Debug.WriteLine(string.Format("[{0}] {1}", title, desc));
+            System.Diagnostics.Debug.WriteLine(msg);
         }
-        public static void LogConsole(string title, string desc)
+        
+        public static void Error(string msg)
         {
-            Console.WriteLine(title, desc);
+            System.Diagnostics.Debug.WriteLine(msg);
         }
     }
 }

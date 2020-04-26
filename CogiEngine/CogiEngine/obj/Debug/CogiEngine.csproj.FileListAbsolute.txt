@@ -63,3 +63,4 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\path.p
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\pinkFlowers.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\person.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\playerTexture.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap.png

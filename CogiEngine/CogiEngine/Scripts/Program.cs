@@ -13,13 +13,13 @@ namespace CogiEngine
         [STAThread]
         static void Main()
         {
-            CogiLogger.Log("Main", "=========START=======");
+            CogiLogger.Debug("=========ENGINE START=======");
             string envDebug = Environment.GetEnvironmentVariable("DEBUG");
             if (envDebug == "GL")
             {
                 KhronosApi.Log += delegate(object sender, KhronosLogEventArgs e)
                 {
-                    CogiLogger.Log("KhronosApi", e.ToString());
+                    CogiLogger.Debug(string.Format("[KhronosApi] {0}",  e.ToString()));
                 };
                 KhronosApi.LogEnabled = true;
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OpenGL;
 
 namespace CogiEngine
@@ -8,7 +9,8 @@ namespace CogiEngine
     {
         List<uint> vaoList = new List<uint>();
         List<uint> vboList = new List<uint>();
-        List<uint> _textures = new List<uint>();
+        List<uint> loadedTextureList = new List<uint>();
+        List<Bitmap> loadedBitmap = new List<Bitmap>();
         
         public RawModel LoadToVAO(float [] positions,float [] textureCoords, float [] normals, int[] indices)
         {
@@ -21,19 +23,31 @@ namespace CogiEngine
             return new RawModel(vaoID, positions.Length);
         }
 
+        public Bitmap LoadBitmap(string filename)
+        {
+            Bitmap bitmap = new Bitmap(string.Format(@"Resources\Textures\{0}.png", filename));
+            if (bitmap.Height > 0 == false)
+            {
+                CogiLogger.Error("not found file" + filename);
+                return null;
+            }
+            loadedBitmap.Add(bitmap);
+            return bitmap;
+        }
+
         public uint LoadTexture(string fileName)
         {
             string filePath = $".\\Resources\\Textures\\{fileName}.png";
             uint tex2d_id = Soil.NET.WrapSOIL.load_OGL_texture(filePath, Soil.NET.WrapSOIL.SOIL_LOAD.AUTO, Soil.NET.WrapSOIL.SOIL_NEW.ID,
                 Soil.NET.WrapSOIL.SOIL_FLAG.MIPMAPS | Soil.NET.WrapSOIL.SOIL_FLAG.NTSC_SAFE_RGB | Soil.NET.WrapSOIL.SOIL_FLAG.COMPRESS_TO_DXT);
-            _textures.Add(tex2d_id);
+            this.loadedTextureList.Add(tex2d_id);
             
             
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureLodBias, 0f);
             Gl.GenerateMipmap(TextureTarget.Texture2d);
+            
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, TextureMinFilter.LinearMipmapLinear);
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, Gl.LINEAR);
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureLodBias, -0.2f);
-            
 
             #region Desc
             // Mipmap과 TexturFiter는 함께 쓸수있는가?
@@ -71,7 +85,7 @@ namespace CogiEngine
         {
             Gl.DeleteVertexArrays(vaoList.ToArray());
             Gl.DeleteBuffers(vboList.ToArray());
-            Gl.DeleteTextures(_textures.ToArray());
+            Gl.DeleteTextures(loadedTextureList.ToArray());
         }
 
         uint CreateVAO()

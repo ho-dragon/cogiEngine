@@ -92,19 +92,23 @@ namespace CogiEngine
             
             this.lgiht = new Light(new Vertex3f(20000, 40000,20000), new Vertex3f(1,1,1));
             this.entities = new List<Entity>();
+            
+            LoadPlayer();
             LoadEntities(this.entities, this.loader);
             LoadTerrain(this.loader);
         }
-        
-        private void LoadEntities(List<Entity> entities, Loader loader)
+
+        private void LoadPlayer()
         {
-            //Person
             ModelTexture personTexture = new ModelTexture(loader.LoadTexture("playerTexture"));
             personTexture.ShineDamper = 30f;
             personTexture.Reflectivity = 0.3f;
             TextureModel personModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("person", loader), personTexture);
             this.player = new Player(personModel, new Vertex3f(0, 0, -50), 0, 0, 0, 1f);
-
+        }
+        
+        private void LoadEntities(List<Entity> entities, Loader loader)
+        {
             //Tree
             ModelTexture lowPolyTree = new ModelTexture(loader.LoadTexture("lowPolyTree"));
             lowPolyTree.ShineDamper = 30f;
@@ -154,8 +158,10 @@ namespace CogiEngine
             TerrainTexturePack texturePack = new TerrainTexturePack(baseTexture, redTexture, greenTexture, blueTexture);
             
             TerrainTexture blendMapTexture = new TerrainTexture(loader.LoadRepeatTexture("blendMap"));
-            this.terrain_01 = new Terrain(0, -0.5f, loader, texturePack, blendMapTexture);
-            this.terrain_02 = new Terrain(-1, -0.5f, loader, texturePack, blendMapTexture);
+            
+            Bitmap heightMapImage = loader.LoadBitmap("heightmap");
+            this.terrain_01 = new Terrain(0, -0.5f, loader, texturePack, blendMapTexture, heightMapImage);
+            this.terrain_02 = new Terrain(-1, -0.5f, loader, texturePack, blendMapTexture, heightMapImage);
         }
         
 
@@ -184,9 +190,17 @@ namespace CogiEngine
             {
                 renderer.ProcessEntity(this.entities[i]);
             }
-            renderer.ProcessTerrain(this.terrain_01); 
-            renderer.ProcessTerrain(this.terrain_02);
+
+            if (this.terrain_01 != null)
+            {
+                renderer.ProcessTerrain(this.terrain_01);    
+            }
+
+            if (this.terrain_02 != null)
+            {
+                renderer.ProcessTerrain(this.terrain_02);
             
+            }
             renderer.Render(this.lgiht, this.camera);
             //DrawAxis(PrimitiveType.Lines,0,0,0,0.1f,1f);
             this.displayManager.UpdateDisplay();
