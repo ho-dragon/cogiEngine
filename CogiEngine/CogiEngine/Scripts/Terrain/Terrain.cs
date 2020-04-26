@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Security.Policy;
 using OpenGL;
 
 namespace CogiEngine
@@ -6,7 +9,7 @@ namespace CogiEngine
     public class Terrain
     {
         //https://www.youtube.com/watch?v=h-kZ8dEHIBg
-        private const float SIZE = 800;
+        public const float SIZE = 800;
         private const float MAX_HEIGHT = 40;
         private const float MAX_PIXCEL_COLOR = 256 * 256 * 256; // R * G * B
         private float x;
@@ -14,6 +17,8 @@ namespace CogiEngine
         private RawModel model;
         private TerrainTexturePack texturePack;
         private TerrainTexture blendMap;
+        private int hieghtMapWidth;
+        private float[,] heights;
 
         public float X => x;
         public float Z => z;
@@ -22,18 +27,57 @@ namespace CogiEngine
         public TerrainTexture BlendMap => blendMap;
 
         public Terrain(float gridX, float gridZ, Loader loader, TerrainTexturePack texturePack, TerrainTexture blendMap,
-            Bitmap hegihtMapFileName)
+            Bitmap hegihtMap)
         {
+            this.hieghtMapWidth = hegihtMap.Width;
             this.texturePack = texturePack;
             this.blendMap = blendMap;
             this.x = gridX * SIZE;
             this.z = gridZ * SIZE;
-            this.model = GenerateTerrain(loader, hegihtMapFileName);
+            this.model = GenerateTerrain(loader, hegihtMap);
+        }
+
+        public float GetHeightOfTerrain(float worldPositionX, float worldPositonZ)
+        {
+            float terrainX = worldPositionX - this.x;
+            float terrainZ = worldPositonZ - this.z;
+            float gridSquareSize = SIZE /  ((float)hieghtMapWidth - 1);
+
+            int gridX = (int) Math.Floor(terrainX / gridSquareSize);
+            int gridZ = (int) Math.Floor(terrainZ / gridSquareSize);
+
+            if (gridX >= heights.Length - 1 || gridZ >= heights.Length - 1 || gridX < 0 || gridZ < 0)
+            {
+                return 0f;
+            }
+
+            float xCoord = (terrainX % gridSquareSize) / gridSquareSize;
+            float zCoord = (terrainZ % gridSquareSize) / gridSquareSize;
+            
+            float hegiht = 0f;
+
+            if (xCoord <= 1 - zCoord)
+            {
+                hegiht = Maths.BarryCentric(new Vertex3f(0, heights[gridX, gridZ], 0)
+                    , new Vertex3f(1, heights[gridX + 1, gridZ], 0)
+                    , new Vertex3f(0, heights[gridX, gridZ + 1], 1)
+                    , new Vertex2f(xCoord, zCoord));
+            }
+            else
+            {
+                hegiht = Maths.BarryCentric(new Vertex3f(1, heights[gridX + 1, gridZ], 0)
+                    , new Vertex3f(1, heights[gridX + 1, gridZ + 1], 1)
+                    , new Vertex3f(0, heights[gridX, gridZ + 1], 1)
+                    , new Vertex2f(xCoord, zCoord));
+            }
+            return hegiht;
         }
 
         private RawModel GenerateTerrain(Loader loader, Bitmap heightMap)
         {
             int vertexCount = heightMap.Height;
+            this.heights = new float[vertexCount, vertexCount];
+
             int count = vertexCount * vertexCount;
             float[] vertices = new float[count * 3];
             float[] normals = new float[count * 3];
@@ -45,8 +89,10 @@ namespace CogiEngine
             {
                 for (int j = 0; j < vertexCount; j++)
                 {
+                    float height = GetHeight(j, i, heightMap);
+                    this.heights[j, i] = height;
                     vertices[vertexPointer * 3] = (float) j / ((float) vertexCount - 1) * SIZE;
-                    vertices[vertexPointer * 3 + 1] = GetHeight(j, i, heightMap);
+                    vertices[vertexPointer * 3 + 1] = height;
                     vertices[vertexPointer * 3 + 2] = (float) i / ((float) vertexCount - 1) * SIZE;
 
                     Vertex3f normal = GetNormal(j, i, heightMap);

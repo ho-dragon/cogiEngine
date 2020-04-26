@@ -18,8 +18,7 @@ namespace CogiEngine
         private Camera camera;
         private Light lgiht;
         private List<Entity> entities;
-        private Terrain terrain_01;
-        private Terrain terrain_02;
+        private Terrain terrain;
         private Player player;
         
         public MainForm()
@@ -94,8 +93,8 @@ namespace CogiEngine
             this.entities = new List<Entity>();
             
             LoadPlayer();
-            LoadEntities(this.entities, this.loader);
-            LoadTerrain(this.loader);
+            this.terrain = LoadTerrain(this.loader);
+            LoadEntities(this.terrain, this.entities, this.loader);
         }
 
         private void LoadPlayer()
@@ -104,10 +103,11 @@ namespace CogiEngine
             personTexture.ShineDamper = 30f;
             personTexture.Reflectivity = 0.3f;
             TextureModel personModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("person", loader), personTexture);
-            this.player = new Player(personModel, new Vertex3f(0, 0, -50), 0, 0, 0, 1f);
+            //this.player = new Player(personModel, new Vertex3f(0, 0, -50), 0, 0, 0, 1f);
+            this.player = new Player(personModel, new Vertex3f(256, 0, 256), 0, 0, 0, 1f);
         }
         
-        private void LoadEntities(List<Entity> entities, Loader loader)
+        private void LoadEntities(Terrain terrain, List<Entity> entities, Loader loader)
         {
             //Tree
             ModelTexture lowPolyTree = new ModelTexture(loader.LoadTexture("lowPolyTree"));
@@ -141,15 +141,32 @@ namespace CogiEngine
             Random random = new Random();
             for (int i = 0; i < 200; i++)
             {
-                entities.Add(new Entity(lowPolyTreeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1f));
-                entities.Add(new Entity(treeModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 5f));
-                entities.Add(new Entity(grassModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));
-                entities.Add(new Entity(flowerModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 1));
-                entities.Add(new Entity(fernModel, new Vertex3f((float)random.NextDouble() * 800 - 400,0, (float)random.NextDouble() * - 600), 0, 0, 0, 0.6f));
+                if (i % 20 == 0)
+                {
+                    entities.Add(new Entity(fernModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 0.6f));
+                    
+                }
+
+                if (i % 5 == 0)
+                {
+                    entities.Add(new Entity(lowPolyTreeModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 1f));
+                }
+                
+                entities.Add(new Entity(treeModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 5f));
+                entities.Add(new Entity(grassModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 1));
+                entities.Add(new Entity(flowerModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 1));
             }
         }
 
-        private void LoadTerrain(Loader loader)
+        private Vertex3f GetRadomPosition(Terrain terrain, Random random, float randomX, float randomZ)
+        {
+            float x = (float)random.NextDouble() * (Terrain.SIZE - randomX);
+            float z = (float)random.NextDouble() * + randomZ;
+            float y = terrain.GetHeightOfTerrain(x, z);
+            return  new Vertex3f(x, y, z);
+        }
+
+        private Terrain LoadTerrain(Loader loader)
         {
             TerrainTexture baseTexture = new TerrainTexture(loader.LoadRepeatTexture("grassy"));
             TerrainTexture redTexture = new TerrainTexture(loader.LoadRepeatTexture("dirt"));
@@ -160,8 +177,7 @@ namespace CogiEngine
             TerrainTexture blendMapTexture = new TerrainTexture(loader.LoadRepeatTexture("blendMap"));
             
             Bitmap heightMapImage = loader.LoadBitmap("heightmap");
-            this.terrain_01 = new Terrain(0, -0.5f, loader, texturePack, blendMapTexture, heightMapImage);
-            this.terrain_02 = new Terrain(-1, -0.5f, loader, texturePack, blendMapTexture, heightMapImage);
+            return new Terrain(0, 0, loader, texturePack, blendMapTexture, heightMapImage);;
         }
         
 
@@ -177,30 +193,18 @@ namespace CogiEngine
             //this.models.ForEach(x => x.IncreaseRotation(0f,0.5f,0f));
             this.renderer.UpdateViewRect(this.glControl.ClientSize.Width, this.glControl.ClientSize.Height);
             this.inputManager.UpdateMousePosition();
-            this.player.UpdateMove(this.inputManager, this.displayManager.GetFrameTimeSeconds());
+            this.player.UpdateMove(this.inputManager, this.terrain, this.displayManager.GetFrameTimeSeconds());
             this.camera.UpdateMove(this.player.Position, this.player.RotY, this.inputManager);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
-            //Control senderControl = (Control) sender;
             renderer.ProcessEntity(this.player);
-            
             for (int i = 0; i < this.entities.Count; i++)
             {
                 renderer.ProcessEntity(this.entities[i]);
             }
-
-            if (this.terrain_01 != null)
-            {
-                renderer.ProcessTerrain(this.terrain_01);    
-            }
-
-            if (this.terrain_02 != null)
-            {
-                renderer.ProcessTerrain(this.terrain_02);
-            
-            }
+            renderer.ProcessTerrain(this.terrain);
             renderer.Render(this.lgiht, this.camera);
             //DrawAxis(PrimitiveType.Lines,0,0,0,0.1f,1f);
             this.displayManager.UpdateDisplay();

@@ -11,7 +11,6 @@ namespace CogiEngine
         private const float TURN_SPPED = 160f;
         private const float GRAVITY = -50f;
         private const float JUMP_POWER = 30f;
-        private const float TERRAIN_HEIGHT = 0f;
         
         private float currentSpeed = 0f;
         private float currentTurnSpeed = 0f;
@@ -24,7 +23,7 @@ namespace CogiEngine
             
         }
         
-        private void Move(float frameTimeSec)
+        private void Move(Terrain terrain, float frameTimeSec)
         {
             base.IncreaseRotation(0f, this.currentTurnSpeed * frameTimeSec, 0f);
             float distance = currentSpeed * frameTimeSec;
@@ -34,10 +33,11 @@ namespace CogiEngine
             base.IncreasePosition(dx,0,dz);
             this.upwardsSpeed += GRAVITY * frameTimeSec;
             base.IncreasePosition(0f, upwardsSpeed * frameTimeSec, 0);
-            if (base._position.y < TERRAIN_HEIGHT)
+            float terrainHeight = terrain.GetHeightOfTerrain(base._position.x, base._position.z);
+            if (base._position.y < terrainHeight)
             {
                 upwardsSpeed = 0;
-                base._position.y = TERRAIN_HEIGHT;
+                base._position.y = terrainHeight;
                 isInAir = false;
             }
         }
@@ -51,7 +51,7 @@ namespace CogiEngine
             }
         }
         
-        public void UpdateMove(InputManager input, float frameTimeSec)
+        public void UpdateMove(InputManager input, Terrain terrain, float frameTimeSec)
         {
             if (input.IsKeyStatus(KeyStatus.KeyDown, Keys.W))
             {
@@ -82,7 +82,7 @@ namespace CogiEngine
             {
                 Jump();
             }
-            Move(frameTimeSec);
+            Move(terrain, frameTimeSec);
         }
     }
 }
