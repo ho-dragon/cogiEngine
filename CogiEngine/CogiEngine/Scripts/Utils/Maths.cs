@@ -28,6 +28,15 @@ namespace CogiEngine
             matrix.Scale(scale, scale, scale);
             return matrix;
         }
+        
+        public static Matrix4x4f CreateTransformationMatrix(Vertex2f translation, Vertex2f scale)
+        {
+            Matrix4x4f matrix = new Matrix4x4f(IdentityMatrix4x4);
+            matrix.Translate(translation.x, translation.y, 0);
+            matrix.Scale(scale.x, scale.y, 1f);
+            return matrix;
+        }
+
 
         public static Matrix4x4f CreateProjectionMatrix(float fov, float aspectRatio, float nearPlane, float farPlane)
         {

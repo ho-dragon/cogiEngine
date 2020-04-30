@@ -12,7 +12,7 @@ namespace CogiEngine
         List<uint> loadedTextureList = new List<uint>();
         List<Bitmap> loadedBitmap = new List<Bitmap>();
         
-        public RawModel LoadToVAO(float [] positions,float [] textureCoords, float [] normals, int[] indices)
+        public RawModel LoadVAO(float [] positions,float [] textureCoords, float [] normals, int[] indices)
         {
             uint vaoID = CreateVAO();
             BindIndicesBuffer(indices);//Bind Index Buffer
@@ -20,7 +20,15 @@ namespace CogiEngine
             StoreDataInAttributeList(1, 2, textureCoords);  
             StoreDataInAttributeList(2,3, normals);
             UnbindVAO();
-            return new RawModel(vaoID, positions.Length);
+            return new RawModel(vaoID, positions.Length);//PrimitiveType.Triangles
+        }
+        
+        public RawModel LoadVAO_GUI(float[] positions)
+        {
+            uint vaoID = CreateVAO();
+            StoreDataInAttributeList(0, 2, positions);
+            UnbindVAO();
+            return new RawModel(vaoID, positions.Length / 2);//PrimitiveType.TriangleStrip
         }
 
         public Bitmap LoadBitmap(string filename)

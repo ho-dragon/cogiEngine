@@ -33,7 +33,7 @@
             set => reflectivity = value;
         }
 
-        public uint ID
+        public uint TextureID
         {
             get => textureID;
         }
@@ -44,9 +44,9 @@
             set => hasTransparency = value;
         }
 
-        public ModelTexture(uint id)
+        public ModelTexture(uint textureId)
         {
-            this.textureID = id;
+            this.textureID = textureId;
         }
     }
 }

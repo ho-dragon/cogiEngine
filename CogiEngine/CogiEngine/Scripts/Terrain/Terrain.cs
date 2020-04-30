@@ -124,7 +124,7 @@ namespace CogiEngine
                 }
             }
 
-            return loader.LoadToVAO(vertices, textureCoords, normals, indices);
+            return loader.LoadVAO(vertices, textureCoords, normals, indices);
         }
 
         private Vertex3f GetNormal(int x, int z, Bitmap bitmap)

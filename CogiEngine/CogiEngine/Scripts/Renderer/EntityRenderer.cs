@@ -48,7 +48,7 @@ namespace CogiEngine
             this.shader.LoadFakeLighting(texture.UseFakeLigihting);
             this.shader.LoadShineVariables(texture.ShineDamper, texture.Reflectivity);
             Gl.ActiveTexture(TextureUnit.Texture0);
-            Gl.BindTexture(TextureTarget.Texture2d, texture.ID);
+            Gl.BindTexture(TextureTarget.Texture2d, texture.TextureID);
         }
 
         private void Unbind()

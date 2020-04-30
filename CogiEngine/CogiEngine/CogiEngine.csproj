@@ -83,6 +83,9 @@
         <Compile Include="Scripts\Entities\Entity.cs" />
         <Compile Include="Scripts\Entities\Light.cs" />
         <Compile Include="Scripts\Entities\Player.cs" />
+        <Compile Include="Scripts\GUI\GUIRenderer.cs" />
+        <Compile Include="Scripts\GUI\GUIShader.cs" />
+        <Compile Include="Scripts\GUI\GUITexture.cs" />
         <Compile Include="Scripts\InputManager.cs" />
         <Compile Include="Scripts\Loader.cs" />
         <Compile Include="Scripts\MainForm.cs" />
@@ -265,6 +268,28 @@
     </ItemGroup>
     <ItemGroup>
       <None Include="Resources\Textures\fernAtlas.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="Resources\Shader\guiFragmentShader.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Shader\guiVertexShader.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="Resources\Textures\health.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\pine.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\socuwan.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="Resources\Textures\thinmatrix.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>

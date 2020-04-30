@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using OpenGL;
@@ -14,10 +13,12 @@ namespace CogiEngine
         private DisplayManager displayManager;
         private InputManager inputManager;
         private MasterRanderer renderer;
+        private GUIRenderer guiRenderer;
         private Loader loader;
         private Camera camera;
         private Light lgiht;
         private List<Entity> entities;
+        private List<GUITexture> guiList;
         private Terrain terrain;
         private Player player;
         
@@ -36,7 +37,7 @@ namespace CogiEngine
             //glControl
             this.glControl.Animation = true;
             this.glControl.AnimationTimer = false;
-            this.glControl.BackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.glControl.BackColor = Color.FromArgb(64, 64, 64);
             this.glControl.ColorBits = 24u;//Gl.COLOR_BUFFER_BIT;
             this.glControl.DepthBits = 24u;//Gl.DEPTH_BUFFER_BIT;
             this.glControl.Dock = DockStyle.Fill;
@@ -46,11 +47,11 @@ namespace CogiEngine
             this.glControl.Size = new Size(DisplayManager.WIDTH, DisplayManager.HEIGHT);
             this.glControl.StencilBits = 0u;//Gl.MULTISAMPLE_BIT;
             this.glControl.TabIndex = 0;
-            
-            this.glControl.ContextCreated += new EventHandler<GlControlEventArgs>(this.OnCreated_GlControl);
-            this.glControl.ContextDestroying += new EventHandler<GlControlEventArgs>(this.OnDestroying_GlControl);
-            this.glControl.Render += new EventHandler<GlControlEventArgs>(this.OnRender_GlControl);
-            this.glControl.ContextUpdate += new EventHandler<GlControlEventArgs>(this.OnUpdate_GlControl);
+
+            this.glControl.ContextCreated += OnCreated_GlControl;
+            this.glControl.ContextDestroying += OnDestroying_GlControl;
+            this.glControl.Render += OnRender_GlControl;
+            this.glControl.ContextUpdate += OnUpdate_GlControl;
             
             //input event
             this.glControl.MouseWheel += this.inputManager.OnMoueWheel;
@@ -84,6 +85,7 @@ namespace CogiEngine
             
             this.loader = new Loader();
             this.renderer = new MasterRanderer(glControl.ClientSize.Width, glControl.ClientSize.Height);
+            this.guiRenderer = new GUIRenderer(this.loader);
             
             //Camera 
             this.camera = new Camera(new Vertex3f(0, 10, 0), 20f);
@@ -92,18 +94,20 @@ namespace CogiEngine
             this.lgiht = new Light(new Vertex3f(20000, 40000,20000), new Vertex3f(1,1,1));
             this.entities = new List<Entity>();
             
-            LoadPlayer();
+            //Load Resources
+            
             this.terrain = LoadTerrain(this.loader);
             LoadEntities(this.terrain, this.entities, this.loader);
+            LoadPlayer(this.loader);
+            LoadGUI(this.loader);
         }
 
-        private void LoadPlayer()
+        private void LoadPlayer(Loader loader)
         {
             ModelTexture personTexture = new ModelTexture(loader.LoadTexture("playerTexture"));
             personTexture.ShineDamper = 30f;
             personTexture.Reflectivity = 0.3f;
             TextureModel personModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("person", loader), personTexture);
-            //this.player = new Player(personModel, new Vertex3f(0, 0, -50), 0, 0, 0, 1f);
             this.player = new Player(personModel, new Vertex3f(256, 0, 256), 0, 0, 0, 1f);
         }
         
@@ -157,6 +161,15 @@ namespace CogiEngine
             }
         }
 
+        private void LoadGUI(Loader loader)
+        {
+            this.guiList = new List<GUITexture>();
+            GUITexture gui1 = new GUITexture(loader.LoadTexture("socuwan"), new Vertex2f(0.5f, 0.5f), new Vertex2f(0.25f, 0.25f));
+            GUITexture gui2 = new GUITexture(loader.LoadTexture("thinmatrix"), new Vertex2f(0.3f, 0.74f), new Vertex2f(0.4f, 0.4f));
+            this.guiList.Add(gui1);
+            this.guiList.Add(gui2);
+        }
+        
         private Vertex3f GetRadomPosition(Terrain terrain, Random random, float randomX, float randomZ)
         {
             float x = (float)random.NextDouble() * (Terrain.SIZE - randomX);
@@ -185,6 +198,7 @@ namespace CogiEngine
             this.displayManager.CloseDisplay();
             this.loader.CleanUp();
             this.renderer.CleanUp();
+            this.guiRenderer.CleanUp();
         }
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
@@ -198,13 +212,14 @@ namespace CogiEngine
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
-            renderer.ProcessEntity(this.player);
+            this.renderer.ProcessEntity(this.player);
             for (int i = 0; i < this.entities.Count; i++)
             {
-                renderer.ProcessEntity(this.entities[i]);
+                this.renderer.ProcessEntity(this.entities[i]);
             }
-            renderer.ProcessTerrain(this.terrain);
-            renderer.Render(this.lgiht, this.camera);
+            this.renderer.ProcessTerrain(this.terrain);
+            this.renderer.Render(this.lgiht, this.camera);
+            this.guiRenderer.Render(this.guiList);
             //DrawAxis(PrimitiveType.Lines,0,0,0,0.1f,1f);
             this.displayManager.UpdateDisplay();
         }

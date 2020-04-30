@@ -25,7 +25,7 @@ namespace CogiEngine
             float[] textureArray = TextureFromMesh(scene.Meshes[0]);
             int[] indicesArray = IndicesFromMesh(scene.Meshes[0]);
             float[] normalsArray = NormalsFromMesh(scene.Meshes[0]);
-            return loader.LoadToVAO(verticesArray, textureArray, normalsArray, indicesArray);
+            return loader.LoadVAO(verticesArray, textureArray, normalsArray, indicesArray);
         }
 
         static float[] TextureFromMesh(Mesh mesh)
@@ -142,7 +142,7 @@ namespace CogiEngine
                 }
             }
 
-            return loader.LoadToVAO(ConvertToArray(vertexList), uvArray, ConvertToArray(normalList),
+            return loader.LoadVAO(ConvertToArray(vertexList), uvArray, ConvertToArray(normalList),
                 indexList.ToArray());
         }
 

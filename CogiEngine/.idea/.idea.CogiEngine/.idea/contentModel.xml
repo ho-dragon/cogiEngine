@@ -27,6 +27,8 @@
           <e p="person.obj" t="Include" />
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
+            <e p="guiFragmentShader.txt" t="Include" />
+            <e p="guiVertexShader.txt" t="Include" />
             <e p="terrainFragmentShader.txt" t="Include" />
             <e p="terrainVertexShader.txt" t="Include" />
             <e p="vertexShader.txt" t="Include" />
@@ -43,16 +45,20 @@
             <e p="grassFlowers.png" t="Include" />
             <e p="grassTexture.png" t="Include" />
             <e p="grassy.png" t="Include" />
+            <e p="health.png" t="Include" />
             <e p="heightmap.png" t="Include" />
             <e p="image.png" t="Include" />
             <e p="image_2.png" t="Include" />
             <e p="lowPolyTree.png" t="Include" />
             <e p="mud.png" t="Include" />
             <e p="path.png" t="Include" />
+            <e p="pine.png" t="Include" />
             <e p="pinkFlowers.png" t="Include" />
             <e p="playerTexture.png" t="Include" />
             <e p="rainbow.png" t="Include" />
+            <e p="socuwan.png" t="Include" />
             <e p="stallTexture.png" t="Include" />
+            <e p="thinmatrix.png" t="Include" />
             <e p="tree.png" t="Include" />
             <e p="white2.png" t="Include" />
             <e p="white64.png" t="Include" />
@@ -66,6 +72,11 @@
             <e p="Entity.cs" t="Include" />
             <e p="Light.cs" t="Include" />
             <e p="Player.cs" t="Include" />
+          </e>
+          <e p="GUI" t="Include">
+            <e p="GUIRenderer.cs" t="Include" />
+            <e p="GUIShader.cs" t="Include" />
+            <e p="GUITexture.cs" t="Include" />
           </e>
           <e p="InputManager.cs" t="Include" />
           <e p="Loader.cs" t="Include" />
