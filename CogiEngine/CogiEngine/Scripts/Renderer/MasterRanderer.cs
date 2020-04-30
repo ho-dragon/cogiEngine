@@ -103,7 +103,7 @@ namespace CogiEngine
 
         public void ProcessEntity(Entity entity)
         {
-            TextureModel entityModel = entity.Model;
+            TextureModel entityModel = entity.TextureModel;
             if (this.entities.ContainsKey(entityModel))
             {
                 this.entities[entityModel].Add(entity);   

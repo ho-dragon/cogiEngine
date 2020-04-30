@@ -56,7 +56,7 @@ namespace CogiEngine
         
         public void LoadSkyColor(float r, float g, float b)
         {
-            base.LoadVector(this.locationSkyColor, new Vertex3f(r, g, b));
+            base.LoadVector3(this.locationSkyColor, new Vertex3f(r, g, b));
         }
         
         public void LoadShineVariables(float damper, float reflectivity)
@@ -83,8 +83,8 @@ namespace CogiEngine
         
         public void LoadLight(Light light)
         {
-            base.LoadVector(this.loccationLightPosition, light.Position);
-            base.LoadVector(this.locationLightColor, light.Colour);
+            base.LoadVector3(this.loccationLightPosition, light.Position);
+            base.LoadVector3(this.locationLightColor, light.Colour);
         }
     }
 }

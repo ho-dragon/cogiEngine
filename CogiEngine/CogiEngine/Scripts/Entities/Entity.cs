@@ -4,49 +4,71 @@ namespace CogiEngine
 {
     public class Entity
     {
-        TextureModel _model;
+        TextureModel textureModel;
+        protected Vertex3f position;
+        protected float rotationX;
+        protected float rotationY;
+        protected float rotationZ;
+        protected float scale;
+        private int textureIndex = 0;
+        
+        public TextureModel TextureModel => textureModel;
 
-        public TextureModel Model => _model;
+        public Vertex3f Position => position;
 
-        public Vertex3f Position => _position;
+        public float RotationX => rotationX;
 
-        public float RotX => _rotX;
+        public float RotationY => rotationY;
 
-        public float RotY => _rotY;
+        public float RotationZ => rotationZ;
 
-        public float RotZ => _rotZ;
+        public float Scale => scale;
 
-        public float Scale => _scale;
-
-        protected Vertex3f _position;
-        protected float _rotX;
-        protected float _rotY;
-        protected float _rotZ;
-        protected float _scale;
-  
-        public Entity(TextureModel model, Vertex3f position, float rotX, float rotY, float rotZ, float scale)
+        public Entity(TextureModel textureModel, Vertex3f position, float rotationX, float rotationY, float rotationZ, float scale)
         {
-            _model = model;
-            _position = position;
-            _rotX = rotX;
-            _rotY = rotY;
-            _rotZ = rotZ;
-            _scale = scale;
+            this.textureModel = textureModel;
+            this.position = position;
+            this.rotationX = rotationX;
+            this.rotationY = rotationY;
+            this.rotationZ = rotationZ;
+            this.scale = scale;
         }
 
+        public Entity(TextureModel textureModel, int textureIndex, Vertex3f position, float rotationX, float rotationY, float rotationZ, float scale)
+        {
+            this.textureIndex = textureIndex;
+            this.textureModel = textureModel;
+            this.position = position;
+            this.rotationX = rotationX;
+            this.rotationY = rotationY;
+            this.rotationZ = rotationZ;
+            this.scale = scale;
+        }
 
         public void IncreasePosition(float dx, float dy, float dz)
         {
-            _position.x += dx;
-            _position.y += dy;
-            _position.z += dz;
+            this.position.x += dx;
+            this.position.y += dy;
+            this.position.z += dz;
         }
 
         public void IncreaseRotation(float dx, float dy, float dz)
         {
-            _rotX += dx;
-            _rotY += dy;
-            _rotZ += dz;
+            this.rotationX += dx;
+            this.rotationY += dy;
+            this.rotationZ += dz;
+        }
+
+        public float GetTextureOffsetX()
+        {
+            int column = this.textureIndex % this.textureModel.Texture.NumberOfRows;
+            return (float) column / (float) this.textureModel.Texture.NumberOfRows;
+        }
+        
+        public float GetTextureOffsetY()
+        {
+            int row = this.textureIndex / this.textureModel.Texture.NumberOfRows;
+            return (float) row / (float) this.textureModel.Texture.NumberOfRows;
         }
     }
 }

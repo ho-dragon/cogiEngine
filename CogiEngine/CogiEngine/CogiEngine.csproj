@@ -263,6 +263,11 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+    <ItemGroup>
+      <None Include="Resources\Textures\fernAtlas.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Import Project="..\packages\SoilDotnet.1.0.3\build\SoilDotnet.targets" Condition="Exists('..\packages\SoilDotnet.1.0.3\build\SoilDotnet.targets')" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

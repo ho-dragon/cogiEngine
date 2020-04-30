@@ -36,6 +36,7 @@
             <e p="blendMap.png" t="Include" />
             <e p="dirt.png" t="Include" />
             <e p="fern.png" t="Include" />
+            <e p="fernAtlas.png" t="Include" />
             <e p="flower.png" t="Include" />
             <e p="gold.png" t="Include" />
             <e p="grass.png" t="Include" />

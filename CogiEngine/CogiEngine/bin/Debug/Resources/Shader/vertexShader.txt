@@ -16,6 +16,9 @@ uniform mat4 _viewMatrix;
 uniform vec3 _lightPosition;
 uniform float _useFakeLighting;
 
+uniform int _numberOfRows;
+uniform vec2 _offset;
+
 const float FOG_DENSITY = 0.007;
 const float FOG_GRADIENT = 1.5;
 
@@ -25,7 +28,7 @@ void main(void)
     vec4 positionRelativeToCam = _viewMatrix * worldPosition;
     
     gl_Position  = _projectionMatrix * positionRelativeToCam;
-    _pass_textureCoords = _textureCoords;
+    _pass_textureCoords = (_textureCoords / _numberOfRows) + _offset;
     
     vec3 fakeNormal = _normal;
     if (_useFakeLighting > 0.5) {

@@ -134,17 +134,16 @@ namespace CogiEngine
             TextureModel flowerModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), flowerTexture);
             
             //Fern
-            ModelTexture fernTexture = new ModelTexture(loader.LoadTexture("fern"));
-            fernTexture.HasTransparency = true;
-            TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", this.loader), fernTexture);
+            ModelTexture fernTextureAltas = new ModelTexture(loader.LoadTexture("fernAtlas"));
+            fernTextureAltas.NumberOfRows = 2;
+            TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", this.loader), fernTextureAltas);
      
             Random random = new Random();
             for (int i = 0; i < 200; i++)
             {
-                if (i % 20 == 0)
+                if (i % 2 == 0)
                 {
-                    entities.Add(new Entity(fernModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 0.6f));
-                    
+                    entities.Add(new Entity(fernModel, random.Next(0,3), GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 0.6f));
                 }
 
                 if (i % 5 == 0)
@@ -194,7 +193,7 @@ namespace CogiEngine
             this.renderer.UpdateViewRect(this.glControl.ClientSize.Width, this.glControl.ClientSize.Height);
             this.inputManager.UpdateMousePosition();
             this.player.UpdateMove(this.inputManager, this.terrain, this.displayManager.GetFrameTimeSeconds());
-            this.camera.UpdateMove(this.player.Position, this.player.RotY, this.inputManager);
+            this.camera.UpdateMove(this.player.Position, this.player.RotationY, this.inputManager);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)

@@ -64,3 +64,4 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\pinkFl
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\person.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\playerTexture.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\fernAtlas.png

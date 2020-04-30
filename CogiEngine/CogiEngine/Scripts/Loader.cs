@@ -42,10 +42,8 @@ namespace CogiEngine
                 Soil.NET.WrapSOIL.SOIL_FLAG.MIPMAPS | Soil.NET.WrapSOIL.SOIL_FLAG.NTSC_SAFE_RGB | Soil.NET.WrapSOIL.SOIL_FLAG.COMPRESS_TO_DXT);
             this.loadedTextureList.Add(tex2d_id);
             
-            
-            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureLodBias, 0f);
             Gl.GenerateMipmap(TextureTarget.Texture2d);
-            
+            Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureLodBias, 0f);
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, TextureMinFilter.LinearMipmapLinear);
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, Gl.LINEAR);
 

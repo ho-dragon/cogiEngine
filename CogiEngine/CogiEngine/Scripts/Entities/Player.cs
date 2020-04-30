@@ -17,8 +17,8 @@ namespace CogiEngine
         private float upwardsSpeed = 0f;
         private bool isInAir = false;
         
-        public Player(TextureModel model, Vertex3f position, float rotX, float rotY, float rotZ, float scale)
-            : base(model, position, rotX, rotY, rotZ, scale)
+        public Player(TextureModel textureModel, Vertex3f position, float rotationX, float rotationY, float rotationZ, float scale)
+            : base(textureModel, position, rotationX, rotationY, rotationZ, scale)
         {
             
         }
@@ -27,17 +27,17 @@ namespace CogiEngine
         {
             base.IncreaseRotation(0f, this.currentTurnSpeed * frameTimeSec, 0f);
             float distance = currentSpeed * frameTimeSec;
-            double radian  = Math.PI * _rotY / 180.0f;
+            double radian  = Math.PI * rotationY / 180.0f;
             float dx = distance * (float)Math.Sin(radian);
             float dz = distance * (float) Math.Cos(radian);
             base.IncreasePosition(dx,0,dz);
             this.upwardsSpeed += GRAVITY * frameTimeSec;
             base.IncreasePosition(0f, upwardsSpeed * frameTimeSec, 0);
-            float terrainHeight = terrain.GetHeightOfTerrain(base._position.x, base._position.z);
-            if (base._position.y < terrainHeight)
+            float terrainHeight = terrain.GetHeightOfTerrain(base.position.x, base.position.z);
+            if (base.position.y < terrainHeight)
             {
                 upwardsSpeed = 0;
-                base._position.y = terrainHeight;
+                base.position.y = terrainHeight;
                 isInAir = false;
             }
         }

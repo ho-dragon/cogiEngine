@@ -62,8 +62,9 @@ namespace CogiEngine
 
         private void PrepareInstance(Entity entity)
         {
-            Matrix4x4f transformationMatrix = Maths.CreateTransformationMatrix(entity.Position, entity.RotX, entity.RotY, entity.RotZ, entity.Scale);
+            Matrix4x4f transformationMatrix = Maths.CreateTransformationMatrix(entity.Position, entity.RotationX, entity.RotationY, entity.RotationZ, entity.Scale);
             this.shader.LoadTransformationMatrix(transformationMatrix);
+            this.shader.LoadAtlasInfo(entity.TextureModel.Texture.NumberOfRows, new Vertex2f(entity.GetTextureOffsetX(), entity.GetTextureOffsetY()));
         }
     }
 }

@@ -7,7 +7,14 @@
         private float reflectivity = 0f;
         private bool hasTransparency = false;
         private bool useFakeLigihting = false;
-        
+        private int numberOfRows = 1;
+
+        public int NumberOfRows
+        {
+            get => numberOfRows;
+            set => numberOfRows = value;
+        }
+
         public float ShineDamper
         {
             get => shineDamper;
