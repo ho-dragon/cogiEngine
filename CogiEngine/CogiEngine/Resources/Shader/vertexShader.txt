@@ -6,14 +6,14 @@
 
 out vec2 _pass_textureCoords;
 out vec3 _surfaceNormal;
-out vec3 _toLightVector;
+out vec3 _toLightVector[4];
 out vec3 _toCameraVector;
 out float _fogVisibility;
 
 uniform mat4 _transformationMatrix;
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
-uniform vec3 _lightPosition;
+uniform vec3 _lightPosition[4];
 uniform float _useFakeLighting;
 
 uniform int _numberOfRows;
@@ -21,6 +21,7 @@ uniform vec2 _offset;
 
 const float FOG_DENSITY = 0.007;
 const float FOG_GRADIENT = 1.5;
+const int LIGHT_COUNT = 4;
 
 void main(void)
 {
@@ -36,7 +37,10 @@ void main(void)
     }
     
     _surfaceNormal = (_transformationMatrix * vec4(fakeNormal, 0.0)).xyz;
-    _toLightVector = _lightPosition - worldPosition.xyz;
+    for(int i=0; i<LIGHT_COUNT; i++) {
+        _toLightVector[i] = _lightPosition[i] - worldPosition.xyz; 
+    }
+    
     _toCameraVector = (inverse(_viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - worldPosition.xyz;
     
     float distanceFromCam = length(positionRelativeToCam.xyz);

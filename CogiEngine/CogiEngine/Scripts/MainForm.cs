@@ -16,7 +16,7 @@ namespace CogiEngine
         private GUIRenderer guiRenderer;
         private Loader loader;
         private Camera camera;
-        private Light lgiht;
+        private List<Light> lgihtList;
         private List<Entity> entities;
         private List<GUITexture> guiList;
         private Terrain terrain;
@@ -91,11 +91,14 @@ namespace CogiEngine
             this.camera = new Camera(new Vertex3f(0, 10, 0), 20f);
             this.inputManager.OnEventMouseWheel += this.camera.OnEventWheel;
             
-            this.lgiht = new Light(new Vertex3f(20000, 40000,20000), new Vertex3f(1,1,1));
-            this.entities = new List<Entity>();
-            
+            //Light
+            this.lgihtList = new List<Light>();
+            this.lgihtList.Add(new Light(new Vertex3f(0, 10000,-7000), new Vertex3f(1,1,1)));
+            this.lgihtList.Add(new Light(new Vertex3f(-200, 10,-200), new Vertex3f(5,0,0)));
+            this.lgihtList.Add(new Light(new Vertex3f(200, 10,200), new Vertex3f(0,0,5)));
+
             //Load Resources
-            
+            this.entities = new List<Entity>();
             this.terrain = LoadTerrain(this.loader);
             LoadEntities(this.terrain, this.entities, this.loader);
             LoadPlayer(this.loader);
@@ -218,7 +221,7 @@ namespace CogiEngine
                 this.renderer.ProcessEntity(this.entities[i]);
             }
             this.renderer.ProcessTerrain(this.terrain);
-            this.renderer.Render(this.lgiht, this.camera);
+            this.renderer.Render(this.lgihtList, this.camera);
             this.guiRenderer.Render(this.guiList);
             //DrawAxis(PrimitiveType.Lines,0,0,0,0.1f,1f);
             this.displayManager.UpdateDisplay();

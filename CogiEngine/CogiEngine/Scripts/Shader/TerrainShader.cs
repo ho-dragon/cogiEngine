@@ -1,24 +1,26 @@
-﻿using OpenGL;
+﻿using System.Collections.Generic;
+using OpenGL;
 
 namespace CogiEngine
 {
     public class TerrainShader : ShaderProgram
     {
+        private const int MAX_LIGHT_COUNT = 4;
         private const string VERTEX_FILE_PATH = "./Resources/Shader/terrainVertexShader.txt";
         private const string FRAGMENT_FILE_PATH = "./Resources/Shader/terrainFragmentShader.txt";
-        private int locationTransformationMatrix;
-        private int locationProjectionMatrix;
-        private int locationViewMatrix;
-        private int loccationLightPosition;
-        private int locationLightColor;
-        private int locationShineDamper;
-        private int locationReflectivity;
-        private int locationSkyColor;
-        private int locationBlendMapTexture;
-        private int locationBaseTexture;
-        private int locationRedTexture;
-        private int locationGreenTexture;
-        private int locationBlueTexture;
+        private int location_transformationMatrix;
+        private int location_projectionMatrix;
+        private int location_viewMatrix;
+        private int[] loccation_lightPosition;
+        private int[] location_lightColor;
+        private int location_shineDamper;
+        private int location_reflectivity;
+        private int location_skyColor;
+        private int location_blendMapTexture;
+        private int location_baseTexture;
+        private int location_redTexture;
+        private int location_greenTexture;
+        private int location_blueTexture;
         public TerrainShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
 
@@ -30,61 +32,79 @@ namespace CogiEngine
         
         protected override void GetAllUniformLocations()
         {
-            this.locationTransformationMatrix  = base.GetUniformLocation("_transformationMatrix");
-            this.locationProjectionMatrix = base.GetUniformLocation("_projectionMatrix");
-            this.locationViewMatrix = base.GetUniformLocation("_viewMatrix");
-            this.loccationLightPosition = base.GetUniformLocation("_lightPosition");
-            this.locationLightColor = base.GetUniformLocation("_lightColour");
-            this.locationShineDamper = base.GetUniformLocation("_shineDamper");
-            this.locationReflectivity = base.GetUniformLocation("_reflectivity");
-            this.locationSkyColor = base.GetUniformLocation("_skyColor");
-            this.locationBlendMapTexture = base.GetUniformLocation("_blendMap");
-            this.locationBaseTexture = base.GetUniformLocation("_baseTexture");
-            this.locationRedTexture = base.GetUniformLocation("_redTexture");
-            this.locationGreenTexture = base.GetUniformLocation("_greenTexture");
-            this.locationBlueTexture = base.GetUniformLocation("_blueTexture");
+            this.location_transformationMatrix  = base.GetUniformLocation("_transformationMatrix");
+            this.location_projectionMatrix = base.GetUniformLocation("_projectionMatrix");
+            this.location_viewMatrix = base.GetUniformLocation("_viewMatrix");
+            this.location_shineDamper = base.GetUniformLocation("_shineDamper");
+            this.location_reflectivity = base.GetUniformLocation("_reflectivity");
+            this.location_skyColor = base.GetUniformLocation("_skyColor");
+            this.location_blendMapTexture = base.GetUniformLocation("_blendMap");
+            this.location_baseTexture = base.GetUniformLocation("_baseTexture");
+            this.location_redTexture = base.GetUniformLocation("_redTexture");
+            this.location_greenTexture = base.GetUniformLocation("_greenTexture");
+            this.location_blueTexture = base.GetUniformLocation("_blueTexture");
+            
+            
+            this.loccation_lightPosition = new int[MAX_LIGHT_COUNT];
+            this.location_lightColor = new int[MAX_LIGHT_COUNT];
+            for (int i = 0; i < MAX_LIGHT_COUNT; i++)
+            {
+                this.loccation_lightPosition[i] = base.GetUniformLocation(string.Format("_lightPosition[{0}]", i));
+                this.location_lightColor[i] = base.GetUniformLocation(string.Format("_lightColor[{0}]", i));
+            }
         }
 
         public void ConnetTextureUnits()
         {
-            base.LoadInt(this.locationBlendMapTexture, 0);
-            base.LoadInt(this.locationBaseTexture, 1);
-            base.LoadInt(this.locationRedTexture, 2);
-            base.LoadInt(this.locationGreenTexture, 3);
-            base.LoadInt(this.locationBlueTexture, 4);
+            base.LoadInt(this.location_blendMapTexture, 0);
+            base.LoadInt(this.location_baseTexture, 1);
+            base.LoadInt(this.location_redTexture, 2);
+            base.LoadInt(this.location_greenTexture, 3);
+            base.LoadInt(this.location_blueTexture, 4);
         }
         
         public void LoadSkyColor(float r, float g, float b)
         {
-            base.LoadVector3(this.locationSkyColor, new Vertex3f(r, g, b));
+            base.LoadVector3(this.location_skyColor, new Vertex3f(r, g, b));
         }
         
         public void LoadShineVariables(float damper, float reflectivity)
         {
-            base.LoadFloat(this.locationShineDamper, damper);
-            base.LoadFloat(this.locationReflectivity, reflectivity);
+            base.LoadFloat(this.location_shineDamper, damper);
+            base.LoadFloat(this.location_reflectivity, reflectivity);
         }
         
         public void LoadTransformationMatrix(Matrix4x4f value)
         {
-            base.LoadMatrix(this.locationTransformationMatrix, value);
+            base.LoadMatrix(this.location_transformationMatrix, value);
         }
         
         public void LoadProjectionMatrix(Matrix4x4f value)
         {
-            base.LoadMatrix(this.locationProjectionMatrix, value);
+            base.LoadMatrix(this.location_projectionMatrix, value);
         }
         
         public void LoadViewMatrix(Camera camera)
         {
             Matrix4x4f viewMatrix = Maths.CreateViewMatrix(camera);
-            base.LoadMatrix(this.locationViewMatrix, viewMatrix);
+            base.LoadMatrix(this.location_viewMatrix, viewMatrix);
         }
         
-        public void LoadLight(Light light)
+        public void LoadLights(List<Light> lightList)
         {
-            base.LoadVector3(this.loccationLightPosition, light.Position);
-            base.LoadVector3(this.locationLightColor, light.Colour);
+            for (int i = 0; i < MAX_LIGHT_COUNT; i++)
+            {
+                if (i < lightList.Count)
+                {
+                    base.LoadVector3(this.loccation_lightPosition[i], lightList[i].Position);
+                    base.LoadVector3(this.location_lightColor[i], lightList[i].Colour);        
+                }
+                else
+                {
+                    base.LoadVector3(this.loccation_lightPosition[i], new Vertex3f(0,0,0));
+                    base.LoadVector3(this.location_lightColor[i], new Vertex3f(0, 0, 0));
+                }
+            }
         }
     }
 }

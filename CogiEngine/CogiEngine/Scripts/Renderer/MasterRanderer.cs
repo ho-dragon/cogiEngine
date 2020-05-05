@@ -68,14 +68,14 @@ namespace CogiEngine
             this.clientHeight = height;
         }
         
-        public void Render(Light light, Camera camera)
+        public void Render(List<Light> lightList, Camera camera)
         {
             Prepare();
             
             //Entities
             this.entityShader.Start();
             this.entityShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
-            this.entityShader.LoadLight(light);
+            this.entityShader.LoadLights(lightList);
             this.entityShader.LoadViewMatrix(camera);
             this.entityRenderer.Render(this.entities);
             this.entityShader.Stop();
@@ -83,7 +83,7 @@ namespace CogiEngine
             //Terrain
             this.terrainShader.Start();
             this.terrainShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
-            this.terrainShader.LoadLight(light);
+            this.terrainShader.LoadLights(lightList);
             this.terrainShader.LoadViewMatrix(camera);
             this.terrainRenderer.Render(this.terrainList);
             this.terrainShader.Stop();

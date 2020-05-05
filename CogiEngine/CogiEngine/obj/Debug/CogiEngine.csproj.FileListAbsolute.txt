@@ -1,6 +1,5 @@
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy64.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\SoilProxy32.dll
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\terrainFragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\image_2.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\stall.obj
@@ -14,8 +13,6 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grass.
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\rainbow.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\tree.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\tree.obj
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\fragmentShader.txt
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\vertexShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe.config
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.pdb
@@ -43,7 +40,6 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CoreCom
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CopyComplete
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\terrainVertexShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\bunny.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\drone.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\exampleOBJ.obj
@@ -69,5 +65,9 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\health
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\pine.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\socuwan.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\thinmatrix.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\fragmentShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\terrainFragmentShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\terrainVertexShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\vertexShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\guiFragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\guiVertexShader.txt

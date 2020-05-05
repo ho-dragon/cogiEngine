@@ -1,16 +1,19 @@
-﻿using OpenGL;
+﻿using System.Collections.Generic;
+using System.Security.Permissions;
+using OpenGL;
 
 namespace CogiEngine
 {
     public class StaticShader : ShaderProgram
     {
+        private const int MAX_LIGHT_COUNT = 4;
         private const string VERTEX_FILE_PATH = "./Resources/Shader/vertexShader.txt";
         private const string FRAGMENT_FILE_PATH = "./Resources/Shader/fragmentShader.txt";
         private int location_transformationMatrix;
         private int location_projectionMatrix;
         private int location_viewMatrix;
-        private int loccation_lightPosition;
-        private int location_lightColor;
+        private int[] loccation_lightPosition;
+        private int[] location_lightColor;
         private int location_shineDamper;
         private int location_reflectivity;
         private int location_useFakeLighting;
@@ -49,17 +52,23 @@ namespace CogiEngine
 
         protected override void GetAllUniformLocations()
         {
-            this.location_transformationMatrix  = base.GetUniformLocation("_transformationMatrix");
+            this.location_transformationMatrix = base.GetUniformLocation("_transformationMatrix");
             this.location_projectionMatrix = base.GetUniformLocation("_projectionMatrix");
             this.location_viewMatrix = base.GetUniformLocation("_viewMatrix");
-            this.loccation_lightPosition = base.GetUniformLocation("_lightPosition");
-            this.location_lightColor = base.GetUniformLocation("_lightColor");
             this.location_shineDamper = base.GetUniformLocation("_shineDamper");
             this.location_reflectivity = base.GetUniformLocation("_reflectivity");
             this.location_useFakeLighting = base.GetUniformLocation("_useFakeLighting");
             this.location_skyColor = base.GetUniformLocation("_skyColor");
             this.location_numberOfRows = base.GetUniformLocation("_numberOfRows");
             this.location_offset = base.GetUniformLocation("_offset");
+
+            this.loccation_lightPosition = new int[MAX_LIGHT_COUNT];
+            this.location_lightColor = new int[MAX_LIGHT_COUNT];
+            for (int i = 0; i < MAX_LIGHT_COUNT; i++)
+            {
+                this.loccation_lightPosition[i] = base.GetUniformLocation(string.Format("_lightPosition[{0}]", i));
+                this.location_lightColor[i] = base.GetUniformLocation(string.Format("_lightColor[{0}]", i));
+            }
         }
 
         public void LoadAtlasInfo(int numberOfRows, Vertex2f offset)
@@ -95,10 +104,21 @@ namespace CogiEngine
             base.LoadMatrix(this.location_viewMatrix, viewMatrix);
         }
         
-        public void LoadLight(Light light)
+        public void LoadLights(List<Light> lightList)
         {
-            base.LoadVector3(this.loccation_lightPosition, light.Position);
-            base.LoadVector3(this.location_lightColor, light.Colour);
+            for (int i = 0; i < MAX_LIGHT_COUNT; i++)
+            {
+                if (i < lightList.Count)
+                {
+                    base.LoadVector3(this.loccation_lightPosition[i], lightList[i].Position);
+                    base.LoadVector3(this.location_lightColor[i], lightList[i].Colour);        
+                }
+                else
+                {
+                    base.LoadVector3(this.loccation_lightPosition[i], new Vertex3f(0,0,0));
+                    base.LoadVector3(this.location_lightColor[i], new Vertex3f(0, 0, 0));
+                }
+            }
         }
 
         public void LoadFakeLighting(bool useFakeLighting)

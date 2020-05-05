@@ -130,168 +130,168 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Shader\fragmentShader.txt">
+      <Content Include="Resources\Shader\fragmentShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Shader\terrainFragmentShader.txt">
+      </Content>
+      <Content Include="Resources\Shader\terrainFragmentShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Shader\terrainVertexShader.txt">
+      </Content>
+      <Content Include="Resources\Shader\terrainVertexShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Shader\vertexShader.txt">
+      </Content>
+      <Content Include="Resources\Shader\vertexShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\image.png">
+      <Content Include="Resources\Textures\image.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\image_2.png">
+      </Content>
+      <Content Include="Resources\Textures\image_2.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\stall.obj">
+      <Content Include="Resources\stall.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\stallTexture.png">
+      <Content Include="Resources\Textures\stallTexture.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\new_stall.obj">
+      <Content Include="Resources\new_stall.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\dragon.obj">
+      <Content Include="Resources\dragon.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\white2.png">
+      <Content Include="Resources\Textures\white2.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\white64.png">
+      </Content>
+      <Content Include="Resources\Textures\white64.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\gold.png">
+      <Content Include="Resources\Textures\gold.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\grass.png">
+      </Content>
+      <Content Include="Resources\Textures\grass.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\rainbow.png">
+      </Content>
+      <Content Include="Resources\Textures\rainbow.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\tree.png">
+      </Content>
+      <Content Include="Resources\Textures\tree.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\tree.obj">
+      <Content Include="Resources\tree.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\bunny.obj">
+      <Content Include="Resources\bunny.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\drone.obj">
+      </Content>
+      <Content Include="Resources\drone.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\exampleOBJ.obj">
+      </Content>
+      <Content Include="Resources\exampleOBJ.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\fern.obj">
+      </Content>
+      <Content Include="Resources\fern.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\grassModel.obj">
+      </Content>
+      <Content Include="Resources\grassModel.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\lowPolyTree.obj">
+      </Content>
+      <Content Include="Resources\lowPolyTree.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\fern.png">
+      </Content>
+      <Content Include="Resources\Textures\fern.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\flower.png">
+      </Content>
+      <Content Include="Resources\Textures\flower.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\grassTexture.png">
+      </Content>
+      <Content Include="Resources\Textures\grassTexture.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\grassy.png">
+      </Content>
+      <Content Include="Resources\Textures\grassy.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\lowPolyTree.png">
+      </Content>
+      <Content Include="Resources\Textures\lowPolyTree.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\blendMap.png">
+      <Content Include="Resources\Textures\blendMap.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\dirt.png">
+      </Content>
+      <Content Include="Resources\Textures\dirt.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\grassFlowers.png">
+      </Content>
+      <Content Include="Resources\Textures\grassFlowers.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\mud.png">
+      </Content>
+      <Content Include="Resources\Textures\mud.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\path.png">
+      </Content>
+      <Content Include="Resources\Textures\path.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\pinkFlowers.png">
+      </Content>
+      <Content Include="Resources\Textures\pinkFlowers.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\person.obj">
+      <Content Include="Resources\person.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\playerTexture.png">
+      </Content>
+      <Content Include="Resources\Textures\playerTexture.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\heightmap.png">
+      <Content Include="Resources\Textures\heightmap.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\fernAtlas.png">
+      <Content Include="Resources\Textures\fernAtlas.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Shader\guiFragmentShader.txt">
+      <Content Include="Resources\Shader\guiFragmentShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Shader\guiVertexShader.txt">
+      </Content>
+      <Content Include="Resources\Shader\guiVertexShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <ItemGroup>
-      <None Include="Resources\Textures\health.png">
+      <Content Include="Resources\Textures\health.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\pine.png">
+      </Content>
+      <Content Include="Resources\Textures\pine.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\socuwan.png">
+      </Content>
+      <Content Include="Resources\Textures\socuwan.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Include="Resources\Textures\thinmatrix.png">
+      </Content>
+      <Content Include="Resources\Textures\thinmatrix.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      </Content>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Import Project="..\packages\SoilDotnet.1.0.3\build\SoilDotnet.targets" Condition="Exists('..\packages\SoilDotnet.1.0.3\build\SoilDotnet.targets')" />
