@@ -130,6 +130,9 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Resources\lamp.obj">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Resources\Shader\fragmentShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
@@ -144,6 +147,12 @@
       </Content>
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Resources\Textures\grassy2.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\Textures\grassy3.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Resources\Textures\image.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
@@ -157,6 +166,9 @@
       </Content>
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Resources\Textures\lamp.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Resources\Textures\stallTexture.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>

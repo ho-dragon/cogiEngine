@@ -4,24 +4,21 @@ namespace CogiEngine
 {
     public class Light
     {
-        Vertex3f _position;
-        public Vertex3f Position
-        {
-            get { return _position; }
-            set { _position = value; }
-        }
+        Vertex3f position;
+        Vertex3f color;
+        Vertex3f attenuation = new Vertex3f(1, 0, 0);
+        
+        public Vertex3f Position => position;
 
-        Vertex3f _colour;
-        public Vertex3f Colour
-        {
-            get { return _colour; }
-            set { _colour = value; }
-        }
+        public Vertex3f Color => color;
 
-        public Light(Vertex3f position, Vertex3f colour)
+        public Vertex3f Attenuation => attenuation;
+        
+        public Light(Vertex3f position, Vertex3f color, Vertex3f attenuation)
         {
-            this._position = position;
-            this._colour = colour;
+            this.position = position;
+            this.color = color;
+            this.attenuation = attenuation;
         }
     }
 }

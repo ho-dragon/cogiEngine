@@ -14,6 +14,7 @@ namespace CogiEngine
         private int location_viewMatrix;
         private int[] loccation_lightPosition;
         private int[] location_lightColor;
+        private int[] location_attenuation;
         private int location_shineDamper;
         private int location_reflectivity;
         private int location_useFakeLighting;
@@ -64,10 +65,13 @@ namespace CogiEngine
 
             this.loccation_lightPosition = new int[MAX_LIGHT_COUNT];
             this.location_lightColor = new int[MAX_LIGHT_COUNT];
+            this.location_attenuation = new int[MAX_LIGHT_COUNT];
+            
             for (int i = 0; i < MAX_LIGHT_COUNT; i++)
             {
                 this.loccation_lightPosition[i] = base.GetUniformLocation(string.Format("_lightPosition[{0}]", i));
                 this.location_lightColor[i] = base.GetUniformLocation(string.Format("_lightColor[{0}]", i));
+                this.location_attenuation[i] = base.GetUniformLocation(string.Format("_lightAttenuation[{0}]", i));
             }
         }
 
@@ -111,12 +115,14 @@ namespace CogiEngine
                 if (i < lightList.Count)
                 {
                     base.LoadVector3(this.loccation_lightPosition[i], lightList[i].Position);
-                    base.LoadVector3(this.location_lightColor[i], lightList[i].Colour);        
+                    base.LoadVector3(this.location_lightColor[i], lightList[i].Color);
+                    base.LoadVector3(this.location_attenuation[i], lightList[i].Attenuation);
                 }
                 else
                 {
                     base.LoadVector3(this.loccation_lightPosition[i], new Vertex3f(0,0,0));
                     base.LoadVector3(this.location_lightColor[i], new Vertex3f(0, 0, 0));
+                    base.LoadVector3(this.location_attenuation[i], new Vertex3f(1, 0, 0));
                 }
             }
         }

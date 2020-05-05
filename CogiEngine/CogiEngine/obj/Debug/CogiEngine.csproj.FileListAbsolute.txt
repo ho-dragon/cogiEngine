@@ -71,3 +71,7 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\terrainV
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\vertexShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\guiFragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\guiVertexShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\lamp.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\lamp.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grassy2.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\grassy3.png

@@ -7,7 +7,8 @@ namespace CogiEngine
 {
     public class Player : Entity
     {
-        private const float SPEED = 20f;
+        //private const float SPEED = 20f;
+        private const float SPEED = 100f;
         private const float TURN_SPPED = 160f;
         private const float GRAVITY = -50f;
         private const float JUMP_POWER = 30f;
@@ -40,6 +41,7 @@ namespace CogiEngine
                 base.position.y = terrainHeight;
                 isInAir = false;
             }
+            CogiLogger.Debug("position---" + position.ToString());
         }
 
         private void Jump()

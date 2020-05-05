@@ -86,16 +86,11 @@ namespace CogiEngine
             this.loader = new Loader();
             this.renderer = new MasterRanderer(glControl.ClientSize.Width, glControl.ClientSize.Height);
             this.guiRenderer = new GUIRenderer(this.loader);
-            
+              
             //Camera 
             this.camera = new Camera(new Vertex3f(0, 10, 0), 20f);
             this.inputManager.OnEventMouseWheel += this.camera.OnEventWheel;
             
-            //Light
-            this.lgihtList = new List<Light>();
-            this.lgihtList.Add(new Light(new Vertex3f(0, 10000,-7000), new Vertex3f(1,1,1)));
-            this.lgihtList.Add(new Light(new Vertex3f(-200, 10,-200), new Vertex3f(5,0,0)));
-            this.lgihtList.Add(new Light(new Vertex3f(200, 10,200), new Vertex3f(0,0,5)));
 
             //Load Resources
             this.entities = new List<Entity>();
@@ -103,6 +98,13 @@ namespace CogiEngine
             LoadEntities(this.terrain, this.entities, this.loader);
             LoadPlayer(this.loader);
             LoadGUI(this.loader);
+            
+            //Light
+            this.lgihtList = new List<Light>();
+            this.lgihtList.Add(new Light(new Vertex3f(0, 1000,-7000), new Vertex3f(0.4f,0.4f,0.4f), new Vertex3f(1,0,0)));
+            this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,185, 12.7f,-293), new Vertex3f(2,0,0), new Vertex3f(1, 0.01f, 0.002f)));
+            this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,370, 12.7f,-300), new Vertex3f(0,2,2), new Vertex3f(1, 0.01f, 0.002f)));
+            this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,293, 12.7f,-305), new Vertex3f(2, 2, 0), new Vertex3f(1, 0.01f, 0.002f)));
         }
 
         private void LoadPlayer(Loader loader)
@@ -111,7 +113,7 @@ namespace CogiEngine
             personTexture.ShineDamper = 30f;
             personTexture.Reflectivity = 0.3f;
             TextureModel personModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("person", loader), personTexture);
-            this.player = new Player(personModel, new Vertex3f(256, 0, 256), 0, 0, 0, 1f);
+            this.player = new Player(personModel, new Vertex3f(153, 5, -274), 0, 100, 0, 0.6f);
         }
         
         private void LoadEntities(Terrain terrain, List<Entity> entities, Loader loader)
@@ -132,35 +134,47 @@ namespace CogiEngine
             ModelTexture grassTexture = new ModelTexture(loader.LoadTexture("grassTexture"));
             grassTexture.HasTransparency = true;
             grassTexture.UseFakeLigihting = true;
-            TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), grassTexture);
+            TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", loader), grassTexture);
             
             
             ModelTexture flowerTexture = new ModelTexture(loader.LoadTexture("flower"));
             flowerTexture.HasTransparency = true;
             flowerTexture.UseFakeLigihting = true;
-            TextureModel flowerModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", this.loader), flowerTexture);
+            TextureModel flowerModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", loader), flowerTexture);
             
             //Fern
             ModelTexture fernTextureAltas = new ModelTexture(loader.LoadTexture("fernAtlas"));
             fernTextureAltas.NumberOfRows = 2;
-            TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", this.loader), fernTextureAltas);
-     
+            TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", loader), fernTextureAltas);
+            
+            //Lemp
+            ModelTexture lampTexture = new ModelTexture(loader.LoadTexture("lamp"));
+            lampTexture.UseFakeLigihting = true;
+            lampTexture.Reflectivity = 0.3f;
+            lampTexture.ShineDamper = 30f;
+            
+            TextureModel lampModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("lamp", loader), lampTexture);
+            entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 185, 0f, -293), 0, 0, 0, 1));
+            entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 370, 0f, -300), 0, 0, 0, 1));
+            entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 293, 0f, -305), 0, 0, 0, 1));
+
+            
             Random random = new Random();
             for (int i = 0; i < 200; i++)
             {
                 if (i % 2 == 0)
                 {
-                    entities.Add(new Entity(fernModel, random.Next(0,3), GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 0.6f));
+                    entities.Add(new Entity(fernModel, random.Next(0,3), GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 0.6f));
                 }
 
                 if (i % 5 == 0)
                 {
-                    entities.Add(new Entity(lowPolyTreeModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 1f));
+                    entities.Add(new Entity(lowPolyTreeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1f));
                 }
                 
-                entities.Add(new Entity(treeModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 5f));
-                entities.Add(new Entity(grassModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 1));
-                entities.Add(new Entity(flowerModel, GetRadomPosition(terrain, random, 400, 600), 0, 0, 0, 1));
+                entities.Add(new Entity(treeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 5f));
+                entities.Add(new Entity(grassModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1));
+                entities.Add(new Entity(flowerModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1));
             }
         }
 
@@ -175,11 +189,18 @@ namespace CogiEngine
         
         private Vertex3f GetRadomPosition(Terrain terrain, Random random, float randomX, float randomZ)
         {
-            float x = (float)random.NextDouble() * (Terrain.SIZE - randomX);
+            float x = (float)random.NextDouble() * (Terrain.SIZE + randomX);
             float z = (float)random.NextDouble() * + randomZ;
             float y = terrain.GetHeightOfTerrain(x, z);
             return  new Vertex3f(x, y, z);
         }
+        
+        private Vertex3f GetHeightPosition(Terrain terrain, float x, float offsetY, float z)
+        {
+            float y = terrain.GetHeightOfTerrain(x, z);
+            return  new Vertex3f(x, y + offsetY, z);
+        }
+        
 
         private Terrain LoadTerrain(Loader loader)
         {
@@ -192,7 +213,8 @@ namespace CogiEngine
             TerrainTexture blendMapTexture = new TerrainTexture(loader.LoadRepeatTexture("blendMap"));
             
             Bitmap heightMapImage = loader.LoadBitmap("heightmap");
-            return new Terrain(0, 0, loader, texturePack, blendMapTexture, heightMapImage);;
+         
+            return new Terrain(0, -0.5f, loader, texturePack, blendMapTexture, heightMapImage);
         }
         
 
@@ -233,31 +255,31 @@ namespace CogiEngine
             Gl.PushMatrix();
             Gl.LoadIdentity();
             
+            Gl.LineWidth(thick);
+            
             Gl.Translate(0, 0, 0);
             Gl.Rotate(this.camera.Pitch, 1, 0, 0);
             Gl.Rotate(this.camera.Yaw, 0, 1, 0);
             Gl.Rotate(this.camera.Roll, 0, 0, 1);
             Gl.Scale(1,1,1);
             
-            //x축은 빨간색
+            //X - Red
             Gl.Begin(PrimitiveType.Lines);
-            Gl.LineWidth(thick);
-            
             Gl.Color3(1f, 0f, 0f);
             Gl.Vertex3(px, py, pz);
             Gl.Vertex3(px + dist, py, pz);
             
-            
+            //Y - Blue
             Gl.Color3(0, 0, 1f);
             Gl.Vertex3(px, py, pz);
             Gl.Vertex3(px, py + dist, pz);
-            
-            
+
+            //Z - Green
             Gl.Color3(0f,1f,0f);
             Gl.Vertex3(px, py, pz);
-            Gl.Vertex3(px, py, pz - dist);
-            
+            Gl.Vertex3(px, py, pz + dist);
             Gl.End();
+            
             Gl.PopMatrix();
         }
     }

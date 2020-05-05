@@ -26,8 +26,7 @@ namespace CogiEngine
         public TerrainTexturePack TexturePack => texturePack;
         public TerrainTexture BlendMap => blendMap;
 
-        public Terrain(float gridX, float gridZ, Loader loader, TerrainTexturePack texturePack, TerrainTexture blendMap,
-            Bitmap hegihtMap)
+        public Terrain(float gridX, float gridZ, Loader loader, TerrainTexturePack texturePack, TerrainTexture blendMap, Bitmap hegihtMap)
         {
             this.hieghtMapWidth = hegihtMap.Width;
             this.texturePack = texturePack;
@@ -41,7 +40,7 @@ namespace CogiEngine
         {
             float terrainX = worldPositionX - this.x;
             float terrainZ = worldPositonZ - this.z;
-            float gridSquareSize = SIZE /  ((float)hieghtMapWidth - 1);
+            float gridSquareSize = SIZE /  ((float)this.hieghtMapWidth - 1);
 
             int gridX = (int) Math.Floor(terrainX / gridSquareSize);
             int gridZ = (int) Math.Floor(terrainZ / gridSquareSize);
@@ -142,7 +141,6 @@ namespace CogiEngine
         {
             if (x < 0 || x >= image.Width || z < 0 || z >= image.Height)
             {
-                CogiLogger.Error("[Terrain] heightMap is invalid.");
                 return 0f;
             }
 
