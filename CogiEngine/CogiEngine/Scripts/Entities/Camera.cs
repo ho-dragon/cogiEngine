@@ -10,9 +10,9 @@ namespace CogiEngine
         private float distanceFromPlayer = 50f;
         private float angleAroundPlayer = 0f;
         private Vertex3f position = Vertex3f.Zero;
-        private float pitch;
-        private float yaw;
-        private float roll;
+        private float pitch = 0f;
+        private float yaw = 0f;
+        private float roll = 0f;
         
         public Vertex3f Position { get { return position; } }
         public float Pitch { get { return pitch; } }

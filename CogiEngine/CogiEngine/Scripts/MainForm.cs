@@ -223,36 +223,42 @@ namespace CogiEngine
             this.renderer.ProcessTerrain(this.terrain);
             this.renderer.Render(this.lgihtList, this.camera);
             this.guiRenderer.Render(this.guiList);
-            //DrawAxis(PrimitiveType.Lines,0,0,0,0.1f,1f);
+            DrawAxis(0,0,0,1,1f);
             this.displayManager.UpdateDisplay();
         }
         
-        public void DrawAxis(PrimitiveType mode, float px, float py, float pz, float dist, float thick)
+        public void DrawAxis(float px, float py, float pz, float dist, float thick)
         {
+            Gl.Viewport(30,this.glControl.ClientSize.Height - 200, 150, 150);
+            Gl.PushMatrix();
+            Gl.LoadIdentity();
+            
+            Gl.Translate(0, 0, 0);
+            Gl.Rotate(this.camera.Pitch, 1, 0, 0);
+            Gl.Rotate(this.camera.Yaw, 0, 1, 0);
+            Gl.Rotate(this.camera.Roll, 0, 0, 1);
+            Gl.Scale(1,1,1);
+            
             //x축은 빨간색
-            Gl.Begin(mode);
-            Gl.Color3(1f, 0f, 0f);
+            Gl.Begin(PrimitiveType.Lines);
             Gl.LineWidth(thick);
+            
+            Gl.Color3(1f, 0f, 0f);
             Gl.Vertex3(px, py, pz);
             Gl.Vertex3(px + dist, py, pz);
-            Gl.End();
-
-            //y축은 파랑
-            Gl.Begin(mode);
-            Gl.LineWidth(thick);
+            
+            
             Gl.Color3(0, 0, 1f);
             Gl.Vertex3(px, py, pz);
             Gl.Vertex3(px, py + dist, pz);
-            Gl.End();
-
-            //z축은 녹색
-            Gl.Begin(mode);
-            Gl.LineWidth(thick);
+            
+            
             Gl.Color3(0f,1f,0f);
             Gl.Vertex3(px, py, pz);
-            Gl.Vertex3(px, py, pz + dist);
+            Gl.Vertex3(px, py, pz - dist);
+            
             Gl.End();
+            Gl.PopMatrix();
         }
-
     }
 }
