@@ -19,7 +19,7 @@ uniform float _useFakeLighting;
 uniform int _numberOfRows;
 uniform vec2 _offset;
 
-const float FOG_DENSITY = 0.007;
+const float FOG_DENSITY = 0.001;
 const float FOG_GRADIENT = 1.5;
 const int LIGHT_COUNT = 4;
 

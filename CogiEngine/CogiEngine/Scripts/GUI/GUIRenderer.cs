@@ -20,7 +20,7 @@ namespace CogiEngine
                 1, 1,//V3
                 1, -1//V4
             };
-            this.quadModel = loader.LoadVAO_GUI(positions);
+            this.quadModel = loader.LoadVAO(positions, 2);
             this.shader = new GUIShader();
         }
 

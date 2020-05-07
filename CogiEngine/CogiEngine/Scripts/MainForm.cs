@@ -84,7 +84,7 @@ namespace CogiEngine
             }
             
             this.loader = new Loader();
-            this.renderer = new MasterRanderer(glControl.ClientSize.Width, glControl.ClientSize.Height);
+            this.renderer = new MasterRanderer(this.loader, glControl.ClientSize.Width, glControl.ClientSize.Height);
             this.guiRenderer = new GUIRenderer(this.loader);
               
             //Camera 

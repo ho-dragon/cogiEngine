@@ -9,10 +9,10 @@ namespace CogiEngine
         private const float FOV = 70;
         private const float NEAR_PLANE = 0.1f;
         private const float FAR_PLANE = 1000f;
-
-        private const float SKY_COLOR_RED = 0.5f;
-        private const float SKY_COLOR_GREEN = 0.5f;
-        private const float SKY_COLOR_BLUE = 0.5f;
+        
+        private const float SKY_COLOR_RED = 0.5444f;
+        private const float SKY_COLOR_GREEN = 0.62f;
+        private const float SKY_COLOR_BLUE = 0.69f;
 
         private int clientWidth;
         private int clientHeight;
@@ -29,8 +29,11 @@ namespace CogiEngine
         private TerrainRenderer terrainRenderer;
         private TerrainShader terrainShader;
         private List<Terrain> terrainList;
+
+        //Skybox
+        private SkyboxRenderer skyboxRenderer;
         
-        public MasterRanderer(int width, int height)
+        public MasterRanderer(Loader loader, int width, int height)
         {
             Gl.Enable(EnableCap.DepthTest);
             this.clientWidth = width;
@@ -46,6 +49,9 @@ namespace CogiEngine
             this.terrainShader = new TerrainShader();
             this.terrainRenderer = new TerrainRenderer(this.terrainShader, this.projectionMatrix);
             this.terrainList = new List<Terrain>();
+            
+            //Skybox
+            this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
         }
 
         public static void EnableCulling()
@@ -88,6 +94,9 @@ namespace CogiEngine
             this.terrainShader.LoadViewMatrix(camera);
             this.terrainRenderer.Render(this.terrainList);
             this.terrainShader.Stop();
+            
+            //Skybox
+            this.skyboxRenderer.Render(camera);
             
             entities.Clear();
         }

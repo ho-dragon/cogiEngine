@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using OpenGL;
+using PixelFormat = OpenGL.PixelFormat;
 
 namespace CogiEngine
 {
@@ -23,12 +26,12 @@ namespace CogiEngine
             return new RawModel(vaoID, positions.Length);//PrimitiveType.Triangles
         }
         
-        public RawModel LoadVAO_GUI(float[] positions)
+        public RawModel LoadVAO(float[] positions, int dimensions)
         {
             uint vaoID = CreateVAO();
-            StoreDataInAttributeList(0, 2, positions);
+            StoreDataInAttributeList(0, dimensions, positions);
             UnbindVAO();
-            return new RawModel(vaoID, positions.Length / 2);//PrimitiveType.TriangleStrip
+            return new RawModel(vaoID, positions.Length / dimensions);
         }
 
         public Bitmap LoadBitmap(string filename)
@@ -43,6 +46,62 @@ namespace CogiEngine
             return bitmap;
         }
 
+        
+        public uint LoadCubeMap(string[] textureFiles)
+        {
+            uint textureID = Gl.GenTexture();
+            Gl.ActiveTexture(TextureUnit.Texture0);
+            Gl.BindTexture(TextureTarget.TextureCubeMap, textureID);
+            
+            
+            for (int i = 0; i < textureFiles.Length; i++)
+            {
+                Bitmap bitmap = LoadBitmap(textureFiles[i]);
+                //var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+                Gl.TexImage2D(TextureTarget.TextureCubeMapPositiveX + i
+                    , 0
+                    , InternalFormat.Rgb
+                    , bitmap.Width
+                    , bitmap.Height
+                    , 0
+                    , PixelFormat.Rgba
+                    , PixelType.UnsignedByte
+                    , BitmapToIntPtr(bitmap)); 
+            }
+            Gl.TexParameteri(TextureTarget.TextureCubeMap, TextureParameterName.TextureMinFilter, Gl.LINEAR);
+            Gl.TexParameteri(TextureTarget.TextureCubeMap, TextureParameterName.TextureMagFilter, Gl.LINEAR);
+            Gl.TexParameteri(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapS, Gl.CLAMP_TO_EDGE);
+            Gl.TexParameteri(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapT, Gl.CLAMP_TO_EDGE);
+            loadedTextureList.Add(textureID);
+            return textureID;
+        }
+        
+        IntPtr BitmapToIntPtr(Bitmap bitmap)
+        {
+            BitmapData bmpdata = null;
+            bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            return bmpdata.Scan0;
+        }
+        
+        byte[] BitmapToByteArray(Bitmap bitmap)
+        {
+            BitmapData bmpdata = null;
+            try
+            {
+                bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                int numbytes = bmpdata.Stride * bitmap.Height;
+                byte[] bytedata = new byte[numbytes];
+                IntPtr ptr = bmpdata.Scan0;
+                System.Runtime.InteropServices.Marshal.Copy(ptr, bytedata, 0, numbytes);
+                return bytedata;
+            }
+            finally
+            {
+                if (bmpdata != null)
+                    bitmap.UnlockBits(bmpdata);
+            }
+        }
+        
         public uint LoadTexture(string fileName)
         {
             string filePath = $".\\Resources\\Textures\\{fileName}.png";

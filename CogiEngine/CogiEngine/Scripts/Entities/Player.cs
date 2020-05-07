@@ -41,7 +41,7 @@ namespace CogiEngine
                 base.position.y = terrainHeight;
                 isInAir = false;
             }
-            CogiLogger.Debug("position---" + position.ToString());
+            //CogiLogger.Debug("player position => " + position.ToString());
         }
 
         private void Jump()

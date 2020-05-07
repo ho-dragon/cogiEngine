@@ -30,6 +30,8 @@
             <e p="fragmentShader.txt" t="Include" />
             <e p="guiFragmentShader.txt" t="Include" />
             <e p="guiVertexShader.txt" t="Include" />
+            <e p="skyboxFragmentShader.txt" t="Include" />
+            <e p="skyboxVertexShader.txt" t="Include" />
             <e p="terrainFragmentShader.txt" t="Include" />
             <e p="terrainVertexShader.txt" t="Include" />
             <e p="vertexShader.txt" t="Include" />
@@ -60,6 +62,12 @@
             <e p="pinkFlowers.png" t="Include" />
             <e p="playerTexture.png" t="Include" />
             <e p="rainbow.png" t="Include" />
+            <e p="skybox_back.png" t="Include" />
+            <e p="skybox_bottom.png" t="Include" />
+            <e p="skybox_front.png" t="Include" />
+            <e p="skybox_left.png" t="Include" />
+            <e p="skybox_right.png" t="Include" />
+            <e p="skybox_top.png" t="Include" />
             <e p="socuwan.png" t="Include" />
             <e p="stallTexture.png" t="Include" />
             <e p="thinmatrix.png" t="Include" />
@@ -94,10 +102,12 @@
           <e p="Renderer" t="Include">
             <e p="EntityRenderer.cs" t="Include" />
             <e p="MasterRanderer.cs" t="Include" />
+            <e p="SkyboxRenderer.cs" t="Include" />
             <e p="TerrainRenderer.cs" t="Include" />
           </e>
           <e p="Shader" t="Include">
             <e p="ShaderProgram.cs" t="Include" />
+            <e p="SkyboxShader.cs" t="Include" />
             <e p="StaticShader.cs" t="Include" />
             <e p="TerrainShader.cs" t="Include" />
           </e>
