@@ -64,7 +64,7 @@ namespace CogiEngine
                     , bitmap.Width
                     , bitmap.Height
                     , 0
-                    , PixelFormat.Rgba
+                    , PixelFormat.Bgra
                     , PixelType.UnsignedByte
                     , BitmapToIntPtr(bitmap)); 
             }
