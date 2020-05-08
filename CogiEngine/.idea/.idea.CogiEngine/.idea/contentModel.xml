@@ -26,6 +26,7 @@
           <e p="lowPolyTree.obj" t="Include" />
           <e p="new_stall.obj" t="Include" />
           <e p="person.obj" t="Include" />
+          <e p="pine.obj" t="Include" />
           <e p="Shader" t="Include">
             <e p="fragmentShader.txt" t="Include" />
             <e p="guiFragmentShader.txt" t="Include" />

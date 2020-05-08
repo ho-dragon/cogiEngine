@@ -52,15 +52,13 @@ namespace CogiEngine
             uint textureID = Gl.GenTexture();
             Gl.ActiveTexture(TextureUnit.Texture0);
             Gl.BindTexture(TextureTarget.TextureCubeMap, textureID);
-            
-            
+
             for (int i = 0; i < textureFiles.Length; i++)
             {
                 Bitmap bitmap = LoadBitmap(textureFiles[i]);
-                //var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
                 Gl.TexImage2D(TextureTarget.TextureCubeMapPositiveX + i
                     , 0
-                    , InternalFormat.Rgb
+                    , InternalFormat.Rgba
                     , bitmap.Width
                     , bitmap.Height
                     , 0

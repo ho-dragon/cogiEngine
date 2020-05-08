@@ -135,6 +135,9 @@
       <Content Include="Resources\lamp.obj">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Resources\pine.obj">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Resources\Shader\fragmentShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>

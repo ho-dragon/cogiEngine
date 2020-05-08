@@ -83,3 +83,4 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox_top.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\skyboxFragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\skyboxVertexShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\pine.obj

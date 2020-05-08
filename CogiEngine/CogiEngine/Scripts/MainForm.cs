@@ -125,10 +125,10 @@ namespace CogiEngine
             TextureModel lowPolyTreeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("lowPolyTree", loader), lowPolyTree);
             
             //Tree
-            ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("tree"));
+            ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("pine"));
             treeTexture.ShineDamper = 30f;
             treeTexture.Reflectivity = 0.3f;
-            TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("tree", loader), treeTexture);
+            TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("pine", loader), treeTexture);
 
             //Grass
             ModelTexture grassTexture = new ModelTexture(loader.LoadTexture("grassTexture"));
@@ -169,10 +169,10 @@ namespace CogiEngine
 
                 if (i % 5 == 0)
                 {
-                    entities.Add(new Entity(lowPolyTreeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1f));
+                    //entities.Add(new Entity(lowPolyTreeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1f));
                 }
                 
-                entities.Add(new Entity(treeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 5f));
+                entities.Add(new Entity(treeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1f));
                 entities.Add(new Entity(grassModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1));
                 entities.Add(new Entity(flowerModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1));
             }

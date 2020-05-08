@@ -2,26 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab95fda2-f254-4b72-ac0a-6bf69f9992f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/skyboxFragmentShader.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/skyboxVertexShader.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/skybox_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/skybox_bottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/skybox_front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/skybox_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/skybox_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/skybox_top.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Shader/SkyboxShader.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/pine.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/terrainVertexShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/terrainVertexShader.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/vertexShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/vertexShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Entities/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Entities/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/GUI/GUIRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/GUI/GUIRenderer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/vertexShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/vertexShader.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" afterDir="false" />
     </list>
@@ -178,15 +168,15 @@
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/GUI/GUIRenderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/guiVertexShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/skyboxVertexShader.txt" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Entities/Player.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/vertexShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/terrainVertexShader.txt" />
-        <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/skyboxFragmentShader.txt" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/SkyboxShader.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/SkyboxShader.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/skyboxFragmentShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" />
       </list>
     </option>
   </component>
@@ -273,6 +263,8 @@
       <workItem from="1588648338675" duration="37908000" />
       <workItem from="1588776945302" duration="1430000" />
       <workItem from="1588859325634" duration="3096000" />
+      <workItem from="1588863561669" duration="1841000" />
+      <workItem from="1588953158652" duration="2188000" />
     </task>
     <servers />
   </component>
@@ -319,22 +311,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1282" y="445" width="751" height="775" key="EnvironmentVariablesDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584277591831" />
-    <state width="2517" height="411" key="GridCell.Tab.0.bottom" timestamp="1588863453389">
+    <state width="2517" height="116" key="GridCell.Tab.0.bottom" timestamp="1588955369006">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="411" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588863453389" />
-    <state width="2517" height="411" key="GridCell.Tab.0.center" timestamp="1588863453389">
+    <state width="2517" height="116" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588955369006" />
+    <state width="2517" height="116" key="GridCell.Tab.0.center" timestamp="1588955369006">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="411" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588863453389" />
-    <state width="2517" height="411" key="GridCell.Tab.0.left" timestamp="1588863453389">
+    <state width="2517" height="116" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588955369006" />
+    <state width="2517" height="116" key="GridCell.Tab.0.left" timestamp="1588955369006">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="411" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588863453389" />
-    <state width="2517" height="411" key="GridCell.Tab.0.right" timestamp="1588863453389">
+    <state width="2517" height="116" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588955369006" />
+    <state width="2517" height="116" key="GridCell.Tab.0.right" timestamp="1588955369006">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="411" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588863453389" />
+    <state width="2517" height="116" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588955369006" />
     <state width="2517" height="411" key="GridCell.Tab.1.bottom" timestamp="1588863453389">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -439,10 +431,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="936" y="330" width="672" height="677" key="run.anything.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1587921542983" />
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1588863143408">
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1588864805608">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588863143408" />
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588864805608" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

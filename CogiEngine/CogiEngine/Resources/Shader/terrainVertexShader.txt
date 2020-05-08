@@ -15,7 +15,7 @@ uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
 uniform vec3 _lightPosition[4];
 
-const float FOG_DENSITY = 0.001;
+const float FOG_DENSITY = 0.007;
 const float FOG_GRADIENT = 1.5;
 const int LIGHT_COUNT = 4;
 
