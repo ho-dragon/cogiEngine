@@ -66,10 +66,10 @@ namespace CogiEngine
             this.shader.Stop();
         }
 
-        public void Render(Camera camera, Vertex3f fogColor)
+        public void Render(Camera camera, Vertex3f fogColor, float frameTimeSec)
         {
             this.shader.Start();
-            this.shader.LoadViewMatrix(camera);
+            this.shader.LoadViewMatrix(camera, frameTimeSec);
             this.shader.LoadFogColor(fogColor);
             Gl.BindVertexArray(this.cube.VaoID);
             Gl.EnableVertexAttribArray(0);

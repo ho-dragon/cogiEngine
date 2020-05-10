@@ -7,10 +7,12 @@ namespace CogiEngine
     {
         private const string VERTEX_FILE_PATH = "./Resources/Shader/skyboxVertexShader.txt";
         private const string FRAGMENT_FILE_PATH = "./Resources/Shader/skyboxFragmentShader.txt";
-
+        private const float ROTATE_SPEED = 1f;
+        private float currentRotation = 0f;
         private int location_projectionMatrix;
         private int location_viewMatrix;
         private int location_fogColor;
+        
         
         public SkyboxShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
@@ -39,12 +41,14 @@ namespace CogiEngine
             base.LoadMatrix(this.location_projectionMatrix, value);
         }
 
-        public void LoadViewMatrix(Camera camera)
+        public void LoadViewMatrix(Camera camera, float frameTimeSec)
         {
             Matrix4x4f viewMatrix = Maths.CreateViewMatrix(camera);
             viewMatrix[3, 0] = 0;
             viewMatrix[3, 1] = 0;
             viewMatrix[3, 2] = 0;
+            this.currentRotation += ROTATE_SPEED * frameTimeSec;
+            viewMatrix.RotateY(this.currentRotation);
             base.LoadMatrix(this.location_viewMatrix, viewMatrix);
         }
     }

@@ -75,7 +75,7 @@ namespace CogiEngine
             this.clientHeight = height;
         }
         
-        public void Render(List<Light> lightList, Camera camera)
+        public void Render(List<Light> lightList, Camera camera, float frameTimeSec)
         {
             Prepare();
             
@@ -96,7 +96,7 @@ namespace CogiEngine
             this.terrainShader.Stop();
             
             //Skybox
-            this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE));
+            this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
             
             entities.Clear();
         }
