@@ -104,6 +104,7 @@
             <e p="RawModel.cs" t="Include" />
             <e p="TextureModel.cs" t="Include" />
           </e>
+          <e p="MousePicker.cs" t="Include" />
           <e p="OBJLoader.cs" t="Include" />
           <e p="Program.cs" t="Include" />
           <e p="Renderer" t="Include">

@@ -98,11 +98,14 @@ namespace CogiEngine
             OnEventMouseWheel(args.Delta);
         }
 
+        public void OnMouseMove(object sender, MouseEventArgs args)
+        {
+            this.mousePosX = args.X;
+            this.mousePosY = args.Y;
+        }
+
         public void UpdateMousePosition()
         {
-            this.mousePosX = Cursor.Position.X;
-            this.mousePosY = Cursor.Position.Y;
-
             this.mouseDeltaX = this.lastMousePosX - this.mousePosX;
             this.mouseDeltaY = this.lastMousePosY - this.mousePosY;
             

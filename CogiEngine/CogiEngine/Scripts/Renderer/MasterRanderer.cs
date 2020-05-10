@@ -17,7 +17,7 @@ namespace CogiEngine
         private int clientWidth;
         private int clientHeight;
         private Matrix4x4f projectionMatrix = Matrix4x4f.Identity;
-
+        
         private float AspectRatio => clientWidth / clientHeight;
         
         //Entities
@@ -32,6 +32,8 @@ namespace CogiEngine
 
         //Skybox
         private SkyboxRenderer skyboxRenderer;
+        
+        public Matrix4x4f ProjectionMatrix => projectionMatrix;
         
         public MasterRanderer(Loader loader, int width, int height)
         {

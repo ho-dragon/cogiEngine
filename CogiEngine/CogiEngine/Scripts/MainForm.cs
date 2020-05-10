@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using OpenGL;
@@ -21,6 +22,10 @@ namespace CogiEngine
         private List<GUITexture> guiList;
         private Terrain terrain;
         private Player player;
+        private MousePicker mousePicker;
+        private Entity pickingEntity;
+        private Light pickingLight;
+        
         
         public MainForm()
         {
@@ -54,6 +59,7 @@ namespace CogiEngine
             this.glControl.ContextUpdate += OnUpdate_GlControl;
             
             //input event
+            this.glControl.MouseMove += this.inputManager.OnMouseMove;
             this.glControl.MouseWheel += this.inputManager.OnMoueWheel;
             this.glControl.KeyDown += this.inputManager.OnKeyDown;
             this.glControl.KeyUp += this.inputManager.OnKeyUp;
@@ -91,18 +97,23 @@ namespace CogiEngine
             this.camera = new Camera(new Vertex3f(0, 10, 0), 20f);
             this.inputManager.OnEventMouseWheel += this.camera.OnEventWheel;
             
-
             //Load Resources
             this.entities = new List<Entity>();
             this.terrain = LoadTerrain(this.loader);
+            
+            //MousePicker
+            this.mousePicker = new MousePicker(this.camera, this.renderer.ProjectionMatrix, this.terrain);
+
             LoadEntities(this.terrain, this.entities, this.loader);
             LoadPlayer(this.loader);
             LoadGUI(this.loader);
             
             //Light
             this.lgihtList = new List<Light>();
-            this.lgihtList.Add(new Light(new Vertex3f(0, 1000,-7000), new Vertex3f(0.4f,0.4f,0.4f), new Vertex3f(1,0,0)));
-            this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,185, 12.7f,-293), new Vertex3f(2,0,0), new Vertex3f(1, 0.01f, 0.002f)));
+            this.lgihtList.Add(new Light(new Vertex3f(0, 1000, -7000), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0)));
+            
+            this.pickingLight = new Light(GetHeightPosition(this.terrain,185, 12.7f,-293), new Vertex3f(2,0,0), new Vertex3f(1, 0.01f, 0.002f));
+            this.lgihtList.Add(pickingLight);
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,370, 12.7f,-300), new Vertex3f(0,2,2), new Vertex3f(1, 0.01f, 0.002f)));
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,293, 12.7f,-305), new Vertex3f(2, 2, 0), new Vertex3f(1, 0.01f, 0.002f)));
         }
@@ -154,11 +165,11 @@ namespace CogiEngine
             lampTexture.ShineDamper = 30f;
             
             TextureModel lampModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("lamp", loader), lampTexture);
-            entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 185, 0f, -293), 0, 0, 0, 1));
+            this.pickingEntity = new Entity(lampModel, GetHeightPosition(terrain, 185, 0f, -293), 0, 0, 0, 1);
+            entities.Add(this.pickingEntity);
             entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 370, 0f, -300), 0, 0, 0, 1));
             entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 293, 0f, -305), 0, 0, 0, 1));
 
-            
             Random random = new Random();
             for (int i = 0; i < 200; i++)
             {
@@ -233,6 +244,13 @@ namespace CogiEngine
             this.inputManager.UpdateMousePosition();
             this.player.UpdateMove(this.inputManager, this.terrain, this.displayManager.GetFrameTimeSeconds());
             this.camera.UpdateMove(this.player.Position, this.player.RotationY, this.inputManager);
+            
+            //Picking
+            this.mousePicker.Update(this.inputManager, this.glControl.ClientSize.Width, this.glControl.ClientSize.Height);
+            
+            Vertex3f terrainPoint = this.mousePicker.GetCurrentTerrainPoint();
+            this.pickingEntity.SetPosition(terrainPoint.x, terrainPoint.y, terrainPoint.z);
+            this.pickingLight.SetPosition(terrainPoint.x, terrainPoint.y + 12.7f, terrainPoint.z);
         }
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)

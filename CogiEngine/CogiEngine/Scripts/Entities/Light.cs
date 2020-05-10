@@ -20,5 +20,12 @@ namespace CogiEngine
             this.color = color;
             this.attenuation = attenuation;
         }
+
+        public void SetPosition(float x, float y, float z)
+        {
+            this.position.x = x;
+            this.position.y = y;
+            this.position.z = z;
+        }
     }
 }

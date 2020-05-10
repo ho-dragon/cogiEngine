@@ -91,6 +91,7 @@
         <Compile Include="Scripts\MainForm.cs" />
         <Compile Include="Scripts\Models\RawModel.cs" />
         <Compile Include="Scripts\Models\TextureModel.cs" />
+        <Compile Include="Scripts\MousePicker.cs" />
         <Compile Include="Scripts\OBJLoader.cs" />
         <Compile Include="Scripts\Program.cs" />
         <Compile Include="Scripts\Renderer\EntityRenderer.cs" />

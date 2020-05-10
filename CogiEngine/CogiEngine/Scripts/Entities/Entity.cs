@@ -45,6 +45,13 @@ namespace CogiEngine
             this.scale = scale;
         }
 
+        public void SetPosition(float x, float y, float z)
+        {
+            this.position.x = x;
+            this.position.y = y;
+            this.position.z = z;
+        }
+
         public void IncreasePosition(float dx, float dy, float dz)
         {
             this.position.x += dx;

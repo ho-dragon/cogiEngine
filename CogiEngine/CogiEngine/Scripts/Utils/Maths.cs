@@ -36,6 +36,14 @@ namespace CogiEngine
             matrix.Scale(scale.x, scale.y, 1f);
             return matrix;
         }
+        
+        public static Vertex4f Transform(Matrix4x4f left, Vertex4f right) {
+            float x = left[0, 0] * right.x + left[1, 0] * right.y + left[2, 0] * right.z + left[3, 0] * right.w;
+            float y = left[0, 1] * right.x + left[1, 1] * right.y + left[2, 1] * right.z + left[3, 1] * right.w;
+            float z = left[0, 2] * right.x + left[1, 2] * right.y + left[2, 2] * right.z + left[3, 2] * right.w;
+            float w = left[0, 3] * right.x + left[1, 3] * right.y + left[2, 3] * right.z + left[3, 3] * right.w;
+            return new Vertex4f(x, y, z, w);
+        }
 
 
         public static Matrix4x4f CreateProjectionMatrix(float fov, float aspectRatio, float nearPlane, float farPlane)
