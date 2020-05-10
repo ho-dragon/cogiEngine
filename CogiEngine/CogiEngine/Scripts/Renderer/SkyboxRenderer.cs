@@ -1,4 +1,5 @@
-﻿using OpenGL;
+﻿using System.Linq.Expressions;
+using OpenGL;
 
 namespace CogiEngine
 {
@@ -65,10 +66,11 @@ namespace CogiEngine
             this.shader.Stop();
         }
 
-        public void Render(Camera camera)
+        public void Render(Camera camera, Vertex3f fogColor)
         {
             this.shader.Start();
             this.shader.LoadViewMatrix(camera);
+            this.shader.LoadFogColor(fogColor);
             Gl.BindVertexArray(this.cube.VaoID);
             Gl.EnableVertexAttribArray(0);
             Gl.ActiveTexture(TextureUnit.Texture0);
