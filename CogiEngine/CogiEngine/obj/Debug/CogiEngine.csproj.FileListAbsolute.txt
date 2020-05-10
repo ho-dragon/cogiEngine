@@ -84,3 +84,9 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\skyboxFragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\skyboxVertexShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\pine.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox_night_back.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox_night_bottom.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox_night_front.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox_night_left.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox_night_right.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\skybox_night_top.png

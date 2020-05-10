@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Permissions;
 using OpenGL;
 
 namespace CogiEngine
@@ -7,12 +8,16 @@ namespace CogiEngine
     {
         private const string VERTEX_FILE_PATH = "./Resources/Shader/skyboxVertexShader.txt";
         private const string FRAGMENT_FILE_PATH = "./Resources/Shader/skyboxFragmentShader.txt";
+        
         private const float ROTATE_SPEED = 1f;
         private float currentRotation = 0f;
+        
         private int location_projectionMatrix;
         private int location_viewMatrix;
         private int location_fogColor;
-        
+        private int location_cubeMapDay;
+        private int location_cubeMapNight;
+        private int location_blendFactor;
         
         public SkyboxShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
@@ -29,6 +34,20 @@ namespace CogiEngine
             this.location_projectionMatrix = base.GetUniformLocation("_projectionMatrix");
             this.location_viewMatrix = base.GetUniformLocation("_viewMatrix");
             this.location_fogColor = base.GetUniformLocation("_fogColor");
+            this.location_cubeMapDay = base.GetUniformLocation("_cubeMapDay");
+            this.location_cubeMapNight = base.GetUniformLocation("_cubeMapNight");
+            this.location_blendFactor = base.GetUniformLocation("_blendFactor");
+        }
+
+        public void ConnectTextureUnits()
+        {
+            base.LoadInt(this.location_cubeMapDay, 0);
+            base.LoadInt(this.location_cubeMapNight, 1);
+        }
+
+        public void LoadBendFactor(float blendFactor)
+        {
+            base.LoadFloat(this.location_blendFactor, blendFactor);
         }
         
         public void LoadFogColor(Vertex3f fogColor)
