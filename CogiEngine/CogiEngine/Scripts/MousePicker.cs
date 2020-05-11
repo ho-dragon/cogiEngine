@@ -46,25 +46,22 @@ namespace CogiEngine
         private Vertex3f CalculateMouseRay(float mouseX, float mouseY, float screenWidth, float screenHeight)
         {
             Vertex2f normalizedCoords = GetNormalisedDeviceCoordinates(mouseX, mouseY, screenWidth, screenHeight);
-            Vertex4f clipCoords = new Vertex4f(normalizedCoords.x, normalizedCoords.y, -1.0f, 1.0f);
+            Vertex4f clipCoords = new Vertex4f(normalizedCoords.x, normalizedCoords.y, -1.0f, 1.0f);//우리는 광선의 z가 앞으로 향하게하기를 원합니다. 이것은 일반적으로 OpenGL 스타일에서 음의 z 방향입니다. 우리는 4d 벡터를 갖도록 w 를 추가 할 수 있습니다 .
             Vertex4f eyeCoords = ToEyeCoords(clipCoords);
             Vertex3f worldRay = ToWorldCoords(eyeCoords);
             return worldRay;
         }
-
-        private Vertex3f ToWorldCoords(Vertex4f eyeCoords)
-        {
-            Matrix4x4f invertedView = viewMatrix.Inverse;
-            Vertex4f rayWorld = Maths.Transform(invertedView, eyeCoords);
-            Vertex3f mouseRay = new Vertex3f(rayWorld.x, rayWorld.y, rayWorld.z);
-            return mouseRay.Normalized;
-        }
-
+        
         private Vertex4f ToEyeCoords(Vertex4f clipCoords)
         {
-            Matrix4x4f invertedProjection = projectionMatrix.Inverse;
-            Vertex4f eyeCoords = Maths.Transform(invertedProjection, clipCoords);
-            return new Vertex4f(eyeCoords.x, eyeCoords.y, -1f, 0f);
+            Vertex4f eyeCoords = projectionMatrix.Inverse * clipCoords;
+            return new Vertex4f(eyeCoords.x, eyeCoords.y, -1f, 0f);// z, w 부분을 ​"지점이 아닌 앞으로"를 의미 하도록 수동으로 설정
+        }
+        
+        private Vertex3f ToWorldCoords(Vertex4f eyeCoords)
+        {
+            Vertex4f rayWorld = viewMatrix.Inverse * eyeCoords;
+            return new Vertex3f(rayWorld.x, rayWorld.y, rayWorld.z).Normalized;//z 구성 요소에 -1을 수동으로 지정 했으므로 광선이 정규화되지 않았기때문에 정규화 필요.
         }
 
         private Vertex2f GetNormalisedDeviceCoordinates(float mouseX, float mouseY, float screenWidth, float screenHieght)
@@ -74,19 +71,14 @@ namespace CogiEngine
             return new Vertex2f(x, y);
         }
 
-        //**********************************************************
-
         private Vertex3f GetPointOnRay(Vertex3f ray, float distance)
         {
-            Vertex3f camPos = camera.Position;
-            Vertex3f start = new Vertex3f(camPos.x, camPos.y, camPos.z);
-            Vertex3f scaledRay = new Vertex3f(ray.x * distance, ray.y * distance, ray.z * distance);
-            return start + scaledRay;
+            return camera.Position + ray * distance;
         }
 
         private Vertex3f BinarySearch(int count, float start, float finish, Vertex3f ray)
         {
-            float half = start + ((finish - start) / 2f);
+            float half = start + (finish - start) / 2f;
             if (count >= RECURSION_COUNT)
             {
                 Vertex3f endPoint = GetPointOnRay(ray, half);
