@@ -258,7 +258,7 @@ namespace CogiEngine
             }
             this.renderer.ProcessTerrain(this.terrain);
             this.renderer.Render(this.lgihtList, this.camera, this.displayManager.GetFrameTimeSeconds());
-            this.guiRenderer.Render(this.guiList);
+            //this.guiRenderer.Render(this.guiList);
             DrawAxis(0,0,0,1,1f);
             this.displayManager.UpdateDisplay();
         }
