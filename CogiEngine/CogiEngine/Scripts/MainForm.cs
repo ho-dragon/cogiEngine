@@ -130,16 +130,16 @@ namespace CogiEngine
         private void LoadEntities(Terrain terrain, List<Entity> entities, Loader loader)
         {
             //Tree
-            ModelTexture lowPolyTree = new ModelTexture(loader.LoadTexture("lowPolyTree"));
+            ModelTexture lowPolyTree = new ModelTexture(loader.LoadTexture("bobbleTree"));
             lowPolyTree.ShineDamper = 30f;
             lowPolyTree.Reflectivity = 0.3f;
-            TextureModel lowPolyTreeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("lowPolyTree", loader), lowPolyTree);
+            TextureModel lowPolyTreeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("bobbleTree", loader), lowPolyTree);
             
             //Tree
-            ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("pine"));
+            ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("toonRocks"));
             treeTexture.ShineDamper = 30f;
             treeTexture.Reflectivity = 0.3f;
-            TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("pine", loader), treeTexture);
+            TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("toonRocks", loader), treeTexture);
 
             //Grass
             ModelTexture grassTexture = new ModelTexture(loader.LoadTexture("grassTexture"));
@@ -180,7 +180,7 @@ namespace CogiEngine
 
                 if (i % 5 == 0)
                 {
-                    //entities.Add(new Entity(lowPolyTreeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1f));
+                    entities.Add(new Entity(lowPolyTreeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1f));
                 }
                 
                 entities.Add(new Entity(treeModel, GetRadomPosition(terrain, random, -400, -600), 0, 0, 0, 1f));
