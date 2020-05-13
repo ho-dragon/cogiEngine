@@ -91,6 +91,7 @@
         <Compile Include="Scripts\MainForm.cs" />
         <Compile Include="Scripts\Models\RawModel.cs" />
         <Compile Include="Scripts\Models\TextureModel.cs" />
+        <Compile Include="Scripts\Models\WaterTile.cs" />
         <Compile Include="Scripts\MousePicker.cs" />
         <Compile Include="Scripts\OBJLoader.cs" />
         <Compile Include="Scripts\Program.cs" />
@@ -98,10 +99,12 @@
         <Compile Include="Scripts\Renderer\MasterRanderer.cs" />
         <Compile Include="Scripts\Renderer\SkyboxRenderer.cs" />
         <Compile Include="Scripts\Renderer\TerrainRenderer.cs" />
+        <Compile Include="Scripts\Renderer\WaterRenderer.cs" />
         <Compile Include="Scripts\Shader\ShaderProgram.cs" />
         <Compile Include="Scripts\Shader\SkyboxShader.cs" />
         <Compile Include="Scripts\Shader\StaticShader.cs" />
         <Compile Include="Scripts\Shader\TerrainShader.cs" />
+        <Compile Include="Scripts\Shader\WaterShader.cs" />
         <Compile Include="Scripts\Terrain\Terrain.cs" />
         <Compile Include="Scripts\Textures\ModelTexture.cs" />
         <Compile Include="Scripts\Textures\TerrainTexture.cs" />
@@ -165,6 +168,12 @@
       </Content>
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Resources\Shader\waterFragmentShader.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\Shader\waterVertexShader.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Resources\Textures\bobbleTree.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>

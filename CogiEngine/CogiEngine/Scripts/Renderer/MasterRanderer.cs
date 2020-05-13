@@ -33,6 +33,10 @@ namespace CogiEngine
         //Skybox
         private SkyboxRenderer skyboxRenderer;
         
+        //Water
+        private WaterRenderer waterRenderer;
+        private WaterShader waterShader;
+        
         public Matrix4x4f ProjectionMatrix => projectionMatrix;
         
         public MasterRanderer(Loader loader, int width, int height)
@@ -54,6 +58,10 @@ namespace CogiEngine
             
             //Skybox
             this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
+            
+            //Water
+            this.waterShader = new WaterShader(); 
+            this.waterRenderer = new WaterRenderer(loader, waterShader, this.projectionMatrix);
         }
 
         public static void EnableCulling()
@@ -77,7 +85,7 @@ namespace CogiEngine
             this.clientHeight = height;
         }
         
-        public void Render(List<Light> lightList, Camera camera, float frameTimeSec)
+        public void Render(List<Light> lightList, List<WaterTile> waters, Camera camera, float frameTimeSec)
         {
             Prepare();
             
@@ -100,7 +108,10 @@ namespace CogiEngine
             //Skybox
             this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
             
-            entities.Clear();
+            //Water
+            this.waterRenderer.render(waters, camera);
+                
+            this.entities.Clear();
         }
 
         public void UpdateViewRect(int width, int height)

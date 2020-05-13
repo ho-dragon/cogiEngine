@@ -25,7 +25,7 @@ namespace CogiEngine
         private MousePicker mousePicker;
         private Entity pickingEntity;
         private Light pickingLight;
-        
+        private List<WaterTile> waterTileList;
         
         public MainForm()
         {
@@ -114,6 +114,10 @@ namespace CogiEngine
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,185, 12.7f,-293), new Vertex3f(2,0,0), new Vertex3f(1, 0.01f, 0.002f)));
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,370, 12.7f,-300), new Vertex3f(0,2,2), new Vertex3f(1, 0.01f, 0.002f)));
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,293, 12.7f,-305), new Vertex3f(2, 2, 0), new Vertex3f(1, 0.01f, 0.002f)));
+            
+            //Water
+            this.waterTileList = new List<WaterTile>();
+            this.waterTileList.Add(new WaterTile(75, -75, 0));
         }
 
         private void LoadPlayer(Loader loader)
@@ -257,7 +261,7 @@ namespace CogiEngine
                 this.renderer.ProcessEntity(this.entities[i]);
             }
             this.renderer.ProcessTerrain(this.terrain);
-            this.renderer.Render(this.lgihtList, this.camera, this.displayManager.GetFrameTimeSeconds());
+            this.renderer.Render(this.lgihtList, this.waterTileList, this.camera, this.displayManager.GetFrameTimeSeconds());
             //this.guiRenderer.Render(this.guiList);
             DrawAxis(0,0,0,1,1f);
             this.displayManager.UpdateDisplay();

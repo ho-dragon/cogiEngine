@@ -38,6 +38,8 @@
             <e p="terrainVertexShader.txt" t="Include" />
             <e p="toonfragmentShader.txt" t="Include" />
             <e p="vertexShader.txt" t="Include" />
+            <e p="waterFragmentShader.txt" t="Include" />
+            <e p="waterVertexShader.txt" t="Include" />
           </e>
           <e p="stall.obj" t="Include" />
           <e p="Textures" t="Include">
@@ -108,6 +110,7 @@
           <e p="Models" t="Include">
             <e p="RawModel.cs" t="Include" />
             <e p="TextureModel.cs" t="Include" />
+            <e p="WaterTile.cs" t="Include" />
           </e>
           <e p="MousePicker.cs" t="Include" />
           <e p="OBJLoader.cs" t="Include" />
@@ -117,12 +120,14 @@
             <e p="MasterRanderer.cs" t="Include" />
             <e p="SkyboxRenderer.cs" t="Include" />
             <e p="TerrainRenderer.cs" t="Include" />
+            <e p="WaterRenderer.cs" t="Include" />
           </e>
           <e p="Shader" t="Include">
             <e p="ShaderProgram.cs" t="Include" />
             <e p="SkyboxShader.cs" t="Include" />
             <e p="StaticShader.cs" t="Include" />
             <e p="TerrainShader.cs" t="Include" />
+            <e p="WaterShader.cs" t="Include" />
           </e>
           <e p="Terrain" t="Include">
             <e p="Terrain.cs" t="Include" />
