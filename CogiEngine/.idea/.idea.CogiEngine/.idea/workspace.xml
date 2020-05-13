@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab95fda2-f254-4b72-ac0a-6bf69f9992f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/bobbleTree.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/toonRocks.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/bobbleTree.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/toonRocks.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/toonfragmentShader.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/fragmentShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/fragmentShader.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/terrainFragmentShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/terrainFragmentShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/fragmentShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/bin/Debug/Resources/Shader/fragmentShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,9 +169,9 @@
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Utils/Maths.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/MousePicker.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/fragmentShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/terrainFragmentShader.txt" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" />
       </list>
     </option>
   </component>
@@ -269,7 +263,7 @@
       <workItem from="1589040106054" duration="728000" />
       <workItem from="1589101503417" duration="18228000" />
       <workItem from="1589211161417" duration="4626000" />
-      <workItem from="1589383625118" duration="3316000" />
+      <workItem from="1589383625118" duration="3707000" />
     </task>
     <servers />
   </component>
@@ -316,22 +310,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1282" y="445" width="751" height="775" key="EnvironmentVariablesDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584277591831" />
-    <state width="2517" height="116" key="GridCell.Tab.0.bottom" timestamp="1589387935899">
+    <state width="2517" height="116" key="GridCell.Tab.0.bottom" timestamp="1589388325489">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589387935899" />
-    <state width="2517" height="116" key="GridCell.Tab.0.center" timestamp="1589387935899">
+    <state width="2517" height="116" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589388325489" />
+    <state width="2517" height="116" key="GridCell.Tab.0.center" timestamp="1589388325488">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589387935899" />
-    <state width="2517" height="116" key="GridCell.Tab.0.left" timestamp="1589387935899">
+    <state width="2517" height="116" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589388325488" />
+    <state width="2517" height="116" key="GridCell.Tab.0.left" timestamp="1589388325488">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589387935899" />
-    <state width="2517" height="116" key="GridCell.Tab.0.right" timestamp="1589387935899">
+    <state width="2517" height="116" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589388325488" />
+    <state width="2517" height="116" key="GridCell.Tab.0.right" timestamp="1589388325489">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589387935899" />
+    <state width="2517" height="116" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589388325489" />
     <state width="2517" height="382" key="GridCell.Tab.1.bottom" timestamp="1589217793998">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

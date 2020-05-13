@@ -94,3 +94,4 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\bobbleTree.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\bobbleTree.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\toonRocks.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\toonRocks.obj
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\toonfragmentShader.txt

@@ -36,6 +36,7 @@
             <e p="skyboxVertexShader.txt" t="Include" />
             <e p="terrainFragmentShader.txt" t="Include" />
             <e p="terrainVertexShader.txt" t="Include" />
+            <e p="toonfragmentShader.txt" t="Include" />
             <e p="vertexShader.txt" t="Include" />
           </e>
           <e p="stall.obj" t="Include" />

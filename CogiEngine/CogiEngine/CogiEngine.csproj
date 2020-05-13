@@ -157,6 +157,9 @@
       <Content Include="Resources\Shader\terrainVertexShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <Content Include="Resources\Shader\toonfragmentShader.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Resources\Shader\vertexShader.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
