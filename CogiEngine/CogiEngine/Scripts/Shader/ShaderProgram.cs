@@ -48,16 +48,21 @@ namespace CogiEngine
             Gl.Uniform1i(location, 1, value);
         }
 
+        protected void LoadVector2(int location, Vertex2f value)
+        {
+            Gl.Uniform2f(location, 1, value);
+        }
+        
         protected void LoadVector3(int location, Vertex3f value)
         {
             Gl.Uniform3f(location, 1, value);
         }
         
-        protected void LoadVector2(int location, Vertex2f value)
+        protected void LoadVector4(int location, Vertex4f value)
         {
-            Gl.Uniform2f(location, 1, value);
+            Gl.Uniform4f(location, 1, value);
         }
-
+        
         protected void LoadBoolean(int location, bool value)
         {
             Gl.Uniform1f(location, 1, value? 1.0f : 0.0f);

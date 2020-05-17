@@ -97,3 +97,6 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\toonRocks.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\toonfragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\waterFragmentShader.txt
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\waterVertexShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\blendMap2.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap2.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap_perlin.jpg

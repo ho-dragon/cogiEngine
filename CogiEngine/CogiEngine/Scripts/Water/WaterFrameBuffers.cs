@@ -6,8 +6,11 @@ namespace CogiEngine.Water
 {
     public class WaterFrameBuffers
     {
-        private const int REFLECTION_WIDTH = 320;
-        private const int REFLECTION_HEIGHT = 180;
+        /*private const int REFLECTION_WIDTH = 320;
+        private const int REFLECTION_HEIGHT = 180;*/
+        
+        private const int REFLECTION_WIDTH = 1280;
+        private const int REFLECTION_HEIGHT = 720;
 
         private const int REFRACTION_WIDTH = 1280;
         private const int REFRACTION_HEIGHT = 720;

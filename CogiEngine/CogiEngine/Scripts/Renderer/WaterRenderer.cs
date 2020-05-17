@@ -21,7 +21,7 @@ namespace CogiEngine
             for (int i = 0; i < water.Count; i++)
             {
                 WaterTile tile = water[i];
-                Matrix4x4f modelMatrix = Maths.CreateTransformationMatrix(new Vertex3f(tile.getX(), tile.getHeight(), tile.getZ()), 0, 0, 0, WaterTile.TILE_SIZE);
+                Matrix4x4f modelMatrix = Maths.CreateTransformationMatrix(new Vertex3f(tile.X, tile.Height, tile.Z), 0, 0, 0, WaterTile.TILE_SIZE);
                 shader.loadModelMatrix(modelMatrix);
                 Gl.DrawArrays(PrimitiveType.Triangles, 0, quad.VertexCount);                
             }

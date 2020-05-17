@@ -85,12 +85,13 @@ namespace CogiEngine
             this.clientHeight = height;
         }
         
-        public void Render(List<Light> lightList, List<WaterTile> waters, Camera camera, float frameTimeSec)
+        public void Render(List<Light> lightList, List<WaterTile> waters, Camera camera, Vertex4f clipPlane, float frameTimeSec)
         {
             Prepare();
             
             //Entities
             this.entityShader.Start();
+            this.entityShader.LoadClipPlane(clipPlane);
             this.entityShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.entityShader.LoadLights(lightList);
             this.entityShader.LoadViewMatrix(camera);
@@ -99,6 +100,7 @@ namespace CogiEngine
             
             //Terrain
             this.terrainShader.Start();
+            this.terrainShader.LoadClipPlane(clipPlane);
             this.terrainShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.terrainShader.LoadLights(lightList);
             this.terrainShader.LoadViewMatrix(camera);
@@ -110,7 +112,10 @@ namespace CogiEngine
             
             //Water
             this.waterRenderer.render(waters, camera);
-                
+        }
+
+        public void ClearEntities()
+        {
             this.entities.Clear();
         }
 

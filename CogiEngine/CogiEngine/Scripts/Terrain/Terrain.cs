@@ -9,7 +9,8 @@ namespace CogiEngine
     public class Terrain
     {
         //https://www.youtube.com/watch?v=h-kZ8dEHIBg
-        public const float SIZE = 800;
+        //public const float SIZE = 800; //blendMap
+        public const float SIZE = 150; //blendMap2
         private const float MAX_HEIGHT = 40;
         private const float MAX_PIXCEL_COLOR = 256 * 256 * 256; // R * G * B
         private float x;

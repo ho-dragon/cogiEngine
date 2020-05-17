@@ -22,18 +22,20 @@ namespace CogiEngine
         private int location_redTexture;
         private int location_greenTexture;
         private int location_blueTexture;
+        private int location_waterClippingPlane;
+
+
         public TerrainShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
-
         }
 
         protected override void BindAttributes()
         {
         }
-        
+
         protected override void GetAllUniformLocations()
         {
-            this.location_transformationMatrix  = base.GetUniformLocation("_transformationMatrix");
+            this.location_transformationMatrix = base.GetUniformLocation("_transformationMatrix");
             this.location_projectionMatrix = base.GetUniformLocation("_projectionMatrix");
             this.location_viewMatrix = base.GetUniformLocation("_viewMatrix");
             this.location_shineDamper = base.GetUniformLocation("_shineDamper");
@@ -44,12 +46,12 @@ namespace CogiEngine
             this.location_redTexture = base.GetUniformLocation("_redTexture");
             this.location_greenTexture = base.GetUniformLocation("_greenTexture");
             this.location_blueTexture = base.GetUniformLocation("_blueTexture");
-            
-            
+            this.location_waterClippingPlane = base.GetUniformLocation("_waterClippingPlane");
+
             this.loccation_lightPosition = new int[MAX_LIGHT_COUNT];
             this.location_lightColor = new int[MAX_LIGHT_COUNT];
             this.location_attenuation = new int[MAX_LIGHT_COUNT];
-            
+
             for (int i = 0; i < MAX_LIGHT_COUNT; i++)
             {
                 this.loccation_lightPosition[i] = base.GetUniformLocation(string.Format("_lightPosition[{0}]", i));
@@ -58,6 +60,11 @@ namespace CogiEngine
             }
         }
 
+        public void LoadClipPlane(Vertex4f plane)
+        {
+            base.LoadVector4(this.location_waterClippingPlane, plane);
+        }
+        
         public void ConnetTextureUnits()
         {
             base.LoadInt(this.location_blendMapTexture, 0);
@@ -66,34 +73,34 @@ namespace CogiEngine
             base.LoadInt(this.location_greenTexture, 3);
             base.LoadInt(this.location_blueTexture, 4);
         }
-        
+
         public void LoadSkyColor(float r, float g, float b)
         {
             base.LoadVector3(this.location_skyColor, new Vertex3f(r, g, b));
         }
-        
+
         public void LoadShineVariables(float damper, float reflectivity)
         {
             base.LoadFloat(this.location_shineDamper, damper);
             base.LoadFloat(this.location_reflectivity, reflectivity);
         }
-        
+
         public void LoadTransformationMatrix(Matrix4x4f value)
         {
             base.LoadMatrix(this.location_transformationMatrix, value);
         }
-        
+
         public void LoadProjectionMatrix(Matrix4x4f value)
         {
             base.LoadMatrix(this.location_projectionMatrix, value);
         }
-        
+
         public void LoadViewMatrix(Camera camera)
         {
             Matrix4x4f viewMatrix = Maths.CreateViewMatrix(camera);
             base.LoadMatrix(this.location_viewMatrix, viewMatrix);
         }
-        
+
         public void LoadLights(List<Light> lightList)
         {
             for (int i = 0; i < MAX_LIGHT_COUNT; i++)
@@ -106,7 +113,7 @@ namespace CogiEngine
                 }
                 else
                 {
-                    base.LoadVector3(this.loccation_lightPosition[i], new Vertex3f(0,0,0));
+                    base.LoadVector3(this.loccation_lightPosition[i], new Vertex3f(0, 0, 0));
                     base.LoadVector3(this.location_lightColor[i], new Vertex3f(0, 0, 0));
                     base.LoadVector3(this.location_attenuation[i], new Vertex3f(1, 0, 0));
                 }

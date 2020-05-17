@@ -21,6 +21,7 @@ namespace CogiEngine
         private int location_skyColor;
         private int location_numberOfRows;
         private int location_offset;
+        private int location_waterClippingPlane;
         
         public StaticShader() : base(VERTEX_FILE_PATH, FRAGMENT_FILE_PATH)
         {
@@ -62,7 +63,8 @@ namespace CogiEngine
             this.location_skyColor = base.GetUniformLocation("_skyColor");
             this.location_numberOfRows = base.GetUniformLocation("_numberOfRows");
             this.location_offset = base.GetUniformLocation("_offset");
-
+            this.location_waterClippingPlane = base.GetUniformLocation("_waterClippingPlane");
+            
             this.loccation_lightPosition = new int[MAX_LIGHT_COUNT];
             this.location_lightColor = new int[MAX_LIGHT_COUNT];
             this.location_attenuation = new int[MAX_LIGHT_COUNT];
@@ -73,6 +75,11 @@ namespace CogiEngine
                 this.location_lightColor[i] = base.GetUniformLocation(string.Format("_lightColor[{0}]", i));
                 this.location_attenuation[i] = base.GetUniformLocation(string.Format("_lightAttenuation[{0}]", i));
             }
+        }
+
+        public void LoadClipPlane(Vertex4f plane)
+        {
+            base.LoadVector4(this.location_waterClippingPlane, plane);
         }
 
         public void LoadAtlasInfo(int numberOfRows, Vertex2f offset)

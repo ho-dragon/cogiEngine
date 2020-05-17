@@ -35,6 +35,16 @@ namespace CogiEngine
             this.pitch -= mouseDeltaY * 0.1f;
         }
 
+        public void UpdatePosition(Vertex3f newPosition)
+        {
+            this.position = newPosition;
+        }
+
+        public void InvertPitch()
+        {
+            this.pitch = -this.pitch;
+        }
+
         private void UpdateAngleAroundPlayer(float mouseDeltaX)
         {
             float angleChange = mouseDeltaX * 0.3f;

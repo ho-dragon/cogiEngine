@@ -26,7 +26,7 @@ namespace CogiEngine
                 Terrain terrain = terrains[i];
                 PrepareTerrain(terrain);
                 LoadModelMatrix(terrain);
-                Gl.DrawElements(PrimitiveType.TriangleStrip, terrain.Model.VertexCount, DrawElementsType.UnsignedInt, IntPtr.Zero);
+                Gl.DrawElements(PrimitiveType.Triangles, terrain.Model.VertexCount, DrawElementsType.UnsignedInt, IntPtr.Zero);
                 Unbind();
             }
         }

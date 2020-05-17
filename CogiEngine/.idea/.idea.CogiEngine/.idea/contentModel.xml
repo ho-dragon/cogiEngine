@@ -44,6 +44,7 @@
           <e p="stall.obj" t="Include" />
           <e p="Textures" t="Include">
             <e p="blendMap.png" t="Include" />
+            <e p="blendMap2.png" t="Include" />
             <e p="bobbleTree.png" t="Include" />
             <e p="dirt.png" t="Include" />
             <e p="fern.png" t="Include" />
@@ -58,6 +59,8 @@
             <e p="grassy3.png" t="Include" />
             <e p="health.png" t="Include" />
             <e p="heightmap.png" t="Include" />
+            <e p="heightmap2.png" t="Include" />
+            <e p="heightmap_perlin.jpg" t="Include" />
             <e p="image.png" t="Include" />
             <e p="image_2.png" t="Include" />
             <e p="lamp.png" t="Include" />
