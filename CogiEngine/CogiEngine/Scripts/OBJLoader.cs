@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using Assimp;
-using Assimp.Configs;
 using OpenGL;
 
 namespace CogiEngine
@@ -12,71 +9,6 @@ namespace CogiEngine
     /// </summary>
     public class OBJLoader
     {
-        public static RawModel LoadObjModelFromAssimp(string fileName, Loader loader)
-        {
-            string filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", fileName + ".obj");
-            AssimpContext importer = new AssimpContext();
-            Scene scene = importer.ImportFile(filePath);
-            if (scene == null || scene.HasMeshes == false)
-            {
-                return null;
-            }
-            float[] verticesArray = VerticesFromMesh(scene.Meshes[0]);
-            float[] textureArray = TextureFromMesh(scene.Meshes[0]);
-            int[] indicesArray = IndicesFromMesh(scene.Meshes[0]);
-            float[] normalsArray = NormalsFromMesh(scene.Meshes[0]);
-            return loader.LoadVAO(verticesArray, textureArray, normalsArray, indicesArray);
-        }
-
-        static float[] TextureFromMesh(Mesh mesh)
-        {
-            List<float> list = new List<float>();
-            foreach (Vector3D vertex in mesh.TextureCoordinateChannels[0])
-            {
-                list.Add(vertex.X);
-                list.Add(1 - vertex.Y);
-            }
-
-            return list.ToArray();
-        }
-
-        static float[] VerticesFromMesh(Mesh mesh)
-        {
-            List<float> list = new List<float>();
-            foreach (Vector3D vertex in mesh.Vertices)
-            {
-                list.Add(vertex.X);
-                list.Add(vertex.Y);
-                list.Add(vertex.Z);
-            }
-
-            return list.ToArray();
-        }
-
-        static int[] IndicesFromMesh(Mesh mesh)
-        {
-            List<int> list = new List<int>();
-            foreach (Face face in mesh.Faces)
-            {
-                list.AddRange(face.Indices);
-            }
-
-            return list.ToArray();
-        }
-
-        static float[] NormalsFromMesh(Mesh mesh)
-        {
-            List<float> list = new List<float>();
-            foreach (Vector3D vector in mesh.Normals)
-            {
-                list.Add(vector.X);
-                list.Add(vector.Y);
-                list.Add(vector.Z);
-            }
-
-            return list.ToArray();
-        }
-
         public static RawModel LoadObjModel(string fileName, Loader loader)
         {
             List<Vertex3f> vertexList = new List<Vertex3f>();
@@ -142,7 +74,7 @@ namespace CogiEngine
                 }
             }
 
-            return loader.LoadVAO(ConvertToArray(vertexList), uvArray, ConvertToArray(normalList),
+            return loader.LoadVAO(ConvertToArray(vertexList), uvArray, normalArray,
                 indexList.ToArray());
         }
 

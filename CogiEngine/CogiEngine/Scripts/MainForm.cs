@@ -128,7 +128,7 @@ namespace CogiEngine
             ModelTexture personTexture = new ModelTexture(loader.LoadTexture("playerTexture"));
             personTexture.ShineDamper = 30f;
             personTexture.Reflectivity = 0.3f;
-            TextureModel personModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("person", loader), personTexture);
+            TextureModel personModel = new TextureModel(OBJLoader.LoadObjModel("person", loader), personTexture);
             this.player = new Player(personModel, new Vertex3f(0, 5, 0), 0, 100, 0, 0.6f);
         }
         
@@ -138,30 +138,30 @@ namespace CogiEngine
             ModelTexture lowPolyTree = new ModelTexture(loader.LoadTexture("bobbleTree"));
             lowPolyTree.ShineDamper = 30f;
             lowPolyTree.Reflectivity = 0.3f;
-            TextureModel lowPolyTreeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("bobbleTree", loader), lowPolyTree);
+            TextureModel lowPolyTreeModel = new TextureModel(OBJLoader.LoadObjModel("bobbleTree", loader), lowPolyTree);
             
             //Tree
             ModelTexture treeTexture = new ModelTexture(loader.LoadTexture("toonRocks"));
             treeTexture.ShineDamper = 30f;
             treeTexture.Reflectivity = 0.3f;
-            TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("toonRocks", loader), treeTexture);
+            TextureModel treeModel = new TextureModel(OBJLoader.LoadObjModel("toonRocks", loader), treeTexture);
 
             //Grass
             ModelTexture grassTexture = new ModelTexture(loader.LoadTexture("grassTexture"));
             grassTexture.HasTransparency = true;
             grassTexture.UseFakeLigihting = true;
-            TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", loader), grassTexture);
+            TextureModel grassModel = new TextureModel(OBJLoader.LoadObjModel("grassModel", loader), grassTexture);
             
             
             ModelTexture flowerTexture = new ModelTexture(loader.LoadTexture("flower"));
             flowerTexture.HasTransparency = true;
             flowerTexture.UseFakeLigihting = true;
-            TextureModel flowerModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("grassModel", loader), flowerTexture);
+            TextureModel flowerModel = new TextureModel(OBJLoader.LoadObjModel("grassModel", loader), flowerTexture);
             
             //Fern
             ModelTexture fernTextureAltas = new ModelTexture(loader.LoadTexture("fernAtlas"));
             fernTextureAltas.NumberOfRows = 2;
-            TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("fern", loader), fernTextureAltas);
+            TextureModel fernModel = new TextureModel(OBJLoader.LoadObjModel("fern", loader), fernTextureAltas);
             
             //Lemp
             ModelTexture lampTexture = new ModelTexture(loader.LoadTexture("lamp"));
@@ -169,7 +169,7 @@ namespace CogiEngine
             lampTexture.Reflectivity = 0.3f;
             lampTexture.ShineDamper = 30f;
             
-            TextureModel lampModel = new TextureModel(OBJLoader.LoadObjModelFromAssimp("lamp", loader), lampTexture);
+            TextureModel lampModel = new TextureModel(OBJLoader.LoadObjModel("lamp", loader), lampTexture);
             entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 185, 0f, -293), 0, 0, 0, 1));
             entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 370, 0f, -300), 0, 0, 0, 1));
             entities.Add(new Entity(lampModel, GetHeightPosition(terrain, 293, 0f, -305), 0, 0, 0, 1));

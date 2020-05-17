@@ -34,10 +34,6 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="AssimpNet, Version=5.0.0.0, Culture=neutral, PublicKeyToken=0d51b391f59f42a6">
-          <HintPath>..\packages\AssimpNet.5.0.0-beta1\lib\net40\AssimpNet.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
         <Reference Include="mscorlib" />
         <Reference Include="OpenGL.Net, Version=0.8.4.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\packages\OpenGL.Net.0.8.4\lib\net461\OpenGL.Net.dll</HintPath>

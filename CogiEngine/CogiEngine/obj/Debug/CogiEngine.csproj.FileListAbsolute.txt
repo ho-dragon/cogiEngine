@@ -16,14 +16,12 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\tree.obj
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe.config
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\CogiEngine.pdb
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\AssimpNet.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.Math.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.WinForms.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Soil.NetFX4.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Numerics.Vectors.dll
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\AssimpNet.xml
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.pdb
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.xml
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\OpenGL.Net.Math.pdb
