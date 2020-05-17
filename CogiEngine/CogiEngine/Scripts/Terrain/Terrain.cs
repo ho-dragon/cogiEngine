@@ -41,12 +41,12 @@ namespace CogiEngine
         {
             float terrainX = worldPositionX - this.x;
             float terrainZ = worldPositonZ - this.z;
-            float gridSquareSize = SIZE /  ((float)this.hieghtMapWidth - 1);
+            float gridSquareSize = SIZE /  ((float)this.heights.GetLength(0) - 1);
 
             int gridX = (int) Math.Floor(terrainX / gridSquareSize);
             int gridZ = (int) Math.Floor(terrainZ / gridSquareSize);
 
-            if (gridX >= heights.Length - 1 || gridZ >= heights.Length - 1 || gridX < 0 || gridZ < 0)
+            if (gridX >= heights.GetLength(0) - 1 || gridZ >= heights.GetLength(1) - 1 || gridX < 0 || gridZ < 0)
             {
                 return 0f;
             }
