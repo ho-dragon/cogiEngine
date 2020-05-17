@@ -112,6 +112,7 @@
         <Compile Include="Scripts\Utils\CogiLogger.cs" />
         <Compile Include="Scripts\Utils\Maths.cs" />
         <Compile Include="Scripts\Utils\OpenGLExtension.cs" />
+        <Compile Include="Scripts\Water\WaterFrameBuffers.cs" />
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>

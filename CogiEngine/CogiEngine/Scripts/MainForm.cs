@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using CogiEngine.Water;
 using OpenGL;
 using Soil.NET;
 
@@ -26,6 +27,7 @@ namespace CogiEngine
         private Entity pickingEntity;
         private Light pickingLight;
         private List<WaterTile> waterTileList;
+        private WaterFrameBuffers waterFBO;
         
         public MainForm()
         {
@@ -103,10 +105,6 @@ namespace CogiEngine
             
             //MousePicker
             this.mousePicker = new MousePicker(this.camera, this.renderer.ProjectionMatrix, this.terrain);
-
-            LoadEntities(this.terrain, this.entities, this.loader);
-            LoadPlayer(this.loader);
-            LoadGUI(this.loader);
             
             //Light
             this.lgihtList = new List<Light>();
@@ -118,6 +116,12 @@ namespace CogiEngine
             //Water
             this.waterTileList = new List<WaterTile>();
             this.waterTileList.Add(new WaterTile(75, -75, 0));
+            
+            this.waterFBO = new WaterFrameBuffers();
+            
+            LoadEntities(this.terrain, this.entities, this.loader);
+            LoadPlayer(this.loader);
+            LoadGUI(this.loader);
         }
 
         private void LoadPlayer(Loader loader)
@@ -193,10 +197,12 @@ namespace CogiEngine
         private void LoadGUI(Loader loader)
         {
             this.guiList = new List<GUITexture>();
+            /*GUITexture gui2 = new GUITexture(loader.LoadTexture("thinmatrix"), new Vertex2f(0.3f, 0.74f), new Vertex2f(0.4f, 0.4f));
             GUITexture gui1 = new GUITexture(loader.LoadTexture("socuwan"), new Vertex2f(0.5f, 0.5f), new Vertex2f(0.25f, 0.25f));
-            GUITexture gui2 = new GUITexture(loader.LoadTexture("thinmatrix"), new Vertex2f(0.3f, 0.74f), new Vertex2f(0.4f, 0.4f));
             this.guiList.Add(gui1);
-            this.guiList.Add(gui2);
+            this.guiList.Add(gui2);*/
+            GUITexture frameBufferGui = new GUITexture(this.waterFBO.ReflectionTexture, new Vertex2f(-0.5f, 0.5f), new Vertex2f(0.5f, 0.5f));
+            this.guiList.Add(frameBufferGui);
         }
         
         private Vertex3f GetRadomPosition(Terrain terrain, Random random, float randomX, float randomZ)
@@ -236,6 +242,7 @@ namespace CogiEngine
             this.loader.CleanUp();
             this.renderer.CleanUp();
             this.guiRenderer.CleanUp();
+            this.waterFBO.CleanUp();
         }
         
         private void OnUpdate_GlControl(object sender, GlControlEventArgs e)
@@ -261,8 +268,14 @@ namespace CogiEngine
                 this.renderer.ProcessEntity(this.entities[i]);
             }
             this.renderer.ProcessTerrain(this.terrain);
+            
+            this.waterFBO.BindReflectionFrameBuffer();
             this.renderer.Render(this.lgihtList, this.waterTileList, this.camera, this.displayManager.GetFrameTimeSeconds());
-            //this.guiRenderer.Render(this.guiList);
+            this.waterFBO.UnbindCurrentFrameBuffer();
+            
+            this.renderer.Render(this.lgihtList, this.waterTileList, this.camera, this.displayManager.GetFrameTimeSeconds());
+            
+            this.guiRenderer.Render(this.guiList);
             DrawAxis(0,0,0,1,1f);
             this.displayManager.UpdateDisplay();
         }
