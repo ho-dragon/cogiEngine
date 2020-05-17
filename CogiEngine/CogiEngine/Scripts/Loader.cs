@@ -23,7 +23,7 @@ namespace CogiEngine
             StoreDataInAttributeList(1, 2, textureCoords);  
             StoreDataInAttributeList(2,3, normals);
             UnbindVAO();
-            return new RawModel(vaoID, positions.Length);//PrimitiveType.Triangles
+            return new RawModel(vaoID, indices.Length);//PrimitiveType.Triangles
         }
         
         public RawModel LoadVAO(float[] positions, int dimensions)
