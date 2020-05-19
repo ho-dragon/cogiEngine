@@ -9,8 +9,7 @@ namespace CogiEngine
     public class Terrain
     {
         //https://www.youtube.com/watch?v=h-kZ8dEHIBg
-        //public const float SIZE = 800; //blendMap
-        public const float SIZE = 150; //blendMap2
+        public const float SIZE = 150; 
         private const float MAX_HEIGHT = 40;
         private const float MAX_PIXCEL_COLOR = 256 * 256 * 256; // R * G * B
         private float x;
@@ -18,7 +17,6 @@ namespace CogiEngine
         private RawModel model;
         private TerrainTexturePack texturePack;
         private TerrainTexture blendMap;
-        private int hieghtMapWidth;
         private float[,] heights;
 
         public float X => x;
@@ -29,7 +27,6 @@ namespace CogiEngine
 
         public Terrain(float gridX, float gridZ, Loader loader, TerrainTexturePack texturePack, TerrainTexture blendMap, Bitmap hegihtMap)
         {
-            this.hieghtMapWidth = hegihtMap.Width;
             this.texturePack = texturePack;
             this.blendMap = blendMap;
             this.x = gridX * SIZE;

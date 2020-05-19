@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CogiEngine.Water;
 using OpenGL;
 
 namespace CogiEngine
@@ -7,17 +8,20 @@ namespace CogiEngine
     {
         private RawModel quad;
         private WaterShader shader;
-
-        public WaterRenderer(Loader loader, WaterShader shader, Matrix4x4f projectionMatrix) {
+        private WaterFrameBuffers fbos;
+        
+        public WaterRenderer(Loader loader, WaterShader shader, Matrix4x4f projectionMatrix, WaterFrameBuffers fbos) {
             this.shader = shader;
+            this.fbos = fbos;
             shader.Start();
+            shader.ConnectTextureUnits();
             shader.LoadProjectionMatrix(projectionMatrix);
             shader.Stop();
-            setUpVAO(loader);
+            SetUpVAO(loader);
         }
 
-        public void render(List<WaterTile> water, Camera camera) {
-            prepareRender(camera);
+        public void Render(List<WaterTile> water, Camera camera) {
+            PrepareRender(camera);
             for (int i = 0; i < water.Count; i++)
             {
                 WaterTile tile = water[i];
@@ -25,23 +29,27 @@ namespace CogiEngine
                 shader.loadModelMatrix(modelMatrix);
                 Gl.DrawArrays(PrimitiveType.Triangles, 0, quad.VertexCount);                
             }
-            unbind();
+            Unbind();
         }
 	
-        private void prepareRender(Camera camera){
+        private void PrepareRender(Camera camera){
             this.shader.Start();
             shader.LoadViewMatrix(camera);
             Gl.BindVertexArray(quad.VaoID);
             Gl.EnableVertexAttribArray(0);
+            Gl.ActiveTexture(TextureUnit.Texture0);
+            Gl.BindTexture(TextureTarget.Texture2d, this.fbos.ReflectionTexture);
+            Gl.ActiveTexture(TextureUnit.Texture1);
+            Gl.BindTexture(TextureTarget.Texture2d, this.fbos.RefractionTexture);
         }
 	
-        private void unbind(){
+        private void Unbind(){
             Gl.DisableVertexAttribArray(0);
             Gl.BindVertexArray(0);
             this.shader.Stop();
         }
 
-        private void setUpVAO(Loader loader) {
+        private void SetUpVAO(Loader loader) {
             // Just x and z vectex positions here, y is set to 0 in v.shader
             float[] vertices = { -1, -1, -1, 1, 1, -1, 1, -1, -1, 1, 1, 1 };
             quad = loader.LoadVAO(vertices, 2);

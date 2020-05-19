@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Numerics;
+using CogiEngine.Water;
 using OpenGL;
 
 namespace CogiEngine
@@ -36,9 +38,11 @@ namespace CogiEngine
         //Water
         private WaterRenderer waterRenderer;
         private WaterShader waterShader;
+        private WaterFrameBuffers waterFrameBuffers;
         
         public Matrix4x4f ProjectionMatrix => projectionMatrix;
-        
+        public WaterFrameBuffers WaterFrameBuffers => waterFrameBuffers;
+
         public MasterRanderer(Loader loader, int width, int height)
         {
             Gl.Enable(EnableCap.DepthTest);
@@ -60,8 +64,9 @@ namespace CogiEngine
             this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
             
             //Water
+            this.waterFrameBuffers = new WaterFrameBuffers(width, height);
             this.waterShader = new WaterShader(); 
-            this.waterRenderer = new WaterRenderer(loader, waterShader, this.projectionMatrix);
+            this.waterRenderer = new WaterRenderer(loader, waterShader, this.projectionMatrix, this.waterFrameBuffers);
         }
 
         public static void EnableCulling()
@@ -85,9 +90,9 @@ namespace CogiEngine
             this.clientHeight = height;
         }
         
-        public void Render(List<Light> lightList, List<WaterTile> waters, Camera camera, Vertex4f clipPlane, float frameTimeSec)
+        public void Render(int width, int height, List<Light> lightList, List<WaterTile> waters, Camera camera, Vertex4f clipPlane, float frameTimeSec)
         {
-            Prepare();
+            Prepare(width, height);
             
             //Entities
             this.entityShader.Start();
@@ -111,7 +116,7 @@ namespace CogiEngine
             this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
             
             //Water
-            this.waterRenderer.render(waters, camera);
+            this.waterRenderer.Render(waters, camera);
         }
 
         public void ClearEntities()
@@ -144,9 +149,9 @@ namespace CogiEngine
             }
         }
         
-        public void Prepare()
+        public void Prepare(int width, int height)
         {
-            Gl.Viewport(0, 0, clientWidth, clientHeight);
+            Gl.Viewport(0, 0, width, height);
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             Gl.ClearColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE, 1f);
         }

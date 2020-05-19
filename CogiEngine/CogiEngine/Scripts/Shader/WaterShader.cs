@@ -10,6 +10,8 @@ namespace CogiEngine
         private int location_modelMatrix;
         private int location_viewMatrix;
         private int location_projectionMatrix;
+        private int location_reflectionTexture;
+        private int location_refractionTexture;
 
         public WaterShader() :base(VERTEX_FILE, FRAGMENT_FILE)
         {
@@ -23,9 +25,17 @@ namespace CogiEngine
 
         protected override void GetAllUniformLocations()
         {
-            location_projectionMatrix = GetUniformLocation("_projectionMatrix");
-            location_viewMatrix = GetUniformLocation("_viewMatrix");
-            location_modelMatrix = GetUniformLocation("_modelMatrix");
+            this.location_projectionMatrix = GetUniformLocation("_projectionMatrix");
+            this.location_viewMatrix = GetUniformLocation("_viewMatrix");
+            this.location_modelMatrix = GetUniformLocation("_modelMatrix");
+            this.location_reflectionTexture = GetUniformLocation("_reflectionTexture");
+            this.location_refractionTexture = GetUniformLocation("_refractionTexture");
+        }
+
+        public void ConnectTextureUnits()
+        {
+            base.LoadInt(this.location_reflectionTexture, 0);
+            base.LoadInt(this.location_refractionTexture, 1);
         }
 
         public void LoadProjectionMatrix(Matrix4x4f value)

@@ -6,14 +6,14 @@ namespace CogiEngine.Water
 {
     public class WaterFrameBuffers
     {
-        /*private const int REFLECTION_WIDTH = 320;
-        private const int REFLECTION_HEIGHT = 180;*/
+        public const int REFLECTION_WIDTH = 320;
+        public const int REFLECTION_HEIGHT = 180;
         
-        private const int REFLECTION_WIDTH = 1280;
-        private const int REFLECTION_HEIGHT = 720;
+        /*private const int REFLECTION_WIDTH = 1280;
+        private const int REFLECTION_HEIGHT = 720;*/
 
-        private const int REFRACTION_WIDTH = 1280;
-        private const int REFRACTION_HEIGHT = 720;
+        public const int REFRACTION_WIDTH = 1280;
+        public const int REFRACTION_HEIGHT = 720;
 
         private uint reflectionFrameBuffer;
         private uint reflectionTexture;
@@ -29,27 +29,27 @@ namespace CogiEngine.Water
 
         public uint RefractionDepthTexture => refractionDepthTexture;
 
-        public WaterFrameBuffers()
+        public WaterFrameBuffers(int width, int height)
         {
             //call when loading the game
-            InitialiseReflectionFrameBuffer();
-            InitialiseRefractionFrameBuffer();
+            InitialiseReflectionFrameBuffer(width, height);
+            InitialiseRefractionFrameBuffer(width, height);
         }
         
-        private void InitialiseReflectionFrameBuffer()
+        private void InitialiseReflectionFrameBuffer(int width, int height)
         {
             this.reflectionFrameBuffer = CreateFrameBuffer();
             this.reflectionTexture = CreateTextureAttachment(REFLECTION_WIDTH, REFLECTION_HEIGHT);
             this.reflectionDepthBuffer = CreateDepthBufferAttachment(REFLECTION_WIDTH, REFLECTION_HEIGHT);
-            UnbindCurrentFrameBuffer();
+            UnbindCurrentFrameBuffer(width, height);
         }
 
-        private void InitialiseRefractionFrameBuffer()
+        private void InitialiseRefractionFrameBuffer(int width, int height)
         {
             this.refractionFrameBuffer = CreateFrameBuffer();
             this.refractionTexture = CreateTextureAttachment(REFRACTION_WIDTH, REFRACTION_HEIGHT);
             this.refractionDepthTexture = CreateDepthTextureAttachment(REFRACTION_WIDTH, REFRACTION_HEIGHT);
-            UnbindCurrentFrameBuffer();
+            UnbindCurrentFrameBuffer(width, height);
         }
 
         public void CleanUp()
@@ -78,11 +78,11 @@ namespace CogiEngine.Water
             BindFrameBuffer(this.refractionFrameBuffer, REFRACTION_WIDTH, REFRACTION_HEIGHT);
         }
 
-        public void UnbindCurrentFrameBuffer()
+        public void UnbindCurrentFrameBuffer(int width, int height)
         {
             //call to switch to default frame buffer
             Gl.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
-            Gl.Viewport(0, 0, DisplayManager.WIDTH, DisplayManager.HEIGHT);
+            Gl.Viewport(0, 0, width, height);
         }
         
         private void BindFrameBuffer(uint frameBuffer, int width, int height)

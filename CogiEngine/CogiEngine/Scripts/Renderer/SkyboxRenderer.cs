@@ -96,7 +96,7 @@ namespace CogiEngine
 
         private void BindTextures(float frameTimeSec)
         {
-            time += frameTimeSec * 1000;
+            /*time += frameTimeSec * 1000;
             time %= 24000;
             uint texture1;
             uint texture2;
@@ -130,15 +130,15 @@ namespace CogiEngine
                 texture1 = textureID_day;
                 texture2 = textureID_night;
                 blendFactor = (time - time3) / (time4 - time3);
-            }
+            }*/
 
             Gl.ActiveTexture(TextureUnit.Texture0);
-            Gl.BindTexture(TextureTarget.TextureCubeMap, texture1);
+            Gl.BindTexture(TextureTarget.TextureCubeMap, textureID_day);
 
             Gl.ActiveTexture(TextureUnit.Texture1);
-            Gl.BindTexture(TextureTarget.TextureCubeMap, texture2);
+            Gl.BindTexture(TextureTarget.TextureCubeMap, textureID_night);
 
-            this.shader.LoadBendFactor(blendFactor);
+            this.shader.LoadBendFactor(0);
         }
     }
 }
