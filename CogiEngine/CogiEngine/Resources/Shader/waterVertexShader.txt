@@ -4,15 +4,19 @@ in vec2 _position;
 
 out vec4 _clipSpace;
 out vec2 _textureCoords;
+out vec3 _toCameraVector;
 
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
 uniform mat4 _modelMatrix;
+uniform vec3 _cameraPosition;
 
 const float TILING = 6;
 
 void main(void) {
-	 _clipSpace = _projectionMatrix * _viewMatrix * _modelMatrix * vec4(_position.x, 0.0, _position.y, 1.0);
+      vec4 worldPosition = _modelMatrix * vec4(_position.x, 0.0, _position.y, 1.0);
+	 _clipSpace = _projectionMatrix * _viewMatrix * worldPosition;
 	 gl_Position = _clipSpace;
 	 _textureCoords = vec2(_position.x * 0.5 + 0.5, _position.y * 0.5 + 0.5) * TILING;
+	 _toCameraVector = _cameraPosition - worldPosition.xyz;
 }

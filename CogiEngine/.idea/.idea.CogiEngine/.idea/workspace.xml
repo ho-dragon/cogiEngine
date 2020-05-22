@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab95fda2-f254-4b72-ac0a-6bf69f9992f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/waterDUDV.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterFragmentShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterFragmentShader.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterVertexShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterVertexShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/WaterRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/WaterRenderer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Shader/WaterShader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Shader/WaterShader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Water/WaterFrameBuffers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Water/WaterFrameBuffers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,14 +165,14 @@
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Terrain/Terrain.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/OBJLoader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterVertexShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Water/WaterFrameBuffers.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" />
         <option value="$USER_HOME$/Desktop/tutorial_engine/Full code for download/src/engineTester/MainGameLoop.java" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/WaterShader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/WaterRenderer.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/WaterShader.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterVertexShader.txt" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterFragmentShader.txt" />
       </list>
     </option>
@@ -283,7 +274,7 @@
       <workItem from="1589990067747" duration="6094000" />
       <workItem from="1590071092898" duration="7561000" />
       <workItem from="1590082679093" duration="79000" />
-      <workItem from="1590162009788" duration="2789000" />
+      <workItem from="1590162009788" duration="4360000" />
     </task>
     <servers />
   </component>
@@ -330,22 +321,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1282" y="445" width="751" height="775" key="EnvironmentVariablesDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584277591831" />
-    <state width="2517" height="116" key="GridCell.Tab.0.bottom" timestamp="1590164259171">
+    <state width="2517" height="116" key="GridCell.Tab.0.bottom" timestamp="1590167172150">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590164259171" />
-    <state width="2517" height="116" key="GridCell.Tab.0.center" timestamp="1590164259170">
+    <state width="2517" height="116" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590167172150" />
+    <state width="2517" height="116" key="GridCell.Tab.0.center" timestamp="1590167172150">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590164259170" />
-    <state width="2517" height="116" key="GridCell.Tab.0.left" timestamp="1590164259170">
+    <state width="2517" height="116" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590167172150" />
+    <state width="2517" height="116" key="GridCell.Tab.0.left" timestamp="1590167172150">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590164259170" />
-    <state width="2517" height="116" key="GridCell.Tab.0.right" timestamp="1590164259171">
+    <state width="2517" height="116" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590167172150" />
+    <state width="2517" height="116" key="GridCell.Tab.0.right" timestamp="1590167172150">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590164259171" />
+    <state width="2517" height="116" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590167172150" />
     <state width="2517" height="382" key="GridCell.Tab.1.bottom" timestamp="1589996421320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -450,10 +441,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="936" y="330" width="672" height="677" key="run.anything.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589733759560" />
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1590163524966">
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1590166826302">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590163524966" />
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590166826302" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

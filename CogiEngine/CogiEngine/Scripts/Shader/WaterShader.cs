@@ -14,6 +14,7 @@ namespace CogiEngine
         private int location_refractionTexture;
         private int location_dudvMap;
         private int location_moveFactor;
+        private int location_cameraPosition;
 
         public WaterShader() :base(VERTEX_FILE, FRAGMENT_FILE)
         {
@@ -34,6 +35,7 @@ namespace CogiEngine
             this.location_refractionTexture = GetUniformLocation("_refractionTexture");
             this.location_dudvMap = GetUniformLocation("_dudvMap");
             this.location_moveFactor = GetUniformLocation("_moveFactor");
+            this.location_cameraPosition = GetUniformLocation("_cameraPosition");
         }
 
         public void ConnectTextureUnits()
@@ -57,6 +59,7 @@ namespace CogiEngine
         {
             Matrix4x4f viewMatrix = Maths.CreateViewMatrix(camera);
             base.LoadMatrix(this.location_viewMatrix, viewMatrix);
+            base.LoadVector3(this.location_cameraPosition, camera.Position);
         }
 
         public void loadModelMatrix(Matrix4x4f modelMatrix){
