@@ -98,3 +98,5 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\waterVer
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\blendMap2.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap2.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap_perlin.jpg
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\waterDUDV.png
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\dancer.obj

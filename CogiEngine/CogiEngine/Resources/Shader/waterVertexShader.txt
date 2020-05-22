@@ -3,12 +3,16 @@
 in vec2 _position;
 
 out vec4 _clipSpace;
+out vec2 _textureCoords;
 
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
 uniform mat4 _modelMatrix;
 
+const float TILING = 6;
+
 void main(void) {
 	 _clipSpace = _projectionMatrix * _viewMatrix * _modelMatrix * vec4(_position.x, 0.0, _position.y, 1.0);
 	 gl_Position = _clipSpace;
+	 _textureCoords = vec2(_position.x * 0.5 + 0.5, _position.y * 0.5 + 0.5) * TILING;
 }

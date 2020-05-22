@@ -104,7 +104,7 @@ namespace CogiEngine
         {
             string filePath = $".\\Resources\\Textures\\{fileName}.png";
             uint tex2d_id = Soil.NET.WrapSOIL.load_OGL_texture(filePath, Soil.NET.WrapSOIL.SOIL_LOAD.AUTO, Soil.NET.WrapSOIL.SOIL_NEW.ID,
-                Soil.NET.WrapSOIL.SOIL_FLAG.MIPMAPS | Soil.NET.WrapSOIL.SOIL_FLAG.NTSC_SAFE_RGB | Soil.NET.WrapSOIL.SOIL_FLAG.COMPRESS_TO_DXT);
+                 Soil.NET.WrapSOIL.SOIL_FLAG.NTSC_SAFE_RGB | Soil.NET.WrapSOIL.SOIL_FLAG.COMPRESS_TO_DXT);
             this.loadedTextureList.Add(tex2d_id);
             
             Gl.GenerateMipmap(TextureTarget.Texture2d);
@@ -134,6 +134,7 @@ namespace CogiEngine
         public uint LoadRepeatTexture(string fileName)
         {
             uint loadNumber = LoadTexture(fileName);
+            
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
             Gl.TexParameteri(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
             #region Desc

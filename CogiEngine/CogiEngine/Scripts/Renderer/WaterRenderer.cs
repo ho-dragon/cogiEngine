@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using CogiEngine.Water;
 using OpenGL;
 
@@ -6,22 +8,27 @@ namespace CogiEngine
 {
     public class WaterRenderer
     {
+        private const string DUDV_TEXTURE_NAME = "waterDUDV";
+        private const float WAVE_SPEED = 0.03f;
         private RawModel quad;
         private WaterShader shader;
         private WaterFrameBuffers fbos;
+        private uint dudvTexture;
+        private float moveFactor = 0f;
         
         public WaterRenderer(Loader loader, WaterShader shader, Matrix4x4f projectionMatrix, WaterFrameBuffers fbos) {
             this.shader = shader;
             this.fbos = fbos;
-            shader.Start();
-            shader.ConnectTextureUnits();
-            shader.LoadProjectionMatrix(projectionMatrix);
-            shader.Stop();
+            this.dudvTexture = loader.LoadRepeatTexture(DUDV_TEXTURE_NAME);
+            this.shader.Start();
+            this.shader.ConnectTextureUnits();
+            this.shader.LoadProjectionMatrix(projectionMatrix);
+            this.shader.Stop();
             SetUpVAO(loader);
         }
 
-        public void Render(List<WaterTile> water, Camera camera) {
-            PrepareRender(camera);
+        public void Render(List<WaterTile> water, Camera camera, float frameTimeSec) {
+            PrepareRender(camera, frameTimeSec);
             for (int i = 0; i < water.Count; i++)
             {
                 WaterTile tile = water[i];
@@ -32,15 +39,25 @@ namespace CogiEngine
             Unbind();
         }
 	
-        private void PrepareRender(Camera camera){
+        private void PrepareRender(Camera camera, float frameTimeSec){
             this.shader.Start();
-            shader.LoadViewMatrix(camera);
+            this.shader.LoadViewMatrix(camera);
+            
+            this.moveFactor += WAVE_SPEED * frameTimeSec;
+            this.moveFactor %= 1;
+            this.shader.LoadMoveFactor(this.moveFactor);
+            
             Gl.BindVertexArray(quad.VaoID);
             Gl.EnableVertexAttribArray(0);
+            
             Gl.ActiveTexture(TextureUnit.Texture0);
             Gl.BindTexture(TextureTarget.Texture2d, this.fbos.ReflectionTexture);
+            
             Gl.ActiveTexture(TextureUnit.Texture1);
             Gl.BindTexture(TextureTarget.Texture2d, this.fbos.RefractionTexture);
+            
+            Gl.ActiveTexture(TextureUnit.Texture2);
+            Gl.BindTexture(TextureTarget.Texture2d, this.dudvTexture);
         }
 	
         private void Unbind(){

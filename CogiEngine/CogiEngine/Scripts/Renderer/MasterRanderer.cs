@@ -35,13 +35,7 @@ namespace CogiEngine
         //Skybox
         private SkyboxRenderer skyboxRenderer;
         
-        //Water
-        private WaterRenderer waterRenderer;
-        private WaterShader waterShader;
-        private WaterFrameBuffers waterFrameBuffers;
-        
         public Matrix4x4f ProjectionMatrix => projectionMatrix;
-        public WaterFrameBuffers WaterFrameBuffers => waterFrameBuffers;
 
         public MasterRanderer(Loader loader, int width, int height)
         {
@@ -62,11 +56,6 @@ namespace CogiEngine
             
             //Skybox
             this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
-            
-            //Water
-            this.waterFrameBuffers = new WaterFrameBuffers(width, height);
-            this.waterShader = new WaterShader(); 
-            this.waterRenderer = new WaterRenderer(loader, waterShader, this.projectionMatrix, this.waterFrameBuffers);
         }
 
         public static void EnableCulling()
@@ -90,7 +79,16 @@ namespace CogiEngine
             this.clientHeight = height;
         }
         
-        public void Render(int width, int height, List<Light> lightList, List<WaterTile> waters, Camera camera, Vertex4f clipPlane, float frameTimeSec)
+        public void RenderScene(int width, int height, List<Entity> entities, Terrain terrain, List<Light> lights, Camera camera, Vertex4f clipPlane, float frameTimeSec) {
+          
+            for (int i = 0; i < entities.Count; i++)
+            {
+                ProcessEntity(entities[i]);
+            }
+            ProcessTerrain(terrain);
+            Render(width, height, lights, camera, clipPlane, frameTimeSec);
+        }
+        private void Render(int width, int height, List<Light> lightList, Camera camera, Vertex4f clipPlane, float frameTimeSec)
         {
             Prepare(width, height);
             
@@ -114,22 +112,15 @@ namespace CogiEngine
             
             //Skybox
             this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
-            
-            //Water
-            this.waterRenderer.Render(waters, camera);
-        }
-
-        public void ClearEntities()
-        {
             this.entities.Clear();
         }
-
+        
         public void UpdateViewRect(int width, int height)
         {
             SetViewRect(width, height);
         }
-
-        public void ProcessTerrain(Terrain terrain)
+        
+        private void ProcessTerrain(Terrain terrain)
         {
             this.terrainList.Add(terrain);
         }
