@@ -328,7 +328,7 @@ namespace CogiEngine
                 , new Vertex4f(0, -1, 0, 100000)
                 , this.displayManager.GetFrameTimeSeconds());
             
-            this.waterRenderer.Render(this.waterTileList, this.camera, this.displayManager.GetFrameTimeSeconds());
+            this.waterRenderer.Render(this.waterTileList, this.lgihtList, this.camera, this.displayManager.GetFrameTimeSeconds());
             this.guiRenderer.Render(this.guiList);
             DrawAxis(0,0,0,1,1f);
             this.displayManager.UpdateDisplay();

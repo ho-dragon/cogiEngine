@@ -8,18 +8,24 @@ namespace CogiEngine
 {
     public class WaterRenderer
     {
-        private const string DUDV_TEXTURE_NAME = "waterDUDV";
+        private const string DUDV_MAP_NAME = "waterDUDV";
+        //private const string NORMAL_MAP_NAME = "waterNormalMap";
+        private const string NORMAL_MAP_NAME = "waterMatchingNormalMap";
         private const float WAVE_SPEED = 0.03f;
         private RawModel quad;
         private WaterShader shader;
         private WaterFrameBuffers fbos;
         private uint dudvTexture;
+        private uint normalMap;
         private float moveFactor = 0f;
+        private float shineDamper = 20f;
+        private float reflectivity = 0.6f;
         
         public WaterRenderer(Loader loader, WaterShader shader, Matrix4x4f projectionMatrix, WaterFrameBuffers fbos) {
             this.shader = shader;
             this.fbos = fbos;
-            this.dudvTexture = loader.LoadRepeatTexture(DUDV_TEXTURE_NAME);
+            this.dudvTexture = loader.LoadRepeatTexture(DUDV_MAP_NAME);
+            this.normalMap = loader.LoadRepeatTexture(NORMAL_MAP_NAME);
             this.shader.Start();
             this.shader.ConnectTextureUnits();
             this.shader.LoadProjectionMatrix(projectionMatrix);
@@ -27,21 +33,23 @@ namespace CogiEngine
             SetUpVAO(loader);
         }
 
-        public void Render(List<WaterTile> water, Camera camera, float frameTimeSec) {
-            PrepareRender(camera, frameTimeSec);
+        public void Render(List<WaterTile> water, List<Light> lightList, Camera camera, float frameTimeSec) {
+            PrepareRender(lightList, camera, frameTimeSec);
             for (int i = 0; i < water.Count; i++)
             {
                 WaterTile tile = water[i];
                 Matrix4x4f modelMatrix = Maths.CreateTransformationMatrix(new Vertex3f(tile.X, tile.Height, tile.Z), 0, 0, 0, WaterTile.TILE_SIZE);
-                shader.loadModelMatrix(modelMatrix);
+                this.shader.LoadModelMatrix(modelMatrix);
                 Gl.DrawArrays(PrimitiveType.Triangles, 0, quad.VertexCount);                
             }
             Unbind();
         }
 	
-        private void PrepareRender(Camera camera, float frameTimeSec){
+        private void PrepareRender(List<Light> lightList, Camera camera, float frameTimeSec){
             this.shader.Start();
             this.shader.LoadViewMatrix(camera);
+            this.shader.LoadShineVariables(this.shineDamper, this.reflectivity);
+            this.shader.LoadLights(lightList);
             
             this.moveFactor += WAVE_SPEED * frameTimeSec;
             this.moveFactor %= 1;
@@ -58,6 +66,9 @@ namespace CogiEngine
             
             Gl.ActiveTexture(TextureUnit.Texture2);
             Gl.BindTexture(TextureTarget.Texture2d, this.dudvTexture);
+            
+            Gl.ActiveTexture(TextureUnit.Texture3);
+            Gl.BindTexture(TextureTarget.Texture2d, this.normalMap);
         }
 	
         private void Unbind(){

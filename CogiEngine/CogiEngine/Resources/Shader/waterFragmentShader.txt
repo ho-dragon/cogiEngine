@@ -3,15 +3,22 @@
 in vec4 _clipSpace;
 in vec2 _textureCoords;
 in vec3 _toCameraVector;
+in vec3 _toLightVector[4];
 
 out vec4 out_Color;
 
 uniform sampler2D _reflectionTexture;
 uniform sampler2D _refractionTexture;
 uniform sampler2D _dudvMap;
+uniform sampler2D _normalMap;
+uniform vec3 _lightColor[4];
+uniform vec3 _lightAttenuation[4];
+uniform float _shineDamper;
+uniform float _reflectivity;
 uniform float _moveFactor;
 
 const float WAVE_STRENGTH = 0.02;
+const int LIGHT_COUNT = 4;
 
 void main(void) {
 
@@ -20,9 +27,9 @@ void main(void) {
     vec2 reflectionTexCoords = vec2(ndc.x, -ndc.y);
     vec2 refractionTexCoords = vec2(ndc.x, ndc.y);
     
-    vec2 distortion1 = (texture(_dudvMap, vec2(_textureCoords.x + _moveFactor, _textureCoords.y)).rg * 2.0 - 1.0) * WAVE_STRENGTH;
-    vec2 distortion2 = (texture(_dudvMap, vec2(-_textureCoords.x + _moveFactor, _textureCoords.y + _moveFactor)).rg * 2.0 - 1.0) * WAVE_STRENGTH;
-    vec2 totalDistortion = distortion1 + distortion2;
+	vec2 distortedTexCoords = texture(_dudvMap, vec2(_textureCoords.x + _moveFactor, _textureCoords.y)).rg * 0.1;
+	distortedTexCoords = _textureCoords + vec2(distortedTexCoords.x, distortedTexCoords.y + _moveFactor);
+	vec2 totalDistortion = (texture(_dudvMap, distortedTexCoords).rg * 2.0 - 1.0) * WAVE_STRENGTH;
     
     reflectionTexCoords += totalDistortion;
     reflectionTexCoords.x = clamp(reflectionTexCoords.x, 0.001, 0.999);
@@ -38,6 +45,25 @@ void main(void) {
     float refractiveFactor = dot(viewVector, vec3(0.0, 1.0, 0.0));
     refractiveFactor = pow(refractiveFactor, 5.0);
     
+    vec4 normalMapColor = texture(_normalMap, distortedTexCoords);
+    vec3 normal = vec3(normalMapColor.r * 2.0 - 1.0, normalMapColor.b, normalMapColor.g * 2.0 - 1.0);
+    normal = normalize(normal);
+    
+    vec3 totalSpecular = vec3(0.0);                       
+    for(int i=0; i<LIGHT_COUNT; i++)
+    {
+       float distance = length(_toLightVector[i]);
+       float attFactor = _lightAttenuation[i].x + (_lightAttenuation[i].y * distance) + (_lightAttenuation[i].z * distance * distance);
+       vec3 unitLightVector = normalize(_toLightVector[i]);    
+       float nDotl = dot(normal, unitLightVector);
+       vec3 lightDirection = -unitLightVector;
+       vec3 reflectedLightDirection = reflect(lightDirection, normal);        
+       float specularFactor = dot(reflectedLightDirection, viewVector);
+       specularFactor = max(specularFactor, 0.0);
+       float dampedFactor = pow(specularFactor, _shineDamper);
+       totalSpecular = totalSpecular + (dampedFactor * _lightColor[i] * _reflectivity) / attFactor;
+    }
+    
 	out_Color = mix(reflectColor, refractColor, refractiveFactor);
-	out_Color = mix(out_Color, vec4(0.0, 0.3, 0.5, 1.0), 0.2);
+	out_Color = mix(out_Color, vec4(0.0, 0.3, 0.5, 1.0), 0.2) + vec4(totalSpecular, 0.0);
 }

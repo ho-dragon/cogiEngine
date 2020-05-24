@@ -5,18 +5,25 @@ in vec2 _position;
 out vec4 _clipSpace;
 out vec2 _textureCoords;
 out vec3 _toCameraVector;
+out vec3 _toLightVector[4];
 
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
-uniform mat4 _modelMatrix;
+uniform mat4 _transformationMatrix;
+uniform vec3 _lightPosition[4];
 uniform vec3 _cameraPosition;
 
-const float TILING = 6;
+const float TILING = 2.0;
+const int LIGHT_COUNT = 4;
 
 void main(void) {
-      vec4 worldPosition = _modelMatrix * vec4(_position.x, 0.0, _position.y, 1.0);
+      vec4 worldPosition = _transformationMatrix * vec4(_position.x, 0.0, _position.y, 1.0);
 	 _clipSpace = _projectionMatrix * _viewMatrix * worldPosition;
 	 gl_Position = _clipSpace;
 	 _textureCoords = vec2(_position.x * 0.5 + 0.5, _position.y * 0.5 + 0.5) * TILING;
 	 _toCameraVector = _cameraPosition - worldPosition.xyz;
+	 
+	 for(int i=0; i<LIGHT_COUNT; i++) {
+       _toLightVector[i] = _lightPosition[i] - worldPosition.xyz; 
+     }
 }

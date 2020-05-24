@@ -89,6 +89,8 @@
             <e p="toonRocks.png" t="Include" />
             <e p="tree.png" t="Include" />
             <e p="waterDUDV.png" t="Include" />
+            <e p="waterMatchingNormalMap.png" t="Include" />
+            <e p="waterNormalMap.png" t="Include" />
             <e p="white2.png" t="Include" />
             <e p="white64.png" t="Include" />
           </e>
