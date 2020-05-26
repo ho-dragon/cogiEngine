@@ -13,7 +13,7 @@ uniform mat4 _transformationMatrix;
 uniform vec3 _lightPosition[4];
 uniform vec3 _cameraPosition;
 
-const float TILING = 2.0;
+const float TILING = 4.0;
 const int LIGHT_COUNT = 4;
 
 void main(void) {

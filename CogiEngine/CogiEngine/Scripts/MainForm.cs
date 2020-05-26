@@ -298,7 +298,7 @@ namespace CogiEngine
                 , this.terrain
                 , this.lgihtList
                 , this.camera
-                , new Vertex4f(0, 1, 0, WATER_HEIGHT)
+                , new Vertex4f(0, 1, 0, -WATER_HEIGHT + 1)
                 , this.displayManager.GetFrameTimeSeconds());
             this.camera.UpdatePosition(new Vertex3f(this.camera.Position.x, this.camera.Position.y + camDistance, this.camera.Position.z));
             this.camera.InvertPitch();

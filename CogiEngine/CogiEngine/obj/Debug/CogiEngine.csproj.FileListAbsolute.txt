@@ -99,5 +99,4 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\blendM
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap2.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\heightmap_perlin.jpg
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\waterDUDV.png
-C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\waterMatchingNormalMap.png
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Textures\waterNormalMap.png

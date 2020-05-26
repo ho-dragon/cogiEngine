@@ -24,6 +24,7 @@ namespace CogiEngine
         private int[] location_attenuation;
         private int location_shineDamper;
         private int location_reflectivity;
+        private int location_depthMap;
         
         public WaterShader() :base(VERTEX_FILE, FRAGMENT_FILE)
         {
@@ -37,17 +38,18 @@ namespace CogiEngine
 
         protected override void GetAllUniformLocations()
         {
-            this.location_projectionMatrix = GetUniformLocation("_projectionMatrix");
-            this.location_viewMatrix = GetUniformLocation("_viewMatrix");
-            this.location_transformationMatrix = GetUniformLocation("_transformationMatrix");
-            this.location_reflectionTexture = GetUniformLocation("_reflectionTexture");
-            this.location_refractionTexture = GetUniformLocation("_refractionTexture");
-            this.location_dudvMap = GetUniformLocation("_dudvMap");
-            this.location_normalMap = GetUniformLocation("_normalMap");
-            this.location_moveFactor = GetUniformLocation("_moveFactor");
-            this.location_cameraPosition = GetUniformLocation("_cameraPosition");
+            this.location_projectionMatrix = base.GetUniformLocation("_projectionMatrix");
+            this.location_viewMatrix = base.GetUniformLocation("_viewMatrix");
+            this.location_transformationMatrix = base.GetUniformLocation("_transformationMatrix");
+            this.location_reflectionTexture = base.GetUniformLocation("_reflectionTexture");
+            this.location_refractionTexture = base.GetUniformLocation("_refractionTexture");
+            this.location_dudvMap = base.GetUniformLocation("_dudvMap");
+            this.location_normalMap = base.GetUniformLocation("_normalMap");
+            this.location_moveFactor = base.GetUniformLocation("_moveFactor");
+            this.location_cameraPosition = base.GetUniformLocation("_cameraPosition");
             this.location_shineDamper = base.GetUniformLocation("_shineDamper");
             this.location_reflectivity = base.GetUniformLocation("_reflectivity");
+            this.location_depthMap = base.GetUniformLocation("_depthMap");
             this.loccation_lightPosition = new int[MAX_LIGHT_COUNT];
             this.location_lightColor = new int[MAX_LIGHT_COUNT];
             this.location_attenuation = new int[MAX_LIGHT_COUNT];
@@ -66,6 +68,7 @@ namespace CogiEngine
             base.LoadInt(this.location_refractionTexture, 1);
             base.LoadInt(this.location_dudvMap, 2);
             base.LoadInt(this.location_normalMap, 3);
+            base.LoadInt(this.location_depthMap, 4);
         }
 
         public void LoadMoveFactor(float moveFactor)
