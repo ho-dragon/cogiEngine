@@ -5,13 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CogiEngine/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/CogiEngine.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterFragmentShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterFragmentShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterVertexShader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterVertexShader.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Textures/waterMatchingNormalMap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Resources/Textures/waterNormalMap.png" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Resources/Textures/waterNormalMap.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/GUI/GUIRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/GUI/GUIRenderer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/WaterRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/WaterRenderer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Shader/WaterShader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Shader/WaterShader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/EntityRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/EntityRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogiEngine/Scripts/Utils/Maths.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/Scripts/Utils/Maths.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CogiEngine/obj/Debug/CogiEngine.csproj.FileListAbsolute.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,21 +40,16 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A84B63C7-42D5-480B-9047-8BE2A17C9AC4/35/32716f58/PixelFormat.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Utils/Maths.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/GameApp/ShaderProgram.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9AECFB6F-6EE1-4BB3-9CEC-F864D8D0E1D7/ff/9c9ab8df/GCHandle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/GameApp/App.config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Renderer/TerrainRenderer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/GameApp/StaticShader.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/GameApp/Properties/Resources.Designer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Shader/TerrainShader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/DisplayManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Entities/Light.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/GameApp/Properties/Settings.Designer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/GameApp/Properties/Resources.resx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Terrain/Terrain.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C86099A8-45D8-4352-831D-42392525F93D/18/4126c467/Matrix4x4.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F5710885-5FA8-448B-ABCB-DC0D657B8A58/a4/dde19e19/Control.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5067B6F8-9118-4CD3-BBD1-D117ACE90F35/11/276362f6/Matrix4x4f.cs" root0="SKIP_HIGHLIGHTING" />
@@ -65,7 +58,6 @@
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/OBJLoader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Entities/Camera.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Entities/Entity.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C936E3D3-204F-483E-9672-A4260D9BEBCE/09/a5a1d6f5/InternalFormat.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CogiEngine/Scripts/MousePicker.cs" root0="FORCE_HIGHLIGHTING" />
@@ -130,11 +122,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Models/ModelTexture.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Textures/TerrainTexturePack.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Utils/CogiLogger.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Program.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/EntityRenderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Textures/TerrainTexture.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/GUI/GUIShader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Textures/ModelTexture.cs" />
@@ -149,7 +136,6 @@
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Entities/Light.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/DisplayManager.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/InputManager.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Utils/Maths.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/MousePicker.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/fragmentShader.txt" />
         <option value="$USER_HOME$/Desktop/tutorial_engine/water/WaterRenderer.java" />
@@ -170,7 +156,6 @@
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Terrain/Terrain.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/OBJLoader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/SkyboxRenderer.cs" />
-        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Loader.cs" />
         <option value="$USER_HOME$/Desktop/tutorial_engine/Full code for download/src/engineTester/MainGameLoop.java" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/StaticShader.cs" />
@@ -180,7 +165,14 @@
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shader/WaterShader.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/WaterRenderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Resources/Shader/waterFragmentShader.txt" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRanderer.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shadow/ShadowFrameBuffer.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Utils/Maths.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shadow/ShadowBox.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Shadow/ShadowMapMasterRenderer.cs" />
         <option value="$PROJECT_DIR$/CogiEngine/Scripts/MainForm.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/MasterRenderer.cs" />
+        <option value="$PROJECT_DIR$/CogiEngine/Scripts/Renderer/EntityRenderer.cs" />
       </list>
     </option>
   </component>
@@ -285,6 +277,8 @@
       <workItem from="1590252436187" duration="976000" />
       <workItem from="1590306610282" duration="7306000" />
       <workItem from="1590501525555" duration="4237000" />
+      <workItem from="1598543331055" duration="4308000" />
+      <workItem from="1598548169699" duration="126000" />
     </task>
     <servers />
   </component>
@@ -307,46 +301,22 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="553" y="386" key="#Web_Browsers" timestamp="1584277726467">
+    <state width="2517" height="161" key="GridCell.Tab.0.bottom" timestamp="1598548300553">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="553" y="386" key="#Web_Browsers/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584277726467" />
-    <state x="-1337" y="469" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588662184250">
-      <screen x="-1920" y="247" width="1920" height="1040" />
-    </state>
-    <state x="-1337" y="469" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588662184250" />
-    <state x="1006" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584981182141">
+    <state width="2517" height="161" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1598548300553" />
+    <state width="2517" height="161" key="GridCell.Tab.0.center" timestamp="1598548300553">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1006" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584981182141" />
-    <state width="561" height="466" key="DebuggerActiveHint" timestamp="1589734626892">
+    <state width="2517" height="161" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1598548300553" />
+    <state width="2517" height="161" key="GridCell.Tab.0.left" timestamp="1598548300552">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="561" height="466" key="DebuggerActiveHint/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589734626892" />
-    <state x="92" y="69" width="2376" height="1239" maximized="true" key="DiffContextDialog" timestamp="1585419234678">
+    <state width="2517" height="161" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1598548300552" />
+    <state width="2517" height="161" key="GridCell.Tab.0.right" timestamp="1598548300553">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="92" y="69" width="2376" height="1239" maximized="true" key="DiffContextDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585419234678" />
-    <state x="1282" y="445" width="751" height="775" key="EnvironmentVariablesDialog" timestamp="1584277591831">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1282" y="445" width="751" height="775" key="EnvironmentVariablesDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584277591831" />
-    <state width="2517" height="116" key="GridCell.Tab.0.bottom" timestamp="1590505833345">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590505833345" />
-    <state width="2517" height="116" key="GridCell.Tab.0.center" timestamp="1590505833345">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590505833345" />
-    <state width="2517" height="116" key="GridCell.Tab.0.left" timestamp="1590505833345">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590505833345" />
-    <state width="2517" height="116" key="GridCell.Tab.0.right" timestamp="1590505833345">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="116" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590505833345" />
+    <state width="2517" height="161" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1598548300553" />
     <state width="2517" height="382" key="GridCell.Tab.1.bottom" timestamp="1589996421320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -411,50 +381,14 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="2517" height="382" key="GridCell.Tab.4.right/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589996421320" />
-    <state x="983" y="379" key="RiderGenerateDialog" timestamp="1589814026843">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="983" y="379" key="RiderGenerateDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589814026843" />
-    <state x="912" y="404" width="1585" height="716" key="SettingsEditor" timestamp="1589717184498">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="912" y="404" width="1585" height="716" key="SettingsEditor/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589717184498" />
-    <state width="1288" height="708" key="XDebugger.FullValuePopup" timestamp="1585240114077">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1288" height="708" key="XDebugger.FullValuePopup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1585240114077" />
-    <state x="-1993" y="349" width="2376" height="1216" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1586363560970">
-      <screen x="-1920" y="247" width="1920" height="1040" />
-    </state>
-    <state x="-1993" y="349" width="2376" height="1216" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1586363560970" />
-    <state x="927" y="315" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1589132754453">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="927" y="315" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589132754453" />
-    <state x="840" y="436" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1586016989010">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="840" y="436" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1586016989010" />
-    <state x="92" y="92" width="2376" height="1216" key="dock-window-1" timestamp="1588702594297">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="92" y="92" width="2376" height="1216" key="dock-window-1/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1588702594297" />
     <state x="959" y="296" width="642" height="807" key="find.popup" timestamp="1590334887808">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="959" y="296" width="642" height="807" key="find.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590334887808" />
-    <state width="600" height="424" key="javadoc.popup" timestamp="1584107988027">
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1598547548961">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="600" height="424" key="javadoc.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1584107988027" />
-    <state x="936" y="330" width="672" height="677" key="run.anything.popup" timestamp="1589733759560">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="936" y="330" width="672" height="677" key="run.anything.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1589733759560" />
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1590505684902">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1590505684902" />
+    <state x="1113" y="302" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/-1920.247.1920.1040@0.0.2560.1400" timestamp="1598547548961" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

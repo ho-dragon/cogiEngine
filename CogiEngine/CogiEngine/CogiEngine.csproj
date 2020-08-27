@@ -92,7 +92,7 @@
         <Compile Include="Scripts\OBJLoader.cs" />
         <Compile Include="Scripts\Program.cs" />
         <Compile Include="Scripts\Renderer\EntityRenderer.cs" />
-        <Compile Include="Scripts\Renderer\MasterRanderer.cs" />
+        <Compile Include="Scripts\Renderer\MasterRenderer.cs" />
         <Compile Include="Scripts\Renderer\SkyboxRenderer.cs" />
         <Compile Include="Scripts\Renderer\TerrainRenderer.cs" />
         <Compile Include="Scripts\Renderer\WaterRenderer.cs" />

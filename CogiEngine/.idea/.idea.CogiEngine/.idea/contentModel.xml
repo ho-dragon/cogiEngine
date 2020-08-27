@@ -122,7 +122,7 @@
           <e p="Program.cs" t="Include" />
           <e p="Renderer" t="Include">
             <e p="EntityRenderer.cs" t="Include" />
-            <e p="MasterRanderer.cs" t="Include" />
+            <e p="MasterRenderer.cs" t="Include" />
             <e p="SkyboxRenderer.cs" t="Include" />
             <e p="TerrainRenderer.cs" t="Include" />
             <e p="WaterRenderer.cs" t="Include" />

@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Numerics;
-using CogiEngine.Water;
 using OpenGL;
 
 namespace CogiEngine
 {
-    public class MasterRanderer
+    public class MasterRenderer
     {
-        private const float FOV = 70;
-        private const float NEAR_PLANE = 0.1f;
-        private const float FAR_PLANE = 1000f;
-        
+        public const float FOV = 70;
+        public const float NEAR_PLANE = 0.1f;
+        public const float FAR_PLANE = 1000f;
+
         private const float SKY_COLOR_RED = 0.5444f;
         private const float SKY_COLOR_GREEN = 0.62f;
         private const float SKY_COLOR_BLUE = 0.69f;
@@ -19,14 +16,14 @@ namespace CogiEngine
         private int clientWidth;
         private int clientHeight;
         private Matrix4x4f projectionMatrix = Matrix4x4f.Identity;
-        
+
         private float AspectRatio => clientWidth / clientHeight;
-        
+
         //Entities
         private StaticShader entityShader;
         private EntityRenderer entityRenderer;
         private Dictionary<TextureModel, List<Entity>> entities;
-        
+
         //Terrain
         private TerrainRenderer terrainRenderer;
         private TerrainShader terrainShader;
@@ -34,34 +31,34 @@ namespace CogiEngine
 
         //Skybox
         private SkyboxRenderer skyboxRenderer;
-        
+
         public Matrix4x4f ProjectionMatrix => projectionMatrix;
 
-        public MasterRanderer(Loader loader, int width, int height)
+        public MasterRenderer(Camera camera, Loader loader, int width, int height)
         {
             Gl.Enable(EnableCap.DepthTest);
             this.clientWidth = width;
             this.clientHeight = height;
-            this.projectionMatrix  = Maths.CreateProjectionMatrix(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
-            
+            this.projectionMatrix = Maths.CreateProjectionMatrix(FOV, AspectRatio, NEAR_PLANE, FAR_PLANE);
+
             //Entities
             this.entityShader = new StaticShader();
             this.entityRenderer = new EntityRenderer(entityShader, width, height, this.projectionMatrix);
             this.entities = new Dictionary<TextureModel, List<Entity>>();
-            
+
             //Terrain
             this.terrainShader = new TerrainShader();
             this.terrainRenderer = new TerrainRenderer(this.terrainShader, this.projectionMatrix);
             this.terrainList = new List<Terrain>();
-            
+
             //Skybox
             this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
         }
 
         public static void EnableCulling()
         {
-            Gl.Enable(EnableCap.CullFace);//Optimize
-            Gl.CullFace(CullFaceMode.Back);//Optimize
+            Gl.Enable(EnableCap.CullFace); //Optimize
+            Gl.CullFace(CullFaceMode.Back); //Optimize
         }
 
         public static void DisableCulling()
@@ -75,23 +72,35 @@ namespace CogiEngine
             {
                 return;
             }
+
             this.clientWidth = width;
             this.clientHeight = height;
         }
-        
-        public void RenderScene(int width, int height, List<Entity> entities, Terrain terrain, List<Light> lights, Camera camera, Vertex4f clipPlane, float frameTimeSec) {
-          
-            for (int i = 0; i < entities.Count; i++)
+
+        public void ProcessStart(List<Entity> entityList, Terrain terrain)
+        {
+            for (int i = 0; i < entityList.Count; i++)
             {
-                ProcessEntity(entities[i]);
+                ProcessEntity(entityList[i]);
             }
+
             ProcessTerrain(terrain);
+        }
+
+        public void ProcessClear()
+        {
+            this.entities.Clear();
+        }
+
+        public void RenderScene(int width, int height, List<Light> lights, Camera camera, Vertex4f clipPlane, float frameTimeSec)
+        {
             Render(width, height, lights, camera, clipPlane, frameTimeSec);
         }
+
         private void Render(int width, int height, List<Light> lightList, Camera camera, Vertex4f clipPlane, float frameTimeSec)
         {
             Prepare(width, height);
-            
+
             //Entities
             this.entityShader.Start();
             this.entityShader.LoadClipPlane(clipPlane);
@@ -100,7 +109,7 @@ namespace CogiEngine
             this.entityShader.LoadViewMatrix(camera);
             this.entityRenderer.Render(this.entities);
             this.entityShader.Stop();
-            
+
             //Terrain
             this.terrainShader.Start();
             this.terrainShader.LoadClipPlane(clipPlane);
@@ -109,17 +118,16 @@ namespace CogiEngine
             this.terrainShader.LoadViewMatrix(camera);
             this.terrainRenderer.Render(this.terrainList);
             this.terrainShader.Stop();
-            
+
             //Skybox
             this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
-            this.entities.Clear();
         }
-        
+
         public void UpdateViewRect(int width, int height)
         {
             SetViewRect(width, height);
         }
-        
+
         private void ProcessTerrain(Terrain terrain)
         {
             this.terrainList.Add(terrain);
@@ -130,7 +138,7 @@ namespace CogiEngine
             TextureModel entityModel = entity.TextureModel;
             if (this.entities.ContainsKey(entityModel))
             {
-                this.entities[entityModel].Add(entity);   
+                this.entities[entityModel].Add(entity);
             }
             else
             {
@@ -139,7 +147,7 @@ namespace CogiEngine
                 this.entities.Add(entityModel, newBatch);
             }
         }
-        
+
         public void Prepare(int width, int height)
         {
             Gl.Viewport(0, 0, width, height);

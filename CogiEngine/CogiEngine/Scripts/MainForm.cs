@@ -14,10 +14,11 @@ namespace CogiEngine
         private GlControl glControl;
         private DisplayManager displayManager;
         private InputManager inputManager;
-        private MasterRanderer renderer;
+        private MasterRenderer renderer;
         private GUIRenderer guiRenderer;
         private Loader loader;
         private Camera camera;
+        private Light sun;
         private List<Light> lgihtList;
         private List<Entity> entities;
         private List<GUITexture> guiList;
@@ -95,13 +96,13 @@ namespace CogiEngine
             }
             
             this.loader = new Loader();
-            this.renderer = new MasterRanderer(this.loader, glControl.ClientSize.Width, glControl.ClientSize.Height);
-            this.guiRenderer = new GUIRenderer(this.loader);
-              
             //Camera 
             this.camera = new Camera(new Vertex3f(0, 10, 0), 20f);
-            this.inputManager.OnEventMouseWheel += this.camera.OnEventWheel;
             
+            this.renderer = new MasterRenderer(this.camera, this.loader, glControl.ClientSize.Width, glControl.ClientSize.Height);
+            this.guiRenderer = new GUIRenderer(this.loader);
+            this.inputManager.OnEventMouseWheel += this.camera.OnEventWheel;
+
             //Water
             this.waterTileList = new List<WaterTile>();
             this.waterTileList.Add(new WaterTile(75, -75, WATER_HEIGHT));
@@ -116,11 +117,14 @@ namespace CogiEngine
             this.terrain = LoadTerrain(this.loader);
             LoadEntities(this.terrain, this.entities, this.loader);
             LoadPlayer(this.loader, this.entities);
-            LoadGUI(this.loader);
+            //LoadGUI(this.loader);
+            //LoadGUI_Texture(this.loader, this.waterFrameBuffers.RefractionTexture);
             
             //Light
             this.lgihtList = new List<Light>();
-            this.lgihtList.Add(new Light(new Vertex3f(0, 1000, -7000), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0)));
+            //this.sun = new Light(new Vertex3f(10000, 15000, -10000), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
+            this.sun = new Light(new Vertex3f(10, 15, -10), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
+            this.lgihtList.Add(sun);
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,185, 12.7f,-293), new Vertex3f(2,0,0), new Vertex3f(1, 0.01f, 0.002f)));
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,370, 12.7f,-300), new Vertex3f(0,2,2), new Vertex3f(1, 0.01f, 0.002f)));
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,293, 12.7f,-305), new Vertex3f(2, 2, 0), new Vertex3f(1, 0.01f, 0.002f)));
@@ -128,7 +132,7 @@ namespace CogiEngine
             //MousePicker
             this.mousePicker = new MousePicker(this.camera, this.renderer.ProjectionMatrix, this.terrain);
         }
-
+        
         private void LoadPlayer(Loader loader, List<Entity> entities)
         {
             ModelTexture personTexture = new ModelTexture(loader.LoadTexture("playerTexture"));
@@ -201,7 +205,7 @@ namespace CogiEngine
             y = terrain.GetHeightOfTerrain(x, z);
             entities.Add(new Entity(treeModel, new Vertex3f(x, y, z), 0, 0, 0, 1f));
             
-              /*Random random = new Random();
+              Random random = new Random();
               for (int i = 0; i < 10; i++)
               {
                   if (i % 2 == 0)
@@ -217,16 +221,31 @@ namespace CogiEngine
                   entities.Add(new Entity(treeModel, GetRadomPosition(terrain, random, Terrain.SIZE, -Terrain.SIZE), 0, 0, 0, 1f));
                   entities.Add(new Entity(grassModel, GetRadomPosition(terrain, random, Terrain.SIZE, -Terrain.SIZE), 0, 0, 0, 1));
                   entities.Add(new Entity(flowerModel, GetRadomPosition(terrain, random, Terrain.SIZE, -Terrain.SIZE), 0, 0, 0, 1));
-              }*/
+              }
         }
 
         private void LoadGUI(Loader loader)
         {
-            this.guiList = new List<GUITexture>();
-            /*GUITexture gui2 = new GUITexture(loader.LoadTexture("thinmatrix"), new Vertex2f(0.3f, 0.74f), new Vertex2f(0.4f, 0.4f));
+            if (this.guiList == null)
+            {
+                this.guiList = new List<GUITexture>();    
+            }
+            
+            GUITexture gui2 = new GUITexture(loader.LoadTexture("thinmatrix"), new Vertex2f(0.3f, 0.74f), new Vertex2f(0.4f, 0.4f));
             GUITexture gui1 = new GUITexture(loader.LoadTexture("socuwan"), new Vertex2f(0.5f, 0.5f), new Vertex2f(0.25f, 0.25f));
             this.guiList.Add(gui1);
-            this.guiList.Add(gui2);*/
+            this.guiList.Add(gui2);
+        }
+
+        private void LoadGUI_Texture(Loader loader, uint texture2D)
+        {
+            if (this.guiList == null)
+            {
+                this.guiList = new List<GUITexture>();    
+            }
+            
+            GUITexture gui1 = new GUITexture(texture2D, new Vertex2f(0.5f, 0.5f), new Vertex2f(0.25f, 0.25f));
+            this.guiList.Add(gui1);
         }
         
         private Vertex3f GetRadomPosition(Terrain terrain, Random random, float randomX, float randomZ)
@@ -285,8 +304,11 @@ namespace CogiEngine
         
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
-            Gl.Enable(EnableCap.ClipDistance0);
+            this.renderer.ProcessStart(this.entities, this.terrain);
             
+            
+            Gl.Enable(EnableCap.ClipDistance0);
+
             //render fbo reflection texture
             this.waterFrameBuffers.BindReflectionFrameBuffer();
             float camDistance = 2 * (camera.Position.y - WATER_HEIGHT);
@@ -294,8 +316,6 @@ namespace CogiEngine
             this.camera.InvertPitch();
             this.renderer.RenderScene(WaterFrameBuffers.REFLECTION_WIDTH
                 , WaterFrameBuffers.REFLECTION_HEIGHT
-                , this.entities
-                , this.terrain
                 , this.lgihtList
                 , this.camera
                 , new Vertex4f(0, 1, 0, -WATER_HEIGHT + 1)
@@ -307,8 +327,6 @@ namespace CogiEngine
             this.waterFrameBuffers.BindRefractionFrameBuffer();
             this.renderer.RenderScene(WaterFrameBuffers.REFRACTION_WIDTH
                 , WaterFrameBuffers.REFRACTION_HEIGHT
-                , this.entities
-                , this.terrain
                 , this.lgihtList
                 , this.camera
                 , new Vertex4f(0, -1, 0, WATER_HEIGHT)
@@ -321,16 +339,16 @@ namespace CogiEngine
             
             this.renderer.RenderScene(this.glControl.ClientSize.Width
                 , this.glControl.ClientSize.Height
-                , this.entities
-                , this.terrain
                 , this.lgihtList
                 , this.camera
                 , new Vertex4f(0, -1, 0, 100000)
                 , this.displayManager.GetFrameTimeSeconds());
-            
+
             this.waterRenderer.Render(this.waterTileList, this.lgihtList, this.camera, this.displayManager.GetFrameTimeSeconds());
             this.guiRenderer.Render(this.guiList);
             DrawAxis(0,0,0,1,1f);
+            
+            this.renderer.ProcessClear();
             this.displayManager.UpdateDisplay();
         }
         
