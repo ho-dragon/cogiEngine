@@ -26,6 +26,10 @@ namespace CogiEngine
 
         public void Render(List<GUITexture> guiList)
         {
+            if (guiList == null || guiList.Count > 0 == false)
+            {
+                return;
+            }
             this.shader.Start();
             Gl.BindVertexArray(this.quadModel.VaoID);
             Gl.EnableVertexAttribArray(0);// Position

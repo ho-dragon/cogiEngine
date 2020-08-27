@@ -17,7 +17,17 @@ namespace CogiEngine
         {
             _identityMatrix4x4 = new Matrix4x4f(Matrix4x4f.Identity);
         }
+        
+        public static double ToRadians(double degree)
+        {
+            return (Math.PI / 180) * degree;
+        }
 
+        public static double ToDegree(double radian)
+        {
+            return radian * (180 / Math.PI);
+        }
+        
         public static Matrix4x4f CreateTransformationMatrix(Vertex3f translation, float rx, float ry, float rz, float scale)
         {
             Matrix4x4f matrix = new Matrix4x4f(IdentityMatrix4x4);
