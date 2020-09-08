@@ -31,10 +31,15 @@ namespace CogiEngine
 
         //Skybox
         private SkyboxRenderer skyboxRenderer;
+        
+        //Shadow
+        private ShadowRenderer shadowRenderer;
+        private ShadowDepthShader shadowDepthShader;
+        private ShadowDepthFrameBuffer shadowDepthFrameBuffer;
 
         public Matrix4x4f ProjectionMatrix => projectionMatrix;
 
-        public MasterRenderer(Camera camera, Loader loader, int width, int height)
+        public MasterRenderer(Camera camera, Loader loader, DirectionalLight sun, int width, int height)
         {
             Gl.Enable(EnableCap.DepthTest);
             this.clientWidth = width;
@@ -53,6 +58,12 @@ namespace CogiEngine
 
             //Skybox
             this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
+            
+            //Shadow
+            this.shadowDepthShader = new ShadowDepthShader();
+            this.shadowDepthFrameBuffer = new ShadowDepthFrameBuffer();
+            
+            this.shadowRenderer = new ShadowRenderer(sun, shadowDepthShader, shadowDepthFrameBuffer);
         }
 
         public static void EnableCulling()
@@ -101,14 +112,14 @@ namespace CogiEngine
         {
             Prepare(width, height);
 
-            //Entities
+            /*//Entities
             this.entityShader.Start();
             this.entityShader.LoadClipPlane(clipPlane);
             this.entityShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.entityShader.LoadLights(lightList);
             this.entityShader.LoadViewMatrix(camera);
             this.entityRenderer.Render(this.entities);
-            this.entityShader.Stop();
+            this.entityShader.Stop();*/
 
             //Terrain
             this.terrainShader.Start();
@@ -121,6 +132,9 @@ namespace CogiEngine
 
             //Skybox
             this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
+            
+            //Shadow
+            this.shadowRenderer.Render(entities);
         }
 
         public void UpdateViewRect(int width, int height)

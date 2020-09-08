@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Mail;
-using OpenGL;
+﻿using OpenGL;
 
 namespace CogiEngine.Water
 {
@@ -8,7 +6,7 @@ namespace CogiEngine.Water
     {
         public const int REFLECTION_WIDTH = 320;
         public const int REFLECTION_HEIGHT = 180;
-        
+
         /*public const int REFLECTION_WIDTH = 1280;
         public const int REFLECTION_HEIGHT = 720;*/
 
@@ -35,7 +33,7 @@ namespace CogiEngine.Water
             InitialiseReflectionFrameBuffer();
             InitialiseRefractionFrameBuffer();
         }
-        
+
         private void InitialiseReflectionFrameBuffer()
         {
             this.reflectionFrameBuffer = CreateFrameBuffer();
@@ -59,7 +57,7 @@ namespace CogiEngine.Water
             Gl.DeleteFramebuffers(this.reflectionFrameBuffer);
             Gl.DeleteTextures(this.reflectionTexture);
             Gl.DeleteRenderbuffers(this.reflectionDepthBuffer);
-            
+
             //Refraction
             Gl.DeleteFramebuffers(this.refractionFrameBuffer);
             Gl.DeleteTextures(this.refractionTexture);
@@ -83,7 +81,7 @@ namespace CogiEngine.Water
             //call to switch to default frame buffer
             Gl.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
         }
-        
+
         private void BindFrameBuffer(uint frameBuffer, int width, int height)
         {
             Gl.BindTexture(TextureTarget.Texture2d, 0); //To make sure the texture isn't bound

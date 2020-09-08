@@ -32,6 +32,8 @@
             <e p="fragmentShader.txt" t="Include" />
             <e p="guiFragmentShader.txt" t="Include" />
             <e p="guiVertexShader.txt" t="Include" />
+            <e p="shadowDepthFragmentShader.txt" t="Include" />
+            <e p="shadowDepthVertexShader.txt" t="Include" />
             <e p="skyboxFragmentShader.txt" t="Include" />
             <e p="skyboxVertexShader.txt" t="Include" />
             <e p="terrainFragmentShader.txt" t="Include" />
@@ -123,16 +125,21 @@
           <e p="Renderer" t="Include">
             <e p="EntityRenderer.cs" t="Include" />
             <e p="MasterRenderer.cs" t="Include" />
+            <e p="ShadowRenderer.cs" t="Include" />
             <e p="SkyboxRenderer.cs" t="Include" />
             <e p="TerrainRenderer.cs" t="Include" />
             <e p="WaterRenderer.cs" t="Include" />
           </e>
           <e p="Shader" t="Include">
             <e p="ShaderProgram.cs" t="Include" />
+            <e p="ShadowDepthShader.cs" t="Include" />
             <e p="SkyboxShader.cs" t="Include" />
             <e p="StaticShader.cs" t="Include" />
             <e p="TerrainShader.cs" t="Include" />
             <e p="WaterShader.cs" t="Include" />
+          </e>
+          <e p="Shadow" t="Include">
+            <e p="ShadowDepthFrameBuffer.cs" t="Include" />
           </e>
           <e p="Terrain" t="Include">
             <e p="Terrain.cs" t="Include" />

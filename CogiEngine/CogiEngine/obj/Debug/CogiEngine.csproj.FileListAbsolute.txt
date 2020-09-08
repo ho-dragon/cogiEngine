@@ -100,3 +100,5 @@ C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\System.Runtime.CompilerSe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.csproj.CopyComplete
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.exe
 C:\Projects\CogiEngine\CogiEngine\CogiEngine\obj\Debug\CogiEngine.pdb
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\shadowDepthFragmentShader.txt
+C:\Projects\CogiEngine\CogiEngine\CogiEngine\bin\Debug\Resources\Shader\shadowDepthVertexShader.txt

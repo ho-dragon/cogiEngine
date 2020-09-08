@@ -18,7 +18,7 @@ namespace CogiEngine
         private GUIRenderer guiRenderer;
         private Loader loader;
         private Camera camera;
-        private Light sun;
+        private DirectionalLight sun;
         private List<Light> lgihtList;
         private List<Entity> entities;
         private List<GUITexture> guiList;
@@ -99,7 +99,14 @@ namespace CogiEngine
             //Camera 
             this.camera = new Camera(new Vertex3f(0, 10, 0), 20f);
             
-            this.renderer = new MasterRenderer(this.camera, this.loader, glControl.ClientSize.Width, glControl.ClientSize.Height);
+            //Light - Sun
+            this.lgihtList = new List<Light>();
+            this.sun = new DirectionalLight(new Vertex3f(-0.5f, -0.5f, 0.5f),new Vertex3f(100, 150, -100), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
+            //this.sun = new Light(new Vertex3f(10, 15, -10), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
+            this.lgihtList.Add(sun);
+            
+            //Renderer
+            this.renderer = new MasterRenderer(this.camera, this.loader, this.sun, glControl.ClientSize.Width, glControl.ClientSize.Height);
             this.guiRenderer = new GUIRenderer(this.loader);
             this.inputManager.OnEventMouseWheel += this.camera.OnEventWheel;
 
@@ -112,23 +119,21 @@ namespace CogiEngine
             this.waterShader = new WaterShader(); 
             this.waterRenderer = new WaterRenderer(loader, waterShader, this.renderer.ProjectionMatrix, this.waterFrameBuffers);
             
+
             //Load Resources
             this.entities = new List<Entity>();
             this.terrain = LoadTerrain(this.loader);
             LoadEntities(this.terrain, this.entities, this.loader);
             LoadPlayer(this.loader, this.entities);
-            //LoadGUI(this.loader);
-            //LoadGUI_Texture(this.loader, this.waterFrameBuffers.RefractionTexture);
             
-            //Light
-            this.lgihtList = new List<Light>();
-            //this.sun = new Light(new Vertex3f(10000, 15000, -10000), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
-            this.sun = new Light(new Vertex3f(10, 15, -10), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
-            this.lgihtList.Add(sun);
+            //Light - Point
+            
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,185, 12.7f,-293), new Vertex3f(2,0,0), new Vertex3f(1, 0.01f, 0.002f)));
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,370, 12.7f,-300), new Vertex3f(0,2,2), new Vertex3f(1, 0.01f, 0.002f)));
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,293, 12.7f,-305), new Vertex3f(2, 2, 0), new Vertex3f(1, 0.01f, 0.002f)));
-            
+            //LoadGUI(this.loader);
+            //LoadGUI_Texture(this.loader, this.waterFrameBuffers.RefractionTexture);
+
             //MousePicker
             this.mousePicker = new MousePicker(this.camera, this.renderer.ProjectionMatrix, this.terrain);
         }
@@ -262,7 +267,6 @@ namespace CogiEngine
             return  new Vertex3f(x, y + offsetY, z);
         }
         
-
         private Terrain LoadTerrain(Loader loader)
         {
             TerrainTexture baseTexture = new TerrainTexture(loader.LoadRepeatTexture("grassy"));
@@ -305,7 +309,6 @@ namespace CogiEngine
         private void OnRender_GlControl(object sender, GlControlEventArgs e)
         {
             this.renderer.ProcessStart(this.entities, this.terrain);
-            
             
             Gl.Enable(EnableCap.ClipDistance0);
 
