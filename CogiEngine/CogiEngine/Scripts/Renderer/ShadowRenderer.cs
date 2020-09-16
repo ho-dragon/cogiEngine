@@ -11,7 +11,7 @@ namespace CogiEngine
         private ShadowDepthShader shader;
         private ShadowDepthFrameBuffer depthFrameBuffer;
         private Matrix4x4f lightSpaceMatrix;
-        
+        public uint DepthMap => depthFrameBuffer.DepthMap;
         public ShadowRenderer(DirectionalLight sun, ShadowDepthShader shader, ShadowDepthFrameBuffer depthFrameBuffer)
         {
             this.shader = shader;
@@ -28,7 +28,7 @@ namespace CogiEngine
 
         public void Render(Dictionary<TextureModel, List<Entity>> entities)
         {
-            //this.depthFrameBuffer.BindFrameBuffer();
+            this.depthFrameBuffer.BindFrameBuffer();
             this.shader.Start();
             var enumerator = entities.GetEnumerator();
             while (enumerator.MoveNext())
@@ -44,7 +44,9 @@ namespace CogiEngine
                 Unbind();
             }
             this.shader.Stop();
+            this.depthFrameBuffer.UnbindCurrentFrameBuffer();
         }
+        
 
         private void PrepareTextureModel(TextureModel model)
         {

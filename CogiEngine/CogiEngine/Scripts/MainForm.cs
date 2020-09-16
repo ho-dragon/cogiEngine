@@ -133,6 +133,7 @@ namespace CogiEngine
             this.lgihtList.Add(new Light(GetHeightPosition(this.terrain,293, 12.7f,-305), new Vertex3f(2, 2, 0), new Vertex3f(1, 0.01f, 0.002f)));
             //LoadGUI(this.loader);
             //LoadGUI_Texture(this.loader, this.waterFrameBuffers.RefractionTexture);
+            LoadGUI_Texture(this.loader, renderer.DepthMap);
 
             //MousePicker
             this.mousePicker = new MousePicker(this.camera, this.renderer.ProjectionMatrix, this.terrain);
@@ -348,10 +349,11 @@ namespace CogiEngine
                 , this.displayManager.GetFrameTimeSeconds());
 
             this.waterRenderer.Render(this.waterTileList, this.lgihtList, this.camera, this.displayManager.GetFrameTimeSeconds());
+            this.renderer.RenderShadowMap();
+            this.renderer.ProcessEnd();
+            
             this.guiRenderer.Render(this.guiList);
             DrawAxis(0,0,0,1,1f);
-            
-            this.renderer.ProcessClear();
             this.displayManager.UpdateDisplay();
         }
         

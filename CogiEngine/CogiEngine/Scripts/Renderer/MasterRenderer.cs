@@ -33,7 +33,7 @@ namespace CogiEngine
         private SkyboxRenderer skyboxRenderer;
         
         //Shadow
-        private ShadowRenderer shadowRenderer;
+        public ShadowRenderer shadowRenderer;
         private ShadowDepthShader shadowDepthShader;
         private ShadowDepthFrameBuffer shadowDepthFrameBuffer;
 
@@ -98,7 +98,7 @@ namespace CogiEngine
             ProcessTerrain(terrain);
         }
 
-        public void ProcessClear()
+        public void ProcessEnd()
         {
             this.entities.Clear();
         }
@@ -112,14 +112,14 @@ namespace CogiEngine
         {
             Prepare(width, height);
 
-            /*//Entities
+            //Entities
             this.entityShader.Start();
             this.entityShader.LoadClipPlane(clipPlane);
             this.entityShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.entityShader.LoadLights(lightList);
             this.entityShader.LoadViewMatrix(camera);
             this.entityRenderer.Render(this.entities);
-            this.entityShader.Stop();*/
+            this.entityShader.Stop();
 
             //Terrain
             this.terrainShader.Start();
@@ -132,8 +132,10 @@ namespace CogiEngine
 
             //Skybox
             this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
-            
-            //Shadow
+        }
+        public uint DepthMap => this.shadowRenderer.DepthMap;
+        public void RenderShadowMap()
+        {
             this.shadowRenderer.Render(entities);
         }
 

@@ -6,10 +6,9 @@ namespace CogiEngine
     {
         public const int SHADOW_WIDTH = 1280;
         public const int SHADOW_HEIGHT = 720;
-
-        private uint depthMap;
+        
         private uint depthTexture;
-        public uint DepthMap => depthMap;
+        public uint DepthMap => depthTexture;
 
         private uint frameBuffer;
         
@@ -26,9 +25,10 @@ namespace CogiEngine
         
         public void BindFrameBuffer()
         {
-            Gl.BindTexture(TextureTarget.Texture2d, 0); //To make sure the texture isn't bound
-            Gl.BindFramebuffer(FramebufferTarget.Framebuffer, this.frameBuffer);
+            //Gl.BindTexture(TextureTarget.Texture2d, 0); //To make sure the texture isn't bound
             Gl.Viewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+            Gl.BindFramebuffer(FramebufferTarget.Framebuffer, this.frameBuffer);
+            Gl.Clear(ClearBufferMask.DepthBufferBit);
         }
         
         private uint CreateFrameBuffer()
@@ -37,7 +37,6 @@ namespace CogiEngine
             Gl.BindFramebuffer(FramebufferTarget.Framebuffer, frameBuffer);
             Gl.DrawBuffer(DrawBufferMode.None);
             Gl.ReadBuffer(0);
-            //indicate that we will always render to color attachment 0
             return frameBuffer;
         }
         
