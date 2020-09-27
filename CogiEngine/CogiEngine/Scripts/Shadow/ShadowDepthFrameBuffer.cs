@@ -6,7 +6,7 @@ namespace CogiEngine
     {
         public const int SHADOW_WIDTH = 1280;
         public const int SHADOW_HEIGHT = 720;
-        
+
         private uint depthTexture;
         public uint DepthMap => depthTexture;
 

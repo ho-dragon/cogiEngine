@@ -9,10 +9,12 @@ out vec3 _surfaceNormal;
 out vec3 _toLightVector[4];
 out vec3 _toCameraVector;
 out float _fogVisibility;
+out vec4 _fragPosLightSpace;
 
 uniform mat4 _transformationMatrix;
 uniform mat4 _projectionMatrix;
 uniform mat4 _viewMatrix;
+uniform mat4 _lightSpaceMatrix;
 uniform vec3 _lightPosition[4];
 uniform vec4 _waterClippingPlane;
 
@@ -40,6 +42,7 @@ void main(void)
     
     float distanceFromCam = length(positionRelativeToCam.xyz);
     _fogVisibility = exp(-pow((distanceFromCam * FOG_DENSITY), FOG_GRADIENT));
-    _fogVisibility = clamp(_fogVisibility, 0.0, 1.0); 
+    _fogVisibility = clamp(_fogVisibility, 0.0, 1.0);
+    _fragPosLightSpace = _lightSpaceMatrix * worldPosition;
     
 }

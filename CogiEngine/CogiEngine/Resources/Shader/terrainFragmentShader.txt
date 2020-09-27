@@ -5,6 +5,7 @@ in vec3 _surfaceNormal;
 in vec3 _toLightVector[4];
 in vec3 _toCameraVector;
 in float _fogVisibility;
+in vec4 _fragPosLightSpace;
 
 out vec4 out_Color;
 
@@ -19,9 +20,31 @@ uniform vec3 _lightAttenuation[4];
 uniform float _shineDamper;
 uniform float _reflectivity;
 uniform vec3 _skyColor;
+uniform sampler2D _shadowMap;
 
 const int LIGHT_COUNT = 4;
 const float AMBIENT_LIGHT = 0.0;
+
+float ShadowCalculation(vec4 fragPosLightSpace)
+{
+     // perform perspective divide
+     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+     
+     // transform to [0,1] range
+     projCoords = projCoords * 0.5 + 0.5;
+     
+     // get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+     float closestDepth = texture(_shadowMap, projCoords.xy).r;
+      
+     // get depth of current fragment from light's perspective
+     float currentDepth = projCoords.z;
+     
+     // check whether current frag pos is in shadow
+     float shadow = currentDepth > closestDepth  ? 1.0 : 0.0;
+    
+     return shadow;
+}
+
 
 void main(void)
 {
@@ -61,6 +84,9 @@ void main(void)
          }
         totalDiffuse = max(totalDiffuse, AMBIENT_LIGHT);;
         
+       
         out_Color = (vec4(totalDiffuse, 1.0) + 0.3) * totalColor + vec4(totalSpecular, 1.0);
+        float shadow = ShadowCalculation(_fragPosLightSpace);
+        out_Color *= (1.0 - shadow);
         out_Color = mix(vec4(_skyColor, 1.0), out_Color, _fogVisibility);
 }

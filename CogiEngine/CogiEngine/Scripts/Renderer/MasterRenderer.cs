@@ -51,19 +51,18 @@ namespace CogiEngine
             this.entityRenderer = new EntityRenderer(entityShader, width, height, this.projectionMatrix);
             this.entities = new Dictionary<TextureModel, List<Entity>>();
 
-            //Terrain
-            this.terrainShader = new TerrainShader();
-            this.terrainRenderer = new TerrainRenderer(this.terrainShader, this.projectionMatrix);
-            this.terrainList = new List<Terrain>();
-
             //Skybox
             this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
             
             //Shadow
             this.shadowDepthShader = new ShadowDepthShader();
             this.shadowDepthFrameBuffer = new ShadowDepthFrameBuffer();
-            
             this.shadowRenderer = new ShadowRenderer(sun, shadowDepthShader, shadowDepthFrameBuffer);
+            
+            //Terrain
+            this.terrainShader = new TerrainShader();
+            this.terrainRenderer = new TerrainRenderer(this.terrainShader, this.projectionMatrix, this.shadowRenderer);
+            this.terrainList = new List<Terrain>();
         }
 
         public static void EnableCulling()
@@ -127,6 +126,7 @@ namespace CogiEngine
             this.terrainShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.terrainShader.LoadLights(lightList);
             this.terrainShader.LoadViewMatrix(camera);
+            this.terrainShader.LoadLightViewMatrix(this.shadowRenderer.LightSpaceMatrix);
             this.terrainRenderer.Render(this.terrainList);
             this.terrainShader.Stop();
 
@@ -136,7 +136,8 @@ namespace CogiEngine
         public uint DepthMap => this.shadowRenderer.DepthMap;
         public void RenderShadowMap()
         {
-            this.shadowRenderer.Render(entities);
+            this.shadowRenderer.Render(this.entities, this.terrainList);
+
         }
 
         public void UpdateViewRect(int width, int height)

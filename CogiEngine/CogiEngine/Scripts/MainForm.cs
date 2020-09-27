@@ -101,8 +101,7 @@ namespace CogiEngine
             
             //Light - Sun
             this.lgihtList = new List<Light>();
-            this.sun = new DirectionalLight(new Vertex3f(-0.5f, -0.5f, 0.5f),new Vertex3f(100, 150, -100), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
-            //this.sun = new Light(new Vertex3f(10, 15, -10), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
+            this.sun = new DirectionalLight(new Vertex3f(-0.5f, -2f, 0.5f),new Vertex3f(150, 250, -150), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
             this.lgihtList.Add(sun);
             
             //Renderer
@@ -299,7 +298,7 @@ namespace CogiEngine
             this.inputManager.UpdateMousePosition();
             this.player.UpdateMove(this.inputManager, this.terrain, this.displayManager.GetFrameTimeSeconds());
             this.camera.UpdateMove(this.player.Position, this.player.RotationY, this.inputManager);
-            this.Text = String.Format("[CogiEngine] Window ({0}x{1})", this.glControl.ClientSize.Width , this.glControl.ClientSize.Height);
+            //this.Text = String.Format("[CogiEngine] Window ({0}x{1})", this.glControl.ClientSize.Width , this.glControl.ClientSize.Height);
             //Picking
             //this.mousePicker.Update(this.inputManager, this.glControl.ClientSize.Width, this.glControl.ClientSize.Height);
             //Vertex3f terrainPoint = this.mousePicker.GetCurrentTerrainPoint();
@@ -370,7 +369,7 @@ namespace CogiEngine
             Gl.Rotate(this.camera.Yaw, 0, 1, 0);
             Gl.Rotate(this.camera.Roll, 0, 0, 1);
             Gl.Scale(1,1,1);
-            
+            this.Text = $"CogiEngine (Deubg : camera dir x = {camera.Pitch}, y ={camera.Yaw}, z = {camera.Roll}";
             //X - Red
             Gl.Begin(PrimitiveType.Lines);
             Gl.Color3(1f, 0f, 0f);
