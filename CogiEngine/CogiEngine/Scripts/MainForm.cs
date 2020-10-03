@@ -101,7 +101,7 @@ namespace CogiEngine
             
             //Light - Sun
             this.lgihtList = new List<Light>();
-            this.sun = new DirectionalLight(new Vertex3f(-0.5f, -2f, 0.5f),new Vertex3f(150, 250, -150), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
+            this.sun = new DirectionalLight(new Vertex3f(-0.5f, -1.5f, 0.5f),new Vertex3f(150, 250, -150), new Vertex3f(0.4f, 0.4f, 0.4f), new Vertex3f(1, 0, 0));
             this.lgihtList.Add(sun);
             
             //Renderer
