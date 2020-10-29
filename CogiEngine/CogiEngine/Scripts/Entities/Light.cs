@@ -2,12 +2,22 @@
 
 namespace CogiEngine
 {
+
+    public class DirectionalLight : Light
+    {
+        public Vertex3f Direction { get; }
+        public DirectionalLight(Vertex3f direction, Vertex3f position, Vertex3f color, Vertex3f attenuation) : base(position, color, attenuation)
+        {
+            Direction = direction;
+        }
+    }
+    
     public class Light
     {
         Vertex3f position;
         Vertex3f color;
         Vertex3f attenuation = new Vertex3f(1, 0, 0);
-        
+
         public Vertex3f Position => position;
 
         public Vertex3f Color => color;

@@ -31,10 +31,15 @@ namespace CogiEngine
 
         //Skybox
         private SkyboxRenderer skyboxRenderer;
+        
+        //Shadow
+        public ShadowRenderer shadowRenderer;
+        private ShadowDepthShader shadowDepthShader;
+        private ShadowDepthFrameBuffer shadowDepthFrameBuffer;
 
         public Matrix4x4f ProjectionMatrix => projectionMatrix;
 
-        public MasterRenderer(Camera camera, Loader loader, int width, int height)
+        public MasterRenderer(Camera camera, Loader loader, DirectionalLight sun, int width, int height)
         {
             Gl.Enable(EnableCap.DepthTest);
             this.clientWidth = width;
@@ -46,13 +51,18 @@ namespace CogiEngine
             this.entityRenderer = new EntityRenderer(entityShader, width, height, this.projectionMatrix);
             this.entities = new Dictionary<TextureModel, List<Entity>>();
 
-            //Terrain
-            this.terrainShader = new TerrainShader();
-            this.terrainRenderer = new TerrainRenderer(this.terrainShader, this.projectionMatrix);
-            this.terrainList = new List<Terrain>();
-
             //Skybox
             this.skyboxRenderer = new SkyboxRenderer(loader, this.projectionMatrix);
+            
+            //Shadow
+            this.shadowDepthShader = new ShadowDepthShader();
+            this.shadowDepthFrameBuffer = new ShadowDepthFrameBuffer();
+            this.shadowRenderer = new ShadowRenderer(sun, shadowDepthShader, shadowDepthFrameBuffer);
+            
+            //Terrain
+            this.terrainShader = new TerrainShader();
+            this.terrainRenderer = new TerrainRenderer(this.terrainShader, this.projectionMatrix, this.shadowRenderer);
+            this.terrainList = new List<Terrain>();
         }
 
         public static void EnableCulling()
@@ -87,7 +97,7 @@ namespace CogiEngine
             ProcessTerrain(terrain);
         }
 
-        public void ProcessClear()
+        public void ProcessEnd()
         {
             this.entities.Clear();
         }
@@ -116,11 +126,18 @@ namespace CogiEngine
             this.terrainShader.LoadSkyColor(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE);
             this.terrainShader.LoadLights(lightList);
             this.terrainShader.LoadViewMatrix(camera);
+            this.terrainShader.LoadLightViewMatrix(this.shadowRenderer.LightSpaceMatrix);
             this.terrainRenderer.Render(this.terrainList);
             this.terrainShader.Stop();
 
             //Skybox
             this.skyboxRenderer.Render(camera, new Vertex3f(SKY_COLOR_RED, SKY_COLOR_GREEN, SKY_COLOR_BLUE), frameTimeSec);
+        }
+        public uint DepthMap => this.shadowRenderer.DepthMap;
+        public void RenderShadowMap()
+        {
+            this.shadowRenderer.Render(this.entities, this.terrainList);
+
         }
 
         public void UpdateViewRect(int width, int height)

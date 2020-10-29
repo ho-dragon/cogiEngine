@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 using OpenGL;
 
 namespace CogiEngine
@@ -11,12 +12,14 @@ namespace CogiEngine
         private int location_transformationMatrix;
         private int location_projectionMatrix;
         private int location_viewMatrix;
+        private int location_lightViewMatrix;
         private int[] loccation_lightPosition;
         private int[] location_lightColor;
         private int[] location_attenuation;
         private int location_shineDamper;
         private int location_reflectivity;
         private int location_skyColor;
+        private int location_shadowMap;
         private int location_blendMapTexture;
         private int location_baseTexture;
         private int location_redTexture;
@@ -38,9 +41,11 @@ namespace CogiEngine
             this.location_transformationMatrix = base.GetUniformLocation("_transformationMatrix");
             this.location_projectionMatrix = base.GetUniformLocation("_projectionMatrix");
             this.location_viewMatrix = base.GetUniformLocation("_viewMatrix");
+            this.location_lightViewMatrix = base.GetUniformLocation("_lightSpaceMatrix");
             this.location_shineDamper = base.GetUniformLocation("_shineDamper");
             this.location_reflectivity = base.GetUniformLocation("_reflectivity");
             this.location_skyColor = base.GetUniformLocation("_skyColor");
+            this.location_shadowMap = base.GetUniformLocation("_shadowMap");
             this.location_blendMapTexture = base.GetUniformLocation("_blendMap");
             this.location_baseTexture = base.GetUniformLocation("_baseTexture");
             this.location_redTexture = base.GetUniformLocation("_redTexture");
@@ -72,6 +77,7 @@ namespace CogiEngine
             base.LoadInt(this.location_redTexture, 2);
             base.LoadInt(this.location_greenTexture, 3);
             base.LoadInt(this.location_blueTexture, 4);
+            base.LoadInt(this.location_shadowMap, 5);
         }
 
         public void LoadSkyColor(float r, float g, float b)
@@ -99,6 +105,11 @@ namespace CogiEngine
         {
             Matrix4x4f viewMatrix = Maths.CreateViewMatrix(camera);
             base.LoadMatrix(this.location_viewMatrix, viewMatrix);
+        }
+
+        public void LoadLightViewMatrix(Matrix4x4f value)
+        {
+            base.LoadMatrix(this.location_lightViewMatrix, value);
         }
 
         public void LoadLights(List<Light> lightList)

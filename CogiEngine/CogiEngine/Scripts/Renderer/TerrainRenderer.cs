@@ -9,9 +9,11 @@ namespace CogiEngine
         private TerrainShader shader;
         private const float SHINE_DAMPER = 1f;
         private const float REFLECTIVITY = 0f;
+        private ShadowRenderer shadowRenderer;
 
-        public TerrainRenderer(TerrainShader shader, Matrix4x4f projectionMatrix)
+        public TerrainRenderer(TerrainShader shader, Matrix4x4f projectionMatrix, ShadowRenderer shadowRenderer)
         {
+            this.shadowRenderer = shadowRenderer;
             this.shader = shader;
             this.shader.Start();
             this.shader.LoadProjectionMatrix(projectionMatrix);
@@ -60,6 +62,9 @@ namespace CogiEngine
             
             Gl.ActiveTexture(TextureUnit.Texture4);
             Gl.BindTexture(TextureTarget.Texture2d, texturePack.BlueTexture.TextureId);
+            
+            Gl.ActiveTexture(TextureUnit.Texture5);
+            Gl.BindTexture(TextureTarget.Texture2d, this.shadowRenderer.DepthMap);
         }
 
         private void Unbind()
